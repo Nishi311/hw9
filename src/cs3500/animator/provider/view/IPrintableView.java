@@ -3,7 +3,7 @@ package cs3500.animator.provider.view;
 import java.io.IOException;
 import java.util.List;
 
-import cs3500.animator.transformations.ITransformation;
+import cs3500.animator.provider.ITransformation;
 
 
 public interface IPrintableView extends IViewable {

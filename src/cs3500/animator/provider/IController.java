@@ -1,8 +1,6 @@
 package cs3500.animator.provider;
 import java.util.List;
 
-import cs3500.animator.animshape.IAnimShape;
-import cs3500.animator.transformations.ITransformation;
 
 /**
  * This is the interface for controller objects, which control animations. Controllers act as an

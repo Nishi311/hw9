@@ -2,7 +2,8 @@ package cs3500.animator.provider.view;
 
 import java.util.List;
 
-import cs3500.animator.animshape.IAnimShape;
+import cs3500.animator.provider.IAnimShape;
+
 
 public abstract class AView implements IViewable {
 

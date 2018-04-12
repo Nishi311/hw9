@@ -1,8 +1,7 @@
 package cs3500.animator.provider.view;
 
 import java.util.List;
-import cs3500.animator.animshape.IAnimShape;
-import cs3500.animator.transformations.ITransformation;
+import cs3500.animator.provider.IAnimShape;
 
 /**
  * This is the interface for a View object, which displays the shapes in some form, allowing

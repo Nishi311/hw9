@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
@@ -30,6 +31,10 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
+import cs3500.animator.provider.IAnimShape;
+import cs3500.animator.provider.IShape;
+import cs3500.animator.provider.IController;
+import cs3500.animator.provider.ITransformation;
 
 
 /**

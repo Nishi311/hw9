@@ -1,6 +1,5 @@
 package cs3500.animator.provider;
 
-
 /**
  * This is the interface for a transformation object, which holds information relating to how
  * and when a certain shape should change.
@@ -12,7 +11,7 @@ public interface ITransformation {
    *
    * @return A deep copy of this transformation
    */
-  Transformation makeCopy();
+  ITransformation makeCopy();
 
   /**
    * Check if the shape should be displayed in the animation, given what tick it is.

@@ -1,5 +1,4 @@
 package cs3500.animator.provider;
-import cs3500.animator.animshape.shapes.Shape;
 
 /**
  * This interface is for classes representing an animated shape which is given various attributes
@@ -35,7 +34,7 @@ public interface IAnimShape {
    *
    * @return The shape object
    */
-  Shape getShape();
+  IShape getShape();
 
   /**
    * Getter for the shape type, i.e. rectangle, oval, etc.
@@ -49,7 +48,7 @@ public interface IAnimShape {
    *
    * @return Point where the shape is
    */
-  SLocation getLocation();
+  ISLocation getLocation();
 
   /**
    * Getter for the parameter names, the names of the parameters that describe the shape.
@@ -70,7 +69,7 @@ public interface IAnimShape {
    *
    * @return The shape's current color
    */
-  SColor getColor();
+  ISColor getColor();
 
   /**
    * Getter for appears, the point in the animation where the shape appears.
@@ -91,7 +90,7 @@ public interface IAnimShape {
    *
    * @param endsAt Translate the shape to this location
    */
-  void moveTo(SLocation endsAt);
+  void moveTo(ISLocation endsAt);
 
   /**
    * Scale an existing shape in size by some scale factors.
@@ -108,7 +107,7 @@ public interface IAnimShape {
    *
    * @param endsAt Change to this color
    */
-  void changeColor(SColor endsAt);
+  void changeColor(ISColor endsAt);
 
   /**
    * Gets the visible boolean flag of the shape.

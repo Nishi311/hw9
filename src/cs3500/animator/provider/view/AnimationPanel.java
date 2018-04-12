@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.*;
 import cs3500.animator.provider.IAnimShape;
+import cs3500.animator.provider.ISColor;
 
 /**
  * AnimationPanel extends JPanel to add the functionality of painting frames as desired.
@@ -75,7 +76,7 @@ public class AnimationPanel extends JPanel {
    * @param color   SColor to be turned into java.awt.Color
    * @return        java.awt.Color representing the same color as the given SColor
    */
-  private static Color getColorFromSColor(SColor color) {
+  private static Color getColorFromSColor(ISColor color) {
     return new Color((float) color.getRed(), (float) color.getGreen(), (float) color.getBlue());
   }
 }

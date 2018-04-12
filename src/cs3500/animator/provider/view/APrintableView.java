@@ -4,6 +4,7 @@ import java.util.List;
 
 import cs3500.animator.provider.ITransformation;
 
+
 public abstract class APrintableView extends AView implements IPrintableView {
 
   protected final Appendable output;
@@ -26,7 +27,7 @@ public abstract class APrintableView extends AView implements IPrintableView {
    * Get the list of shapes for the view to display.
    */
   @Override
-  public void setTransformations(List<Transformation> transformationList) {
+  public void setTransformations(List<ITransformation> transformationList) {
     if(transformationList == null) {
       throw new IllegalStateException("The list of transformations cannot be null.");
     }

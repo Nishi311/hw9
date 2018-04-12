@@ -3,7 +3,7 @@ package cs3500.animator.provider.view;
 import java.io.IOException;
 import java.util.List;
 
-import cs3500.animator.animshape.IAnimShape;
+import cs3500.animator.provider.IAnimShape;
 
 public interface IRunnableView extends IViewable{
 

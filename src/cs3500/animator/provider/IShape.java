@@ -1,4 +1,5 @@
 package cs3500.animator.provider;
+
 /**
  * This is an interface for classes representing shapes, i.e. rectangle, oval, etc.
  * An object of this class has no knowledge of its presence, appearance, or location in the
@@ -11,7 +12,7 @@ public interface IShape {
    *
    * @return A deep copy of this shape
    */
-  Shape makeCopy();
+  IShape makeCopy();
 
   /**
    * Check if the shape that has been created meets whatever standards the class sets for it.

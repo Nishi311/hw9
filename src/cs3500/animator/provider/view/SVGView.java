@@ -1,12 +1,11 @@
 package cs3500.animator.provider.view;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import cs3500.animator.animshape.IAnimShape;
-import cs3500.animator.transformations.ITransformation;
+import cs3500.animator.provider.IAnimShape;
+import cs3500.animator.provider.ITransformation;
 
 /**
  * This class represents an SVG View object, which displays the shapes visibly in most internet

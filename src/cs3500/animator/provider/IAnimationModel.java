@@ -2,9 +2,6 @@ package cs3500.animator.provider;
 
 import java.util.List;
 
-import cs3500.animator.animshape.IAnimShape;
-import cs3500.animator.transformations.ITransformation;
-
 /**
  * This is the interface for an animation model. Classes implementing this
  * interface must start the animation, store animshape, keep track of TIME,
