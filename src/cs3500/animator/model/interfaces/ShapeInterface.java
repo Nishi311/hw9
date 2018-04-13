@@ -103,9 +103,9 @@ public interface ShapeInterface {
   int hashCode();
 
   /**
-   * Returns all of Shapes' dimensions.
+   * Returns all of shapes' dimensions.
    *
-   * @return the dimensions for Shapes
+   * @return the dimensions for shapes
    */
   double[] allDimensions();
 

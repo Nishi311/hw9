@@ -23,9 +23,9 @@ public class ProviderColorChange extends ProviderTransformAbstract {
     transformInfo[2] = startingColor.toString();
     transformInfo[3] = endingColor.toString();
 
-    redIncrement = (double) ((startingColor.getRed()-endingColor.getRed()) / span);
-    greenIncrement = (double) ((startingColor.getGreen()-endingColor.getGreen()) / span);
-    blueIncrement = (double) ((startingColor.getBlue()-endingColor.getBlue()) / span);
+    redIncrement = (double) ((endingColor.getRed()-startingColor.getRed()) / span);
+    greenIncrement = (double) ((endingColor.getGreen()-startingColor.getGreen()) / span);
+    blueIncrement = (double) ((endingColor.getBlue()-startingColor.getBlue()) / span);
   }
 
   @Override

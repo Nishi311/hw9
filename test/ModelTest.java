@@ -501,7 +501,7 @@ public class ModelTest {
   public void getOverViewTest() {
     model.clearShapeList();
 
-    String expectedOutput = "Shapes:\n"
+    String expectedOutput = "shapes:\n"
             + "Name: R\n"
             + "Type: rectangle\n"
             + "Lower-left corner: (200.0,200.0), Width: 50.0, Height: 100.0, Color: (1.0,0.0,0.0)\n"

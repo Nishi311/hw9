@@ -11,7 +11,7 @@ public interface IViewable {
 
   /**
    * Set the shapes for the view to print out.
-   * @param shapes  Shapes to be given to the view
+   * @param shapes  shapes to be given to the view
    */
   void setShapes(List<IAnimShape> shapes);
 }

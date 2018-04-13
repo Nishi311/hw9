@@ -1,10 +1,6 @@
 package cs3500.animator.converters.transforms;
 
-import cs3500.animator.converters.ProviderAnimShape;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ColorChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.PositionChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeRR;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeWH;
+import cs3500.animator.converters.shapes.ProviderAnimShape;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ITransformation;

@@ -263,7 +263,7 @@ public class AnimationModelText implements AnimationModelInterface {
 
     Iterator itr;
 
-    builder.append("Shapes:\n");
+    builder.append("shapes:\n");
 
     //for all shapes
     for (ShapeInterface currentShape : shapeList) {
@@ -308,7 +308,7 @@ public class AnimationModelText implements AnimationModelInterface {
 
     Iterator itr;
 
-    builder.append("Shapes:\n");
+    builder.append("shapes:\n");
 
     //for all shapes
     for (ShapeInterface currentShape : shapeList) {

@@ -13,6 +13,7 @@ import javax.swing.JCheckBox;
 
 import cs3500.animator.controller.ModelInsulator;
 import cs3500.animator.controller.interfaces.TweenModelBuilder;
+import cs3500.animator.provider.view.IViewable;
 import cs3500.animator.view.interfaces.ViewFactoryInterface;
 import cs3500.animator.model.AnimationModelText;
 import cs3500.animator.model.interfaces.AnimationModelInterface;
@@ -29,7 +30,13 @@ import cs3500.animator.view.ViewTypes;
 public class ControllerWithHybrid extends ControllerAbstract implements KeyListener, ActionListener,
         ItemListener {
 
-  HybridViewInterface hybridView;
+  protected HybridViewInterface hybridView;
+  protected IViewable providerView;
+
+
+  protected ViewTypes type = null;
+  protected String outFile = "out";
+  int ticksPerSecond = 1;
 
   /**
    * Basic constructor for the controller. Just calls the ControllerAbstract constructor.
@@ -60,7 +67,7 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
   public void keyTyped(KeyEvent k) {
     checkIfHybridExists();
 
-    System.out.println("Key pressed: " + k.getKeyCode() );
+    System.out.println("Key pressed: " + k.getKeyCode());
 
   }
 
@@ -68,21 +75,19 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
   public void keyPressed(KeyEvent k) {
     checkIfHybridExists();
 
-    System.out.println("Key pressed: " + k.getKeyCode() );
+    System.out.println("Key pressed: " + k.getKeyCode());
   }
 
   @Override
   public void keyReleased(KeyEvent k) {
     checkIfHybridExists();
-    System.out.println("Key pressed: " + k.getKeyCode() );
+    System.out.println("Key pressed: " + k.getKeyCode());
   }
 
   @Override
   public String parseInput(String[] args) {
     String inFile = null;
-    ViewTypes type = null;
-    String outFile = "out";
-    int ticksPerSecond = 1;
+
 
     util.AnimationFileReader reader = new util.AnimationFileReader();
 
@@ -140,7 +145,6 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
           }
           i += 1;
           break;
-
         default:
           return ("Unexpected input, please ensure that all arguments are "
                   + "preceded with \"-if\", \"-iv\", \"-o\", or \"-speed\"");
@@ -153,19 +157,12 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
     } catch (Exception e) {
       return e.getMessage();
     }
-    //Create the view based on  the given parameters.
     try {
-      view = vFac.create(type, new ModelInsulator(model), outFile, ticksPerSecond);
+      createView();
     } catch (Exception e) {
       return e.getMessage();
     }
-
-    //if the view is a hybrid, create the hybridView and also assign proper listeners.
-    if (view.getViewType().equals("Hybrid View")) {
-      hybridView = (HybridViewInterface) view;
-      hybridView.setListeners(this, this, this);
-    }
-
+    //Create the view based on  the given parameters.
     return "No Error";
   }
 
@@ -246,6 +243,22 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
     if (hybridView == null) {
       throw new IllegalStateException("Hybrid view not present");
     }
+  }
+
+
+  private void createView() throws IllegalArgumentException {
+    try {
+      view = vFac.create(type, new ModelInsulator(model), outFile, ticksPerSecond);
+    } catch (Exception e) {
+      throw new IllegalArgumentException(e.getMessage());
+    }
+
+    //if the view is a hybrid, create the hybridView and also assign proper listeners.
+    if (view.getViewType().equals("Hybrid View")) {
+      hybridView = (HybridViewInterface) view;
+      hybridView.setListeners(this, this, this);
+    }
+
   }
 
 }

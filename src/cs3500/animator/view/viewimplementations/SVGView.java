@@ -160,7 +160,7 @@ public class SVGView implements ViewInterface {
   }
 
   /**
-   * change the Shapes and Animations into the svg.
+   * change the shapes and Animations into the svg.
    *
    * @return the text represent the svg format of animation.
    */

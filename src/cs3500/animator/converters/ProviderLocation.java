@@ -7,4 +7,8 @@ public class ProviderLocation implements ISLocation {
   public ProviderLocation(Position2D pos){
 
   }
+
+  public ProviderLocation (double x, double y){
+
+  }
 }

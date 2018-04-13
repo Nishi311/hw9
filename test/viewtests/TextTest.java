@@ -56,7 +56,7 @@ public class TextTest {
   public void test10TickPerSecond() throws IOException {
     model.clearShapeList();
 
-    String expectedOutput = "Shapes:\n"
+    String expectedOutput = "shapes:\n"
             + "Name: R\n"
             + "Type: rectangle\n"
             + "Lower-left corner: (200.0,200.0), Width: 50.0, Height: 90.0, Color: (1.0,0.0,0.0)\n"
