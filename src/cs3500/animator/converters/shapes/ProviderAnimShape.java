@@ -17,4 +17,8 @@ public class ProviderAnimShape implements IAnimShape {
                            AnimationComponentInterface disappearance){
 
   }
+
+  public ProviderAnimShape(IAnimShape s){
+
+  }
 }

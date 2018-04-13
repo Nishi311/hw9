@@ -1,5 +1,6 @@
 package cs3500.animator.converters;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.*;
 
 import cs3500.animator.controller.ModelInsulator;
 import cs3500.animator.controller.controllerimplementations.ControllerWithHybrid;
@@ -23,6 +26,8 @@ import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.IController;
 import cs3500.animator.provider.ITransformation;
+import cs3500.animator.provider.view.IPrintableView;
+import cs3500.animator.provider.view.IRunnableView;
 import cs3500.animator.provider.view.IViewable;
 import cs3500.animator.view.ViewTypes;
 import cs3500.animator.view.interfaces.HybridViewInterface;
@@ -31,24 +36,15 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
         ItemListener, IController {
 
   private IViewable providerView;
-
-
-  private List<IAnimShape> providerShapeListAll;
-  private List<IAnimShape> providerShapeListActive;
-  private List<ITransformation> providerTransformList;
-
-  private List<ShapeInterface> shapeList;
-  private List<AnimationComponentInterface> animationList;
-
-  private Map<String, List<AnimationComponentInterface>> shapeToAnimation = new HashMap<>();
-  private Map<String, IAnimShape> shapeToShapeObject = new HashMap<>();
-
-  private boolean isPaused = false;
-  private boolean doesLoop = false;
+  private IPrintableView printView;
+  private IRunnableView runView;
 
   private String status;
 
   private ViewFactoryProviderInterface vFacProvider;
+
+  private Timer timer;
+
 
   public ProviderController(AnimationModelInterface model, ViewFactoryProviderInterface vFac){
     super (model, vFac);
@@ -242,39 +238,72 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
     }
   }
 
-  private void shapesToIShapes(List<ShapeInterface> conversion) {
-    for (ShapeInterface shape : conversion) {
-      List<AnimationComponentInterface> animations = shapeToAnimation.get(shape.getName());
 
-      IAnimShape temp = new ProviderAnimShape(shape, animations.get(0),
-              animations.get(animations.size()-1));
-      shapeToShapeObject.put(temp.getName(), temp);
-      providerShapeListAll.add(temp);
-    }
+  private class DrawListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      //if the animation is over, either reset and and start again or terminate draws
+      //depending on looping behavior
 
-    for (IAnimShape shape: providerShapeListAll){
-      if (shape.isActive(1)){
-        providerShapeListActive.add(shape);
+      IRunnableView runnableView = (IRunnableView) view;
+
+      startTime = System.nanoTime();
+      lastTime = startTime;
+      statusTime = startTime;
+
+      model.startAnim();
+      do {
+        //int frames = 0;
+        while (model.running()) {
+          if (System.nanoTime() > nanosBetweenFrames + lastTime) {
+            //frames++;
+            //double timeDifference = (System.nanoTime() - lastTime) / 1000000000d;
+            lastTime = System.nanoTime();
+            //System.out.println("Frame: " + frames + " Tick: " + model.getTick()
+            //        + " Time difference: " + timeDifference
+            //        + " Actual FPS: " + 1d / timeDifference);
+            try {
+              runnableView.updateView(getCurrentShapes(), getStatus());
+            } catch (IOException e) {
+              throw new IllegalStateException("Could not render this frame, at tick "
+                      + model.getTick() + ".");
+            }
+            if (!paused) {
+              model.tick();
+            }
+          }
+          if (System.nanoTime() > statusTime + 3000000000L) {
+            status = "...";
+          }
+        }
+        //System.out.println("looping + " + lastTime);
+
+        while (!isLooping()) {
+          paused = true;
+          changeStatus("End of the animation");
+          try {
+            runnableView.updateView(getCurrentShapes(), getStatus());
+          } catch (IOException e) {
+            throwPopUpError("Could not render this frame.");
+          }
+          try {
+            Thread.sleep(1);
+          } catch (InterruptedException e) {
+            throwPopUpError("Sleep interrupted.");
+          }
+        }
+        model.restart();
+        changeStatus("Restarting");
+      } while (true);
+
+
+
+
+
+
+
       }
     }
 
-  }
 
-  private void amComsToTransformations(List<AnimationComponentInterface> conversion) {
-    for (AnimationComponentInterface animation : conversion){
-
-      if (animation instanceof ColorChange){
-        providerTransformList.add(new ProviderColorChange(animation,
-                shapeToShapeObject.get(animation.getTargetName())));
-      }
-      else if (animation instanceof PositionChange){
-        providerTransformList.add(new ProviderColorChange(animation,
-                shapeToShapeObject.get(animation.getTargetName())));
-      }
-      else if (animation instanceof ScaleChangeRR || animation instanceof ScaleChangeWH){
-        providerTransformList.add(new ProviderColorChange(animation,
-                shapeToShapeObject.get(animation.getTargetName())));
-      }
-    }
-  }
 }
