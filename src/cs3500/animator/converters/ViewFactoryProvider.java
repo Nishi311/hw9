@@ -21,6 +21,7 @@ public class ViewFactoryProvider extends ViewFactoryWithHybrid
 
     List<ShapeInterface> shapeList;
     List<AnimationComponentInterface>
+
   @Override
   public IViewable createProviderView(String viewType, ModelInsulatorInterface model, String output,
                                       int ticksPerSecond, IController) throws IOException{

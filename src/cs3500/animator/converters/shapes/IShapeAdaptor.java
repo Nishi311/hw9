@@ -1,20 +1,17 @@
 package cs3500.animator.converters.shapes;
 
-import java.util.List;
-
-import cs3500.animator.model.concreteclasses.shapes.Rectangle;
+import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.provider.IShape;
 
-public class ProviderRectangle implements IShape {
-  Rectangle rect;
+public class IShapeAdaptor implements IShape {
+  ShapeInterface s;
 
-  public ProviderRectangle(double width, double height){
-    this.rect = new Rectangle();
+  public IShapeAdaptor(ShapeInterface s) {
+    this.s = s;
   }
 
   @Override
   public IShape makeCopy() {
-
   }
 
   @Override
@@ -24,24 +21,22 @@ public class ProviderRectangle implements IShape {
 
   @Override
   public String getType() {
-    return this.rect.getShapeType();
+    return null;
   }
 
   @Override
   public String getReference() {
+    return null;
   }
 
   @Override
   public String[] getPNames() {
-    List<String> temp = this.rect.getattributeLennames();
-    String[] names = new String[temp.size()];
-    temp.toArray(names);
-    return names;
+    return new String[0];
   }
 
   @Override
   public double[] getPValues() {
-    return this.rect.allDimensions();
+    return new double[0];
   }
 
   @Override
