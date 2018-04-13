@@ -6,24 +6,19 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import javax.swing.*;
 
 import cs3500.animator.controller.ModelInsulator;
 import cs3500.animator.controller.controllerimplementations.ControllerWithHybrid;
-import cs3500.animator.converters.shapes.ProviderAnimShape;
-import cs3500.animator.converters.transforms.ProviderColorChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ColorChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.PositionChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeRR;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeWH;
-import cs3500.animator.model.interfaces.AnimationComponentInterface;
+
 import cs3500.animator.model.interfaces.AnimationModelInterface;
-import cs3500.animator.model.interfaces.ShapeInterface;
+
 import cs3500.animator.provider.IAnimShape;
+import cs3500.animator.provider.IAnimationModel;
 import cs3500.animator.provider.IController;
 import cs3500.animator.provider.ITransformation;
 import cs3500.animator.provider.view.IPrintableView;
@@ -38,6 +33,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
   private IViewable providerView;
   private IPrintableView printView;
   private IRunnableView runView;
+  private IAnimationModel providerModel;
 
   private String status;
 
@@ -49,6 +45,12 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
   public ProviderController(AnimationModelInterface model, ViewFactoryProviderInterface vFac){
     super (model, vFac);
     this.vFacProvider = vFac;
+  }
+
+  @Override
+  public void run() {
+
+
   }
 
   @Override
@@ -141,17 +143,17 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
 
   @Override
   public void restart(){
-
+    providerModel.restart();
   }
 
   @Override
   public void toggleVisible(String shapeName) {
-
+    providerModel.toggleVisible(shapeName);
   }
 
   @Override
   public boolean getPaused(){
-    return this.isPaused;
+    return !providerModel.running();
   }
 
 
@@ -239,20 +241,13 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
   }
 
 
-  private class DrawListener implements ActionListener {
+  private class RunAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
       //if the animation is over, either reset and and start again or terminate draws
       //depending on looping behavior
 
-      IRunnableView runnableView = (IRunnableView) view;
-
-      startTime = System.nanoTime();
-      lastTime = startTime;
-      statusTime = startTime;
-
-      model.startAnim();
-      do {
+        if (model.is)
         //int frames = 0;
         while (model.running()) {
           if (System.nanoTime() > nanosBetweenFrames + lastTime) {

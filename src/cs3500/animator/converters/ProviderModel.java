@@ -20,11 +20,12 @@ import cs3500.animator.provider.ITransformation;
 
 public class ProviderModel implements IAnimationModel {
 
+
+  private List<IAnimShape> providerShapeBackup;
+
   private List<IAnimShape> providerShapeListAll;
   private List<IAnimShape> providerShapeListActive;
   private List<ITransformation> providerTransformListAll;
-  private List<ITransformation> providerTransformListActive;
-
 
   private List<ShapeInterface> shapeList;
   private List<AnimationComponentInterface> animationList;
@@ -32,7 +33,7 @@ public class ProviderModel implements IAnimationModel {
   private Map<String, List<AnimationComponentInterface>> shapeToAnimation = new HashMap<>();
   private Map<String, IAnimShape> shapeToShapeObject = new HashMap<>();
 
-  private int tick = 1;
+  private int tick = 0;
   private int endTick = 0;
 
   private boolean isPaused = false;
@@ -74,13 +75,13 @@ public class ProviderModel implements IAnimationModel {
 
   @Override
   public List<ITransformation> currentTransformations() {
-    providerTransformListActive.clear();
+    List<ITransformation> output = new ArrayList<>();
     for (ITransformation t: providerTransformListAll){
       if (t.isActive(tick)){
-        providerTransformListActive.add(t.makeCopy());
+        output.add(t);
       }
     }
-    return providerTransformListActive;
+    return output;
   }
 
   @Override
@@ -89,7 +90,6 @@ public class ProviderModel implements IAnimationModel {
     for (IAnimShape s: providerShapeListAll){
       output.add(new ProviderAnimShape(s));
     }
-
     return output;
   }
 
@@ -114,22 +114,32 @@ public class ProviderModel implements IAnimationModel {
 
   @Override
   public void tick() {
-
+    for (ITransformation t: currentTransformations()){
+      t.transform(tick);
+    }
+    tick++;
   }
 
   @Override
   public void endAnim() {
-
   }
 
   @Override
   public boolean running() {
-    return false;
+    return !isPaused;
   }
 
   @Override
   public void restart() {
-
+    tick = 0;
+    providerShapeListAll.clear();
+    for (IAnimShape s: providerShapeBackup){
+      providerShapeListAll.add(s);
+      shapeToShapeObject.put(s.getName(), s);
+    }
+    for (ITransformation t: providerTransformListAll){
+      t.setShape(shapeToShapeObject.get(t.getShapeName()));
+    }
   }
 
   @Override
@@ -139,7 +149,9 @@ public class ProviderModel implements IAnimationModel {
 
   @Override
   public void toggleVisible(String shapeName) {
-
+    if (shapeToShapeObject.containsKey(shapeName)){
+      shapeToShapeObject.get(shapeName).toggleVisible();
+    }
   }
 
   private void shapesToIShapes(List<ShapeInterface> conversion) {
@@ -147,17 +159,11 @@ public class ProviderModel implements IAnimationModel {
       List<AnimationComponentInterface> animations = shapeToAnimation.get(shape.getName());
 
       IAnimShape temp = new ProviderAnimShape(shape, animations.get(0),
-              animations.get(animations.size()-1));
+              animations.get(animations.size() - 1));
       shapeToShapeObject.put(temp.getName(), temp);
-      providerShapeListAll.add(temp);
+      providerShapeBackup.add(temp);
+      providerShapeListAll.add(new ProviderAnimShape(temp));
     }
-
-    for (IAnimShape shape: providerShapeListAll){
-      if (shape.isActive(1)){
-        providerShapeListActive.add(shape);
-      }
-    }
-
   }
 
   private void amComsToTransformations(List<AnimationComponentInterface> conversion) {
@@ -168,27 +174,17 @@ public class ProviderModel implements IAnimationModel {
                 shapeToShapeObject.get(animation.getTargetName()));
         providerTransformListAll.add(current);
 
-        if (current.isActive(1)){
-          providerTransformListActive.add(current.makeCopy());
-        }
-
       }
       else if (animation instanceof PositionChange){
         current = new ProviderColorChange(animation,
                 shapeToShapeObject.get(animation.getTargetName()));
         providerTransformListAll.add(current);
-        if (current.isActive(1)){
-          providerTransformListActive.add(current.makeCopy());
-        }
 
       }
       else if (animation instanceof ScaleChangeRR || animation instanceof ScaleChangeWH){
         current = new ProviderColorChange(animation,
-                shapeToShapeObject.get(animation.getTargetName()))
+                shapeToShapeObject.get(animation.getTargetName()));
         providerTransformListAll.add(current);
-        if (current.isActive(1)){
-          providerTransformListActive.add(current.makeCopy());
-        }
 
       }
     }
