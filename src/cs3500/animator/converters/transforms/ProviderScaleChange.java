@@ -4,6 +4,7 @@ import cs3500.animator.converters.ProviderLocation;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeRR;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeWH;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.provider.IAnimShape;
 
 public class ProviderScaleChange extends ProviderTransformAbstract{
 
@@ -16,8 +17,8 @@ public class ProviderScaleChange extends ProviderTransformAbstract{
   private double xIncrement;
   private double yIncrement;
 
-  public ProviderScaleChange(AnimationComponentInterface amCom){
-    super(amCom);
+  public ProviderScaleChange(AnimationComponentInterface amCom, IAnimShape shape){
+    super(amCom, shape);
 
     startingX = (double) amCom.getInitialParameters().get(0);
     startingY = (double) amCom.getInitialParameters().get(1);

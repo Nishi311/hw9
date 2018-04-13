@@ -16,8 +16,8 @@ public abstract class ProviderTransformAbstract implements ITransformation {
   protected int startingTick;
   protected int endingTick;
 
-  public ProviderTransformAbstract(AnimationComponentInterface amCom){
-    this.shape = new ProviderAnimShape(amCom.getTarget());
+  public ProviderTransformAbstract(AnimationComponentInterface amCom, IAnimShape shape){
+    this.shape = shape;
     this.shapeName = amCom.getTargetName();
     this.startingTick = amCom.getStartTime();
     this.endingTick = amCom.getEndTime();

@@ -3,6 +3,7 @@ package cs3500.animator.converters.transforms;
 import cs3500.animator.converters.ProviderColor;
 import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.provider.IAnimShape;
 
 public class ProviderColorChange extends ProviderTransformAbstract {
 
@@ -13,8 +14,8 @@ public class ProviderColorChange extends ProviderTransformAbstract {
   private double greenIncrement;
   private double blueIncrement;
 
-  public ProviderColorChange(AnimationComponentInterface amCom){
-    super(amCom);
+  public ProviderColorChange(AnimationComponentInterface amCom, IAnimShape shape){
+    super(amCom, shape);
 
     this.startingColor = (ColorClass) amCom.getInitialParameters().get(0);
     this.endingColor = (ColorClass) amCom.getFinalParameters().get(0);
