@@ -43,4 +43,10 @@ public class ProviderColor implements ISColor {
   public void setBlue(double blue) {
     this.color.setBlue((float) blue);
   }
+
+  @Override
+  public String toString() {
+    return String.format("(%.1f,%.1f,%.1f)",this.color.getRed(), this.color.getGreen(),
+            this.color.getBlue());
+  }
 }

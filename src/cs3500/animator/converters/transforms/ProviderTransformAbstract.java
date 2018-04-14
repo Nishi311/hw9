@@ -8,7 +8,7 @@ import cs3500.animator.provider.ITransformation;
 public abstract class ProviderTransformAbstract implements ITransformation {
 
   protected IAnimShape shape;
-  protected String[] transformInfo = new String[5];
+  protected String[] transformInfo = new String[6];
   protected int span;
 
 

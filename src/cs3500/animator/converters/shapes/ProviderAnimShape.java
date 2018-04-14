@@ -1,15 +1,12 @@
 package cs3500.animator.converters.shapes;
 
 
-import java.util.List;
 
 import cs3500.animator.converters.ProviderColor;
 import cs3500.animator.converters.ProviderLocation;
-import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
-import cs3500.animator.model.interfaces.AnimationComponentInterface;
-import cs3500.animator.model.interfaces.AnimationModelInterface;
 
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+
 
 import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.provider.IAnimShape;
@@ -24,7 +21,7 @@ public class ProviderAnimShape implements IAnimShape {
 
   String type;
   String name;
-  boolean isVisible;
+  boolean isVisible = true;
 
   int appears;
   int disappears;
@@ -35,7 +32,7 @@ public class ProviderAnimShape implements IAnimShape {
     this.pos = s.getLocation();
     this.color = s.getColor();
     this.type = s.getShapeType();
-    this.isVisible = s.getVisible();
+
     this.name = s.getName();
     this.appears = s.getAppears();
     this.disappears = s.getDisappears();
@@ -47,15 +44,17 @@ public class ProviderAnimShape implements IAnimShape {
     this.pos = new ProviderLocation(s.getPosition());
     this.color = new ProviderColor(s.getColor());
     this.type = s.getShapeType();
-    this.isVisible = s.getVisibility();
+
     this.name = s.getName();
     this.appears = appearance.getStartTime();
     this.disappears = disappearance.getStartTime();
 
     if(this.type.equals("Oval")) {
       this.shape = new ProviderOval(s.allDimensions()[0], s.allDimensions()[1]);
+      this.type = "oval";
     } else if (this.type.equals("Rectangle")) {
       this.shape = new ProviderRectangle(s.allDimensions()[0], s.allDimensions()[1]);
+      this.type = "rectangle";
     } else {
       throw new IllegalArgumentException("Shape type does not exist!");
     }
@@ -138,5 +137,16 @@ public class ProviderAnimShape implements IAnimShape {
   @Override
   public void setVisible(boolean isVisible) {
     this.isVisible = isVisible;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Name: %s\n"
+                    + "Type: %s\n"
+                    + "%s: %s, %s, Color: %s\n"
+                    + "Appears at t=%d\n"
+                    + "Disappears at t=%d",
+            name, shape.getType(), shape.getReference(), getLocation(),
+            shape, color, appears, disappears);
   }
 }

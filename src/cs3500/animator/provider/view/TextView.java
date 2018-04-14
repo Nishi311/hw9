@@ -39,14 +39,16 @@ public class TextView extends APrintableView implements IPrintableView {
     }
 
     for (IAnimShape shape : shapes) {
-      output.append(String.format("Name: %s\n"
+      String test = String.format("Name: %s\n"
                       + "Type: %s\n"
                       + "%s: %s, %s, Color: %s\n"
                       + "Appears at t=%.1fs\n"
                       + "Disappears at t=%.1fs\n\n",
               shape.getName(), shape.getShapeType(), shape.getShape().getReference(),
               shape.getLocation(), shape.getShape().toString() , shape.getColor(),
-              (double)shape.getAppears() / speed, (double)shape.getDisappears() / speed));
+              (double)shape.getAppears() / speed, (double)shape.getDisappears() / speed);
+
+      output.append(test);
     }
     for (ITransformation transformation : transformations) {
       output.append(String.format("Shape %s %s from %s to %s from t=%.1fs to t=%.1fs\n",

@@ -22,11 +22,11 @@ public class ProviderScaleChange extends ProviderTransformAbstract {
   public ProviderScaleChange(AnimationComponentInterface amCom, IAnimShape shape) {
     super(amCom, shape);
 
-    this.startingX = (double) amCom.getInitialParameters().get(0);
-    this.startingY = (double) amCom.getInitialParameters().get(1);
+    this.startingX = (double)((float) amCom.getInitialParameters().get(0));
+    this.startingY = (double)((float) amCom.getInitialParameters().get(1));
 
-    this.endingX = (double) amCom.getFinalParameters().get(0);
-    this.endingY = (double) amCom.getFinalParameters().get(1);
+    this.endingX = (double)((float) amCom.getFinalParameters().get(0));
+    this.endingY = (double)((float)amCom.getFinalParameters().get(1));
 
     this.xIncrement = (endingX - startingX) / span;
     this.yIncrement = (endingY - startingY) / span;

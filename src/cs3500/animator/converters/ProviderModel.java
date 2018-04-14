@@ -7,6 +7,8 @@ import java.util.Map;
 
 import cs3500.animator.converters.shapes.ProviderAnimShape;
 import cs3500.animator.converters.transforms.ProviderColorChange;
+import cs3500.animator.converters.transforms.ProviderPositionChange;
+import cs3500.animator.converters.transforms.ProviderScaleChange;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ColorChange;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.PositionChange;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeRR;
@@ -21,14 +23,14 @@ import cs3500.animator.provider.ITransformation;
 public class ProviderModel implements IAnimationModel {
 
 
-  private List<IAnimShape> providerShapeBackup;
+  private List<IAnimShape> providerShapeBackup = new ArrayList<>();
 
-  private List<IAnimShape> providerShapeListAll;
-  private List<IAnimShape> providerShapeListActive;
-  private List<ITransformation> providerTransformListAll;
+  private List<IAnimShape> providerShapeListAll = new ArrayList<>();
+  private List<IAnimShape> providerShapeListActive = new ArrayList<>();
+  private List<ITransformation> providerTransformListAll = new ArrayList<>();
 
-  private List<ShapeInterface> shapeList;
-  private List<AnimationComponentInterface> animationList;
+  private List<ShapeInterface> shapeList = new ArrayList<>();
+  private List<AnimationComponentInterface> animationList = new ArrayList<>();
 
   private Map<String, List<AnimationComponentInterface>> shapeToAnimation = new HashMap<>();
   private Map<String, IAnimShape> shapeToShapeObject = new HashMap<>();
@@ -40,6 +42,7 @@ public class ProviderModel implements IAnimationModel {
   private boolean doesLoop = false;
 
   public ProviderModel(AnimationModelInterface origModel){
+    shapeToAnimation = origModel.getShapeNameToAnimationMap();
     shapesToIShapes(origModel.getShapeList());
     List<AnimationComponentInterface> temp = origModel.getAnimationList();
     amComsToTransformations(temp);
@@ -156,8 +159,8 @@ public class ProviderModel implements IAnimationModel {
 
   private void shapesToIShapes(List<ShapeInterface> conversion) {
     for (ShapeInterface shape : conversion) {
-      List<AnimationComponentInterface> animations = shapeToAnimation.get(shape.getName());
 
+      List<AnimationComponentInterface> animations = shapeToAnimation.get(shape.getName());
       IAnimShape temp = new ProviderAnimShape(shape, animations.get(0),
               animations.get(animations.size() - 1));
       shapeToShapeObject.put(temp.getName(), temp);
@@ -176,13 +179,13 @@ public class ProviderModel implements IAnimationModel {
 
       }
       else if (animation instanceof PositionChange){
-        current = new ProviderColorChange(animation,
+        current = new ProviderPositionChange(animation,
                 shapeToShapeObject.get(animation.getTargetName()));
         providerTransformListAll.add(current);
 
       }
       else if (animation instanceof ScaleChangeRR || animation instanceof ScaleChangeWH){
-        current = new ProviderColorChange(animation,
+        current = new ProviderScaleChange(animation,
                 shapeToShapeObject.get(animation.getTargetName()));
         providerTransformListAll.add(current);
 
@@ -190,5 +193,5 @@ public class ProviderModel implements IAnimationModel {
     }
   }
 
-
 }
+

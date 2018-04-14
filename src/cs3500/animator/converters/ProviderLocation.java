@@ -29,4 +29,9 @@ public class ProviderLocation implements ISLocation {
     this.pos.setX((float)s.getX());
     this.pos.setY((float)s.getY());
   }
+
+  @Override
+  public String toString() {
+    return String.format("(%.1f,%.1f)", this.getX(), this.getY());
+  }
 }

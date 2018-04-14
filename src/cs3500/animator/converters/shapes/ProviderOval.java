@@ -14,11 +14,10 @@ public class ProviderOval implements IShape {
 
 
   public ProviderOval(double xRadius, double yRadius) {
+    double[] pValues = {xRadius, yRadius};
     if (pNames.length != pValues.length || pNames.length == 0) {
       throw new IllegalArgumentException("Parameters number not legal!");
     }
-
-    double[] pValues = {xRadius, yRadius};
 
     this.pValues = pValues;
     this.type = "oval";
@@ -69,5 +68,14 @@ public class ProviderOval implements IShape {
       pValues[i] = scaleFactors[i];
     }
     checkValid();
+  }
+
+  @Override
+  public String toString() {
+    String result = String.format("%s: %.1f", pNames[0], pValues[0]);
+    for (int i = 1; i < pNames.length; i++) {
+      result += String.format(", %s: %.1f", pNames[i], pValues[i]);
+    }
+    return result;
   }
 }

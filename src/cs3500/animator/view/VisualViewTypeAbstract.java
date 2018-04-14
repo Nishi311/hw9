@@ -122,11 +122,13 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
     dPan.repaint();
   }
 
-  /*Reorganizes maps and lists so that the animationList AnimationComponents point to the new
-    shape references in the shapeList (will have been modified by the deep copy in the model get()
-    methods. Then remaps the startTimeMap and endTimeMap to do reference the new AnimationComponent
-    references.
-  */
+  /**
+   * Reorganizes maps and lists so that the animationList AnimationComponents
+   * point to the new shape references in the shapeList (will have been modified
+   * by the deep copy in the model get() methods). Then remaps the startTimeMap
+   * and endTimeMap to do reference the new AnimationComponent references.
+   *
+   */
   private void reorganizeMapsAndLists() {
     //sets all animationLists to reference proper shape copies.
     for (AnimationComponentInterface a : animationList) {
@@ -134,23 +136,19 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
       a.setShape(shapeList.get(index));
     }
 
-    //for each entry in the map, grab the list of animationComponentInterfaces
-    for (Map.Entry<Integer, List<AnimationComponentInterface>> entry :
-            startTimeMap.entrySet()) {
-      //make new list of AmComs with updated references
-      List<AnimationComponentInterface> newList = new ArrayList<>();
-      for (AnimationComponentInterface a : entry.getValue()) {
-        int index = animationList.indexOf(a);
-        a = animationList.get(index);
-        newList.add(a);
-      }
-      //replace old list with new list of updated references.
-      startTimeMap.put(entry.getKey(), newList);
-    }
+    reorganizeHelper(startTimeMap);
+    reorganizeHelper(endTimeMap);
+  }
 
-    //for each entry in the map, grab the list of animationComponentInterfaces
-    for (Map.Entry<Integer, List<AnimationComponentInterface>> entry :
-            endTimeMap.entrySet()) {
+  /**
+   * Reorganizes maps and lists so that the animationList AnimationComponents
+   * point to the new shape references in the shapeList (will have been
+   * modified by the deep copy in the model get() methods).
+   *
+   * @param map map of integer and animation components to iterate through
+   */
+  private void reorganizeHelper(Map<Integer, List<AnimationComponentInterface>> map) {
+    for (Map.Entry<Integer, List<AnimationComponentInterface>> entry : map.entrySet()) {
       //make new list of AmComs with updated references
       List<AnimationComponentInterface> newList = new ArrayList<>();
       for (AnimationComponentInterface a : entry.getValue()) {
@@ -159,7 +157,7 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
         newList.add(a);
       }
       //replace old list with new list of updated references.
-      endTimeMap.put(entry.getKey(), newList);
+      map.put(entry.getKey(), newList);
     }
   }
 }
