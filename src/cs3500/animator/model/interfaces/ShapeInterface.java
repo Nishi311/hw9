@@ -164,5 +164,4 @@ public interface ShapeInterface {
    * @return A formatted String for Svg text
    */
   String toSvgString();
-
 }
