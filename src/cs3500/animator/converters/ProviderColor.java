@@ -10,6 +10,11 @@ public class ProviderColor implements ISColor {
     this.color = color;
   }
 
+  public ProviderColor(ISColor toCopy){
+    this.color = new ColorClass((float) toCopy.getRed(), (float) toCopy.getGreen(),
+            (float) toCopy.getBlue());
+  }
+
   public ProviderColor(double red, double green, double blue){
     this.color = new ColorClass((float) red, (float) green, (float) blue);
   }

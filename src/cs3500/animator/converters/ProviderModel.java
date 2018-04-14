@@ -117,10 +117,11 @@ public class ProviderModel implements IAnimationModel {
 
   @Override
   public void tick() {
+    tick++;
     for (ITransformation t: currentTransformations()){
       t.transform(tick);
     }
-    tick++;
+
   }
 
   @Override
@@ -137,8 +138,9 @@ public class ProviderModel implements IAnimationModel {
     tick = 0;
     providerShapeListAll.clear();
     for (IAnimShape s: providerShapeBackup){
-      providerShapeListAll.add(s);
-      shapeToShapeObject.put(s.getName(), s);
+      ProviderAnimShape temp = new ProviderAnimShape(s);
+      providerShapeListAll.add(temp);
+      shapeToShapeObject.put(s.getName(), temp);
     }
     for (ITransformation t: providerTransformListAll){
       t.setShape(shapeToShapeObject.get(t.getShapeName()));
@@ -164,8 +166,8 @@ public class ProviderModel implements IAnimationModel {
       IAnimShape temp = new ProviderAnimShape(shape, animations.get(0),
               animations.get(animations.size() - 1));
       shapeToShapeObject.put(temp.getName(), temp);
-      providerShapeBackup.add(temp);
-      providerShapeListAll.add(new ProviderAnimShape(temp));
+      providerShapeBackup.add(new ProviderAnimShape(temp));
+      providerShapeListAll.add(temp);
     }
   }
 

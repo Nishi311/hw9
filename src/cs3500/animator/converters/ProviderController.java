@@ -40,8 +40,8 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
 
   private Timer timer;
 
-  private boolean doesLoop = false;
-  private boolean isPaused = true;
+  private boolean doesLoop = true;
+  private boolean isPaused = false;
 
 
   public ProviderController(AnimationModelInterface model, ViewFactoryProviderInterface vFac) {
@@ -68,6 +68,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
           }
         } else{
         timer.start();
+        changeStatus("Playing");
       }
       } else {
         view.run();
@@ -99,8 +100,8 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
     public void pauseAnimation () {
       isPaused = !isPaused;
       if (isPaused) {
-        timer.stop();
         changeStatus("Paused");
+        timer.stop();
       } else {
         timer.start();
         changeStatus("Playing");
@@ -115,7 +116,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
     @Override
     public void changeSpeed ( int speed){
       this.ticksPerSecond = speed;
-      timer.setDelay(speed);
+      timer.setDelay(1000/speed);
     }
 
     @Override
@@ -169,6 +170,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
     @Override
     public void restart () {
       providerModel.restart();
+      timer.start();
     }
 
     @Override
@@ -243,7 +245,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
           throw new IOException(e.getMessage());
         }
 
-        timer = new Timer(this.ticksPerSecond, new RunAction());
+        timer = new Timer(1000/this.ticksPerSecond, new RunAction());
         timer.stop();
       } else {
         try {
@@ -276,7 +278,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
           }
         } else {
           if (isLooping()) {
-            providerModel.restart();
+            restart();
           } else {
             pauseAnimation();
           }

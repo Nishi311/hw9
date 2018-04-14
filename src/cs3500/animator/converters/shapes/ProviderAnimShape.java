@@ -29,14 +29,14 @@ public class ProviderAnimShape implements IAnimShape {
   IShape shape;
 
   public ProviderAnimShape(IAnimShape s){
-    this.pos = s.getLocation();
-    this.color = s.getColor();
+    this.pos = new ProviderLocation(s.getLocation());
+    this.color = new ProviderColor(s.getColor());
     this.type = s.getShapeType();
 
     this.name = s.getName();
     this.appears = s.getAppears();
     this.disappears = s.getDisappears();
-    this.shape = s.getShape();
+    this.shape = s.getShape().makeCopy();
   }
 
   public ProviderAnimShape(ShapeInterface s, AnimationComponentInterface appearance,

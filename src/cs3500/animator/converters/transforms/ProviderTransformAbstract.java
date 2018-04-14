@@ -47,7 +47,7 @@ public abstract class ProviderTransformAbstract implements ITransformation {
   @Override
   public boolean isActive(int tick){
     if (tick >= startingTick){
-      if (tick <= endingTick){
+      if (tick < endingTick){
         return true;
       }
     }
@@ -90,3 +90,5 @@ public abstract class ProviderTransformAbstract implements ITransformation {
   }
 
 }
+
+

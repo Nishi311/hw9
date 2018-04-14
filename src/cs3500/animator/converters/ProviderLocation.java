@@ -10,6 +10,10 @@ public class ProviderLocation implements ISLocation {
     this.pos = pos;
   }
 
+  public ProviderLocation (ISLocation toCopy){
+    this.pos = new Position2D((float)toCopy.getX(), (float)toCopy.getY());
+  }
+
   public ProviderLocation (double x, double y){
     this.pos = new Position2D((float) x, (float) y);
   }
