@@ -26,22 +26,15 @@ public class ProviderAnimShape implements IAnimShape {
 
   IShape shape;
 
-  public ProviderAnimShape(ShapeInterface s){
-    this.pos = new ProviderLocation(s.getPosition());
-    this.color = new ProviderColor(s.getColor());
+  public ProviderAnimShape(IAnimShape s){
+    this.pos = s.getLocation();
+    this.color = s.getColor();
     this.type = s.getShapeType();
-    this.isVisible = s.getVisibility();
+    this.isVisible = s.getVisible();
     this.name = s.getName();
-    this.appears = 0;
-    this.disappears = 0;
-
-    if(this.type.equals("Oval")) {
-      this.shape = new ProviderOval(s.allDimensions()[0], s.allDimensions()[1]);
-    } else if (this.type.equals("Rectangle")) {
-      this.shape = new ProviderRectangle(s.allDimensions()[0], s.allDimensions()[1]);
-    } else {
-      throw new IllegalArgumentException("Shape type does not exist!");
-    }
+    this.appears = s.getAppears();
+    this.disappears = s.getDisappears();
+    this.shape = s.getShape();
   }
 
   public ProviderAnimShape(ShapeInterface s, AnimationComponentInterface appearance,
