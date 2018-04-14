@@ -1,5 +1,6 @@
 package cs3500.animator.converters.shapes;
 
+
 import java.util.List;
 
 import cs3500.animator.converters.ProviderColor;
@@ -7,6 +8,9 @@ import cs3500.animator.converters.ProviderLocation;
 import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.model.interfaces.AnimationModelInterface;
+
+import cs3500.animator.model.interfaces.AnimationComponentInterface;
+
 import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ISColor;
@@ -14,6 +18,7 @@ import cs3500.animator.provider.ISLocation;
 import cs3500.animator.provider.IShape;
 
 public class ProviderAnimShape implements IAnimShape {
+
   ISColor color;
   ISLocation pos;
 
@@ -129,7 +134,7 @@ public class ProviderAnimShape implements IAnimShape {
   public boolean getVisible() {
     return this.isVisible;
   }
-
+  
   @Override
   public void setVisible(boolean isVisible) {
     this.isVisible = isVisible;

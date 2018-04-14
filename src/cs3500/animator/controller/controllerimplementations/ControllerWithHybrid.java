@@ -6,6 +6,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,12 +32,10 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
         ItemListener {
 
   protected HybridViewInterface hybridView;
-  protected IViewable providerView;
-
 
   protected ViewTypes type = null;
   protected String outFile = "out";
-  int ticksPerSecond = 1;
+  protected int ticksPerSecond = 1;
 
   /**
    * Basic constructor for the controller. Just calls the ControllerAbstract constructor.
@@ -74,6 +73,7 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
   @Override
   public void keyPressed(KeyEvent k) {
     checkIfHybridExists();
+
 
     System.out.println("Key pressed: " + k.getKeyCode());
   }
@@ -246,7 +246,7 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
   }
 
 
-  private void createView() throws IllegalArgumentException {
+  protected void createView() throws IOException {
     try {
       view = vFac.create(type, new ModelInsulator(model), outFile, ticksPerSecond);
     } catch (Exception e) {

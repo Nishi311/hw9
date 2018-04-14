@@ -16,8 +16,8 @@ public abstract class ProviderTransformAbstract implements ITransformation {
   protected int startingTick;
   protected int endingTick;
 
-  public ProviderTransformAbstract(AnimationComponentInterface amCom){
-    this.shape = new ProviderAnimShape(amCom.getTarget());
+  public ProviderTransformAbstract(AnimationComponentInterface amCom, IAnimShape shape){
+    this.shape = shape;
     this.shapeName = amCom.getTargetName();
     this.startingTick = amCom.getStartTime();
     this.endingTick = amCom.getEndTime();
@@ -30,9 +30,18 @@ public abstract class ProviderTransformAbstract implements ITransformation {
     this.transformInfo[5] = Integer.toString(endingTick);
   }
 
-  @Override
-  public ITransformation makeCopy(){
-    throw new UnsupportedOperationException("Not needed for HW 8");
+  public ProviderTransformAbstract(ProviderAnimShape shape, int startingTick, int endingTick){
+    this.shape = shape;
+    this.shapeName = shape.getName();
+    this.startingTick = startingTick;
+    this.endingTick = endingTick;
+    this.span = endingTick - startingTick;
+
+    this.transformInfo[0] = this.shapeName;
+
+    //transform[1],[2], and [3] will be filled in by individual implementation
+    this.transformInfo[4] = Integer.toString(startingTick);
+    this.transformInfo[5] = Integer.toString(endingTick);
   }
 
   @Override
