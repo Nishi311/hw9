@@ -32,7 +32,7 @@ public class ProviderAnimShape implements IAnimShape {
     this.pos = new ProviderLocation(s.getLocation());
     this.color = new ProviderColor(s.getColor());
     this.type = s.getShapeType();
-
+    this.isVisible = s.getVisible();
     this.name = s.getName();
     this.appears = s.getAppears();
     this.disappears = s.getDisappears();

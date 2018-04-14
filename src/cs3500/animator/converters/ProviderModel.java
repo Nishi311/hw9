@@ -29,11 +29,9 @@ public class ProviderModel implements IAnimationModel {
   private List<IAnimShape> providerShapeListActive = new ArrayList<>();
   private List<ITransformation> providerTransformListAll = new ArrayList<>();
 
-  private List<ShapeInterface> shapeList = new ArrayList<>();
-  private List<AnimationComponentInterface> animationList = new ArrayList<>();
-
   private Map<String, List<AnimationComponentInterface>> shapeToAnimation = new HashMap<>();
   private Map<String, IAnimShape> shapeToShapeObject = new HashMap<>();
+  private Map<String, IAnimShape> shapeToShapeObjectBackup = new HashMap<>();
 
   private int tick = 0;
   private int endTick = 0;
@@ -156,6 +154,7 @@ public class ProviderModel implements IAnimationModel {
   public void toggleVisible(String shapeName) {
     if (shapeToShapeObject.containsKey(shapeName)){
       shapeToShapeObject.get(shapeName).toggleVisible();
+      shapeToShapeObjectBackup.get(shapeName).toggleVisible();
     }
   }
 
@@ -165,9 +164,15 @@ public class ProviderModel implements IAnimationModel {
       List<AnimationComponentInterface> animations = shapeToAnimation.get(shape.getName());
       IAnimShape temp = new ProviderAnimShape(shape, animations.get(0),
               animations.get(animations.size() - 1));
+
       shapeToShapeObject.put(temp.getName(), temp);
-      providerShapeBackup.add(new ProviderAnimShape(temp));
       providerShapeListAll.add(temp);
+
+      IAnimShape temp2 = new ProviderAnimShape(shape, animations.get(0),
+              animations.get(animations.size() - 1));
+
+      providerShapeBackup.add(temp2);
+      shapeToShapeObjectBackup.put(temp2.getName(), temp2);
     }
   }
 

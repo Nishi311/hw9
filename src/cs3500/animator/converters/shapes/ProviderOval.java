@@ -1,8 +1,5 @@
 package cs3500.animator.converters.shapes;
 
-import java.util.List;
-
-import cs3500.animator.model.concreteclasses.shapes.Oval;
 import cs3500.animator.provider.IShape;
 
 public class ProviderOval implements IShape {

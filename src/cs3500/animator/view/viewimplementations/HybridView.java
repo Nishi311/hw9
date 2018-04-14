@@ -255,10 +255,12 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   @Override
   public void resume() {
     //create a new time and begin.
-    this.timer = new Timer((int) this.milliPerTick, new DrawListener());
-    timer.start();
-    tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
-            "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
+    if (!timer.isRunning()) {
+      this.timer = new Timer((int) this.milliPerTick, new DrawListener());
+      timer.start();
+      tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
+              "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
+    }
   }
 
   @Override

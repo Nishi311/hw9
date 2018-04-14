@@ -22,7 +22,6 @@ import cs3500.animator.provider.IAnimationModel;
 import cs3500.animator.provider.IController;
 import cs3500.animator.provider.ITransformation;
 import cs3500.animator.provider.view.APrintableView;
-import cs3500.animator.provider.view.IPrintableView;
 import cs3500.animator.provider.view.IRunnableView;
 import cs3500.animator.provider.view.IViewable;
 import cs3500.animator.view.ViewTypes;
@@ -103,8 +102,8 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
         changeStatus("Paused");
         timer.stop();
       } else {
-        timer.start();
         changeStatus("Playing");
+        timer.start();
       }
     }
 
@@ -171,6 +170,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
     public void restart () {
       providerModel.restart();
       timer.start();
+      changeStatus("Playing");
     }
 
     @Override
@@ -180,7 +180,7 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
 
     @Override
     public boolean getPaused () {
-      return !providerModel.running();
+      return isPaused;
     }
 
 
