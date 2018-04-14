@@ -4,6 +4,9 @@ import java.util.List;
 
 import cs3500.animator.converters.ProviderColor;
 import cs3500.animator.converters.ProviderLocation;
+import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
+import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.model.interfaces.AnimationModelInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ISColor;
@@ -11,90 +14,131 @@ import cs3500.animator.provider.ISLocation;
 import cs3500.animator.provider.IShape;
 
 public class ProviderAnimShape implements IAnimShape {
-  ShapeInterface s;
+  ISColor color;
+  ISLocation pos;
+
+  String type;
+  String name;
+  boolean isVisible;
+
+  int appears;
+  int disappears;
+
+  IShape shape;
 
   public ProviderAnimShape(ShapeInterface s){
-    this.s = s;
+    this.pos = new ProviderLocation(s.getPosition());
+    this.color = new ProviderColor(s.getColor());
+    this.type = s.getShapeType();
+    this.isVisible = s.getVisibility();
+    this.name = s.getName();
+    this.appears = 0;
+    this.disappears = 0;
+
+    if(this.type.equals("Oval")) {
+      this.shape = new ProviderOval(s.allDimensions()[0], s.allDimensions()[1]);
+    } else if (this.type.equals("Rectangle")) {
+      this.shape = new ProviderRectangle(s.allDimensions()[0], s.allDimensions()[1]);
+    } else {
+      throw new IllegalArgumentException("Shape type does not exist!");
+    }
+  }
+
+  public ProviderAnimShape(ShapeInterface s, AnimationComponentInterface appearance,
+                           AnimationComponentInterface disappearance){
+    this.pos = new ProviderLocation(s.getPosition());
+    this.color = new ProviderColor(s.getColor());
+    this.type = s.getShapeType();
+    this.isVisible = s.getVisibility();
+    this.name = s.getName();
+    this.appears = appearance.getStartTime();
+    this.disappears = disappearance.getStartTime();
+
+    if(this.type.equals("Oval")) {
+      this.shape = new ProviderOval(s.allDimensions()[0], s.allDimensions()[1]);
+    } else if (this.type.equals("Rectangle")) {
+      this.shape = new ProviderRectangle(s.allDimensions()[0], s.allDimensions()[1]);
+    } else {
+      throw new IllegalArgumentException("Shape type does not exist!");
+    }
   }
 
   @Override
   public boolean isActive(int tick) {
-    // To Be Added
-    return false;
+    return tick >= this.appears && tick <= this.disappears && this.isVisible;
   }
 
   @Override
   public void toggleVisible() {
-    // To Be Added
+    this.isVisible = ! this.isVisible;
   }
 
   @Override
   public String getName() {
-    return this.s.getName();
+    return this.name;
   }
 
   @Override
   public IShape getShape() {
+    return this.shape;
   }
 
   @Override
   public String getShapeType() {
-    return this.s.getShapeType();
+    return this.type;
   }
 
   public ISLocation getLocation() {
-    return new ProviderLocation(this.s.getPosition());
+    return this.pos;
   }
 
   @Override
   public String[] getPNames() {
-    List<String> temp = this.s.getattributeLennames();
-    String[] names = new String[temp.size()];
-    temp.toArray(names);
-    return names;
+    return this.shape.getPNames();
   }
 
   @Override
   public double[] getPValues() {
-    return this.s.allDimensions();
+    return this.shape.getPValues();
   }
 
   @Override
   public ISColor getColor() {
-    return new ProviderColor(this.s.getColor());
+    return this.color;
   }
 
   @Override
   public int getAppears() {
-
+    return this.appears;
   }
 
   @Override
   public int getDisappears() {
-    return 0;
+    return this.disappears;
   }
 
   @Override
   public void moveTo(ISLocation endsAt) {
-
+    this.pos = endsAt;
   }
 
   @Override
   public void scaleTo(double... endsAt) {
-
+    this.shape.scaleTo(endsAt);
   }
 
   @Override
   public void changeColor(ISColor endsAt) {
+    this.color = endsAt;
   }
 
   @Override
   public boolean getVisible() {
-    return this.s.getVisibility();
+    return this.isVisible;
   }
 
   @Override
   public void setVisible(boolean isVisible) {
-
+    this.isVisible = isVisible;
   }
 }

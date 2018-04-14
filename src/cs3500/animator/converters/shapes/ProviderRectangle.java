@@ -3,49 +3,72 @@ package cs3500.animator.converters.shapes;
 import java.util.List;
 
 import cs3500.animator.model.concreteclasses.shapes.Rectangle;
+import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
+import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
 import cs3500.animator.provider.IShape;
 
 public class ProviderRectangle implements IShape {
-  Rectangle rect;
+  protected String type;
+  protected String reference;
+
+  protected String[] pNames = {"Width", "Height"};
+  protected double[] pValues;
 
   public ProviderRectangle(double width, double height){
-    this.rect = new Rectangle();
+    if (pNames.length != pValues.length || pNames.length == 0) {
+      throw new IllegalArgumentException("Parameters number not legal!");
+    }
+
+    double[] pValues = {width, height};
+
+    this.pValues = pValues;
+    this.type = "rectangle";
+    this.reference = "Min-corner";
+
+    checkValid();
   }
 
   @Override
   public IShape makeCopy() {
-
+    return new ProviderRectangle(pValues[0], pValues[1]);
   }
 
   @Override
   public boolean checkValid() throws IllegalArgumentException {
-    return false;
+    if (pValues[0] < 0 || pValues[1] < 0) {
+      throw new IllegalArgumentException("Width and Height cannot be negative!");
+    }
+    return true;
   }
 
   @Override
   public String getType() {
-    return this.rect.getShapeType();
+    return type;
   }
 
   @Override
   public String getReference() {
+    return reference;
   }
 
   @Override
   public String[] getPNames() {
-    List<String> temp = this.rect.getattributeLennames();
-    String[] names = new String[temp.size()];
-    temp.toArray(names);
-    return names;
+    return pNames;
   }
 
   @Override
   public double[] getPValues() {
-    return this.rect.allDimensions();
+    return pValues;
   }
 
   @Override
   public void scaleTo(double... scaleFactors) {
-
+    if (scaleFactors.length != pValues.length) {
+      throw new IllegalArgumentException("Parameter number does not match!");
+    }
+    for (int i = 0; i < scaleFactors.length; i++) {
+      pValues[i] = scaleFactors[i];
+    }
+    checkValid();
   }
 }
