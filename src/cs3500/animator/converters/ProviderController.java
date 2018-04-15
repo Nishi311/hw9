@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.util.ArrayList;
 
+import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.List;
 
-
-import javax.swing.*;
+import javax.swing.Timer;
 
 import cs3500.animator.controller.ModelInsulator;
 import cs3500.animator.controller.controllerimplementations.ControllerWithHybrid;
@@ -24,6 +24,7 @@ import cs3500.animator.provider.ITransformation;
 import cs3500.animator.provider.view.APrintableView;
 import cs3500.animator.provider.view.IRunnableView;
 import cs3500.animator.provider.view.IViewable;
+
 import cs3500.animator.view.ViewTypes;
 import cs3500.animator.view.interfaces.HybridViewInterface;
 

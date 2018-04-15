@@ -111,7 +111,7 @@ public class ControllerTests {
   @Test
   public void goodCommandVisual() {
     String[] input = {"-if", "smalldemo.txt", "-o", "blargHonk.txt", "-iv", "visual",
-                      "-speed", "10"};
+            "-speed", "10"};
 
     String expectedOutput = "No Error";
 
@@ -122,7 +122,7 @@ public class ControllerTests {
   @Test
   public void goodCommandText() {
     String[] input = {"-if", "smalldemo.txt", "-o", "blargHonk.txt", "-iv", "text",
-                      "-speed", "10"};
+            "-speed", "10"};
 
     String expectedOutput = "No Error";
 
@@ -133,7 +133,7 @@ public class ControllerTests {
   @Test
   public void goodCommandSVG() {
     String[] input = {"-if", "smalldemo.txt", "-o", "blargHonk.txt", "-iv", "svg",
-                      "-speed", "10"};
+            "-speed", "10"};
 
     String expectedOutput = "No Error";
 

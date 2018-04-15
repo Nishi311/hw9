@@ -3,9 +3,7 @@ package cs3500.animator.converters.transforms;
 import cs3500.animator.converters.ProviderLocation;
 import cs3500.animator.converters.shapes.ProviderAnimShape;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.PositionChange;
-import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
-import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ITransformation;
 

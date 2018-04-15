@@ -3,19 +3,9 @@ package cs3500.animator.converters;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import cs3500.animator.controller.interfaces.ModelInsulatorInterface;
-import cs3500.animator.converters.shapes.ProviderAnimShape;
-import cs3500.animator.converters.transforms.ProviderColorChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ColorChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.PositionChange;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeRR;
-import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeWH;
-import cs3500.animator.model.interfaces.AnimationComponentInterface;
-import cs3500.animator.model.interfaces.ShapeInterface;
+import java.util.List;
+
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.IController;
 import cs3500.animator.provider.ITransformation;

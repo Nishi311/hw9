@@ -625,7 +625,7 @@ public class ModelTest {
     Map<Integer, List<AnimationComponentInterface>> newMap = model.getStartToAnimationMap();
 
     ShapeInterface test = new Rectangle("Hello World", new ColorClass(), new Position2D(),
-            0f, false, 0f,0f);
+            0f, false, 0f, 0f);
 
     newMap.get(1).get(0).setShape(test);
 

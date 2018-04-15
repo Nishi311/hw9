@@ -5,8 +5,6 @@ import cs3500.animator.converters.ProviderColor;
 import cs3500.animator.converters.ProviderLocation;
 
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.VisibilityChange;
-import cs3500.animator.model.interfaces.AnimationComponentInterface;
-
 
 import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.provider.IAnimShape;
