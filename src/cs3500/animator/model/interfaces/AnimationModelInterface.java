@@ -39,8 +39,8 @@ public interface AnimationModelInterface {
    *                                  the resulting animation will result in a conflict.
    */
   void editAnimation(int listIndex, String shapeName,
-                     String animationType, DurationInterface animationDuration, Object... parameters)
-          throws IllegalArgumentException;
+                     String animationType, DurationInterface animationDuration,
+                     Object... parameters) throws IllegalArgumentException;
 
   /**
    * Allows the user to add a shape to the model. Note, by default shapes will NOT be visible
@@ -56,8 +56,9 @@ public interface AnimationModelInterface {
    *                                  create an unknown shape type, if any of the parameters
    *                                  (including color and pos) are invalid.
    */
-  void addShape(String shapeName, String shapeType, ColorClassInterface color, Position2DInterface pos,
-                float orient, Object... parameters) throws IllegalArgumentException;
+  void addShape(String shapeName, String shapeType, ColorClassInterface color,
+                Position2DInterface pos, float orient, Object... parameters)
+          throws IllegalArgumentException;
 
 
   /**

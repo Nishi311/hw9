@@ -62,8 +62,8 @@ public class SVGView implements ViewInterface {
    * SVGView generates formatted SVG text.
    *
    * @param ticksPerSecond          Ticks represented in one second.
-   * @param outFile                 The name for the target output file. If left empty, the default is
-   *                                "out.svg".
+   * @param outFile                 The name for the target output file. If left empty, the
+   *                                default is "out.svg".
    * @param shapes                  List contains all the shapes.
    * @param animationList           List contains all the animations.
    * @param shapeNameToAnimationMap Maps that mapping name to animation.
