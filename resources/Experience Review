@@ -1,2 +1,26 @@
 EXPERIENCE REVIEW:
 
+What would we do differently:
+
+After looking at our provider's code, one of the things we would definitely do differently is emulate their distinction of views.
+Our ViewInterface is a catch-all, intended to cover every possible situation but doesn't provide the granularity and distinction
+between view types that we liked in our provider's code. Another nice take away was how they dealt with the different parameter
+names necessary to distinguish rectangle scaling and oval scaling. Our approach was in-elegant and used a separate scale
+class for each one, we probably should've used more of the information we had embedded in the shapes to contextually change
+how the scale was dealt with and thus avoided the two class scenario. The final things that we really liked from the provider
+code was their use of the JFileChooser for the SVG exporting and the JSpinner for the speed controls. Again, our solutions were
+more brutish, using a text field and a button to replace the JFileChooser and two buttons for the JSpinner.
+
+From our client experience, we realized we needed to make interfaces for EVERYTHING, including things
+we figured were pretty simple, like the color and location. We ended up needing to rework our code to accommodate these features
+before we sent it out because we realized we were too tightly coupled to send it out as it was.
+
+
+Our experience with our providers:
+
+We were a little later getting the code from our providers than we would have liked, coming in on Monday night. That said,
+that's still pretty good but it didn't come with a read-me and we needed interfaces for their basic color and location classes.
+Those took about two days to get to us. Finally, we ran into an issue with the export feature of the interactive view and have
+yet to and [[[[[FINISH WHEN WE RECEIVE A RESPONSE]]]]]]
+
+Overall, they were a bit slow but still got the job done.
