@@ -1,6 +1,7 @@
 package cs3500.animator.converters;
 
 import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
+import cs3500.animator.model.interfaces.ColorClassInterface;
 import cs3500.animator.provider.ISColor;
 
 /**
@@ -8,7 +9,7 @@ import cs3500.animator.provider.ISColor;
  * display a color for a shape. Basically just wraps around our own ColorClass.
  */
 public class ProviderColor implements ISColor {
-  ColorClass color;
+  ColorClassInterface color;
 
   /**
    * Conversion Constructor. Allows us to create a provider compatible ISColor with our own
@@ -16,7 +17,7 @@ public class ProviderColor implements ISColor {
    *
    * @param color The colorClass to wrap.
    */
-  public ProviderColor(ColorClass color) {
+  public ProviderColor(ColorClassInterface color) {
     this.color = color;
   }
 

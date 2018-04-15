@@ -3,9 +3,6 @@ package cs3500.animator.model.interfaces;
 import java.util.List;
 import java.awt.Graphics;
 
-import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
-import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
-
 /**
  * This interface governs the implementation of shape interface. These objects are fundamental
  * elements of both AnimationComponents (which act on shapes) and AnimationModels (which are
@@ -50,17 +47,17 @@ public interface ShapeInterface {
    * Allows the user to retrieve the color of the shape. This is a universal parameter so this is
    * available as its own function. Can do the same with getParameter("COLOR).
    *
-   * @return The color of the shape as a {@link ColorClass} object.
+   * @return The color of the shape as a {@link ColorClassInterface} object.
    */
-  ColorClass getColor();
+  ColorClassInterface getColor();
 
   /**
    * Allows the user to retrieve the position of the shape. This is a universal parameter so this is
    * available as its own function. Can do the same with getParameter("POSITION").
    *
-   * @return The position of the shape as a {@link Position2D} object.
+   * @return The position of the shape as a {@link Position2DInterface} object.
    */
-  Position2D getPosition();
+  Position2DInterface getPosition();
 
   /**
    * Allows the user to retrieve the position of a shape. This is a universal parameter so this is

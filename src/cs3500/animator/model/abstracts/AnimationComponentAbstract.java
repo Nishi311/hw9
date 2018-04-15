@@ -1,7 +1,7 @@
 package cs3500.animator.model.abstracts;
 
-import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.model.interfaces.DurationInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -12,7 +12,7 @@ import cs3500.animator.model.interfaces.ShapeInterface;
  */
 public abstract class AnimationComponentAbstract implements AnimationComponentInterface {
   protected ShapeInterface shape;
-  protected Duration dur;
+  protected DurationInterface dur;
 
   @Override
   public void setShape(ShapeInterface newShape) throws IllegalArgumentException {

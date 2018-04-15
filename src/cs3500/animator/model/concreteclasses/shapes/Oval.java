@@ -10,6 +10,8 @@ import cs3500.animator.model.abstracts.ShapeAbstract;
 import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
 import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
+import cs3500.animator.model.interfaces.ColorClassInterface;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -28,7 +30,7 @@ public class Oval extends ShapeAbstract {
    * @param radiusY    The y radius of the oval.
    * @throws IllegalArgumentException If either the X or Y radii are negative.
    */
-  public Oval(String name, ColorClass color, Position2D pos, float orient, boolean visibility,
+  public Oval(String name, ColorClassInterface color, Position2DInterface pos, float orient, boolean visibility,
               float radiusX, float radiusY) throws IllegalArgumentException {
     if (radiusX < 0.0 || radiusY < 0) {
       throw new IllegalArgumentException("Cannot have negative radius for Oval");
@@ -93,8 +95,8 @@ public class Oval extends ShapeAbstract {
 
     ShapeInterface copyOval = new Oval(
             (String) workingParameterMap.get(UniversalShapeParameterTypes.NAME.name()),
-            (ColorClass) workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
-            (Position2D) workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
+            (ColorClassInterface) workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
+            (Position2DInterface) workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
             (float) workingParameterMap.get(UniversalShapeParameterTypes.ORIENTATION.name()),
             (boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name()),
             (float) workingParameterMap.get("xRadius"),
@@ -129,9 +131,9 @@ public class Oval extends ShapeAbstract {
 
   @Override
   public String toString() {
-    ColorClass currentColor = (ColorClass) workingParameterMap.get(
+    ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
             UniversalShapeParameterTypes.COLOR.name());
-    Position2D currentPosition = (Position2D) workingParameterMap.get(
+    Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
             UniversalShapeParameterTypes.POSITION.name());
     float currentRadiusX = (float) workingParameterMap.get("xRadius");
     float currentRadiusY = (float) workingParameterMap.get("yRadius");
@@ -184,9 +186,9 @@ public class Oval extends ShapeAbstract {
 
   @Override
   public String toSvgString() {
-    ColorClass currentColor = (ColorClass) workingParameterMap.get(
+    ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
             UniversalShapeParameterTypes.COLOR.name());
-    Position2D currentPosition = (Position2D) workingParameterMap.get(
+    Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
             UniversalShapeParameterTypes.POSITION.name());
     float currentRadiusX = (float) workingParameterMap.get("xRadius");
     float currentRadiusY = (float) workingParameterMap.get("yRadius");
@@ -210,9 +212,9 @@ public class Oval extends ShapeAbstract {
   public void draw(Graphics g) {
 
     if ((Boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name())) {
-      Position2D currentPosition = (Position2D) workingParameterMap.get(
+      Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
               UniversalShapeParameterTypes.POSITION.name());
-      ColorClass currentColor = (ColorClass) workingParameterMap.get(
+      ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
               UniversalShapeParameterTypes.COLOR.name());
       float currentRadiusX = (float) workingParameterMap.get("xRadius");
       float currentRadiusY = (float) workingParameterMap.get("yRadius");

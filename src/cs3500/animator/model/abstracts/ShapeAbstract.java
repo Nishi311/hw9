@@ -6,6 +6,8 @@ import java.util.Set;
 import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
 import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
+import cs3500.animator.model.interfaces.ColorClassInterface;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 
@@ -35,12 +37,12 @@ public abstract class ShapeAbstract implements ShapeInterface {
   }
 
   @Override
-  public ColorClass getColor() {
+  public ColorClassInterface getColor() {
     return (ColorClass) workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name());
   }
 
   @Override
-  public Position2D getPosition() {
+  public Position2DInterface getPosition() {
     return (Position2D) workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name());
   }
 
@@ -88,7 +90,7 @@ public abstract class ShapeAbstract implements ShapeInterface {
   protected void universalKeyObjectValidation(String key, Object value)
           throws IllegalArgumentException {
     if (key.equals(UniversalShapeParameterTypes.COLOR.name())
-            && !(value instanceof ColorClass)) {
+            && !(value instanceof ColorClassInterface)) {
       throw new IllegalArgumentException("Color must be a ColorClass");
     }
 
@@ -98,7 +100,7 @@ public abstract class ShapeAbstract implements ShapeInterface {
     }
 
     if (key.equals(UniversalShapeParameterTypes.POSITION.name())
-            && !(value instanceof Position2D)) {
+            && !(value instanceof Position2DInterface)) {
       throw new IllegalArgumentException("Position must be a Position2D");
     }
 

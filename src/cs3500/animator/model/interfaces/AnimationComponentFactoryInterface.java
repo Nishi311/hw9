@@ -1,7 +1,5 @@
 package cs3500.animator.model.interfaces;
 
-import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
-
 /**
  * This interface is used to guide any animation component factories built. The sole method,
  * create(), is all that's needed for the factory.
@@ -22,6 +20,6 @@ public interface AnimationComponentFactoryInterface {
    *                                  are invalid for that animationType
    */
   AnimationComponentInterface create(ShapeInterface targetShape, String animationType,
-                                     Duration animationDuration, Object... parameters)
+                                     DurationInterface animationDuration, Object... parameters)
           throws IllegalArgumentException;
 }

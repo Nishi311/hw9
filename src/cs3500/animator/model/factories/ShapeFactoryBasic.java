@@ -5,8 +5,8 @@ import java.util.List;
 
 import cs3500.animator.model.concreteclasses.shapes.Oval;
 import cs3500.animator.model.concreteclasses.shapes.Rectangle;
-import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
-import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
+import cs3500.animator.model.interfaces.ColorClassInterface;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.model.interfaces.ShapeFactoryInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
@@ -16,7 +16,8 @@ import cs3500.animator.model.interfaces.ShapeInterface;
  */
 public class ShapeFactoryBasic implements ShapeFactoryInterface {
   @Override
-  public ShapeInterface create(String shapeName, String shapeType, ColorClass color, Position2D pos,
+  public ShapeInterface create(String shapeName, String shapeType, ColorClassInterface color,
+                               Position2DInterface pos,
                                float orient, Object... parameters)
           throws IllegalArgumentException {
     ShapeInterface newShape;

@@ -8,6 +8,8 @@ import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
 import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
 import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.model.interfaces.ColorClassInterface;
+import cs3500.animator.model.interfaces.DurationInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -19,8 +21,8 @@ public class ColorChange extends AnimationComponentAbstract {
   private float redShiftPerTimeUnit;
   private float greenShiftPerTimeUnit;
   private float blueShiftPerTimeUnit;
-  private ColorClass targetColor;
-  private ColorClass startingColor;
+  private ColorClassInterface targetColor;
+  private ColorClassInterface startingColor;
 
   /**
    * Basic ColorChange constructor.
@@ -30,8 +32,8 @@ public class ColorChange extends AnimationComponentAbstract {
    * @param startingColor The staring color of the shape.
    * @param targetColor   The ending color of the shape.
    */
-  public ColorChange(ShapeInterface shape, Duration dur, ColorClass startingColor,
-                     ColorClass targetColor) {
+  public ColorChange(ShapeInterface shape, DurationInterface dur, ColorClassInterface startingColor,
+                     ColorClassInterface targetColor) {
 
     this.shape = shape;
     this.dur = new Duration(dur);
@@ -65,7 +67,7 @@ public class ColorChange extends AnimationComponentAbstract {
   @Override
   public void executeIncrement() {
 
-    ColorClass currentColor = (ColorClass) shape.getParameter(
+    ColorClassInterface currentColor = (ColorClass) shape.getParameter(
             UniversalShapeParameterTypes.COLOR.name());
 
     float newRed = currentColor.getRed() + redShiftPerTimeUnit;
@@ -93,7 +95,7 @@ public class ColorChange extends AnimationComponentAbstract {
       newBlue = 1;
     }
 
-    ColorClass incrementedColor = new ColorClass(newRed, newGreen, newBlue);
+    ColorClassInterface incrementedColor = new ColorClass(newRed, newGreen, newBlue);
 
     shape.editParameter(UniversalShapeParameterTypes.COLOR.name(), incrementedColor);
   }
@@ -143,12 +145,12 @@ public class ColorChange extends AnimationComponentAbstract {
         if (test.getEndTime() == (this.dur.getEndTime())) {
 
           List<Object> testStartList = test.getInitialParameters();
-          ColorClass testStartColor = (ColorClass) testStartList.get(0);
+          ColorClassInterface testStartColor = (ColorClass) testStartList.get(0);
           //check staring color
           if (testStartColor.equals(this.startingColor)) {
 
             List<Object> testEndList = test.getFinalParameters();
-            ColorClass testEndColor = (ColorClass) testEndList.get(0);
+            ColorClassInterface testEndColor = (ColorClass) testEndList.get(0);
             //check ending color
             if (testEndColor.equals(this.targetColor)) {
               return true;

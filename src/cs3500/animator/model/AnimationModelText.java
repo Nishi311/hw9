@@ -19,6 +19,9 @@ import cs3500.animator.model.factories.ShapeFactoryBasic;
 import cs3500.animator.model.interfaces.AnimationComponentFactoryInterface;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.model.interfaces.AnimationModelInterface;
+import cs3500.animator.model.interfaces.ColorClassInterface;
+import cs3500.animator.model.interfaces.DurationInterface;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.model.interfaces.ShapeFactoryInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
@@ -72,7 +75,7 @@ public class AnimationModelText implements AnimationModelInterface {
 
   @Override
   public void addAnimation(String shapeName,
-                           String animationType, Duration animationDuration, Object... parameters)
+                           String animationType, DurationInterface animationDuration, Object... parameters)
           throws IllegalArgumentException {
     //
     validateComponentShapeExists(shapeName);
@@ -87,7 +90,7 @@ public class AnimationModelText implements AnimationModelInterface {
 
   @Override
   public void editAnimation(int listIndex, String shapeName, String animationType,
-                            Duration animationDuration, Object... parameters)
+                            DurationInterface animationDuration, Object... parameters)
           throws IllegalArgumentException {
     validateListIndex(listIndex);
     validateComponentShapeExists(shapeName);
@@ -112,7 +115,7 @@ public class AnimationModelText implements AnimationModelInterface {
   }
 
   @Override
-  public void addShape(String shapeName, String shapeType, ColorClass color, Position2D pos,
+  public void addShape(String shapeName, String shapeType, ColorClassInterface color, Position2DInterface pos,
                        float orient, Object... parameters) throws IllegalArgumentException {
 
     if (shapeNameToWorkingShapeObjectMap.containsKey(shapeName)) {
@@ -551,10 +554,10 @@ public class AnimationModelText implements AnimationModelInterface {
                                                          float xRadius, float yRadius,
                                                          float red, float green, float blue,
                                                          int startOfLife, int endOfLife) {
-      Position2D pos = new Position2D(cx, cy);
-      ColorClass color = new ColorClass(red, green, blue);
-      Duration durStart = new Duration(startOfLife);
-      Duration durEnd = new Duration(endOfLife);
+      Position2DInterface pos = new Position2D(cx, cy);
+      ColorClassInterface color = new ColorClass(red, green, blue);
+      DurationInterface durStart = new Duration(startOfLife);
+      DurationInterface durEnd = new Duration(endOfLife);
 
       this.model.addShape(name, "Oval", color, pos, 0, xRadius, yRadius);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
@@ -569,10 +572,10 @@ public class AnimationModelText implements AnimationModelInterface {
                                                               float width, float height,
                                                               float red, float green, float blue,
                                                               int startOfLife, int endOfLife) {
-      Position2D pos = new Position2D(lx, ly);
-      ColorClass color = new ColorClass(red, green, blue);
-      Duration durStart = new Duration(startOfLife);
-      Duration durEnd = new Duration(endOfLife);
+      Position2DInterface pos = new Position2D(lx, ly);
+      ColorClassInterface color = new ColorClass(red, green, blue);
+      DurationInterface durStart = new Duration(startOfLife);
+      DurationInterface durEnd = new Duration(endOfLife);
 
       this.model.addShape(name, "Rectangle", color, pos, 0, width, height);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
@@ -586,9 +589,9 @@ public class AnimationModelText implements AnimationModelInterface {
             String name,
             float moveFromX, float moveFromY, float moveToX, float moveToY,
             int startTime, int endTime) {
-      Position2D initialPos = new Position2D(moveFromX, moveFromY);
-      Position2D finalPos = new Position2D(moveToX, moveToY);
-      Duration dur = new Duration(startTime, endTime);
+      Position2DInterface initialPos = new Position2D(moveFromX, moveFromY);
+      Position2DInterface finalPos = new Position2D(moveToX, moveToY);
+      DurationInterface dur = new Duration(startTime, endTime);
 
       this.model.addAnimation(name, "Position Change", dur, initialPos, finalPos);
       return this;
@@ -600,9 +603,9 @@ public class AnimationModelText implements AnimationModelInterface {
             String name,
             float oldR, float oldG, float oldB, float newR, float newG, float newB,
             int startTime, int endTime) {
-      ColorClass initialColor = new ColorClass(oldR, oldG, oldB);
-      ColorClass finalColor = new ColorClass(newR, newG, newB);
-      Duration dur = new Duration(startTime, endTime);
+      ColorClassInterface initialColor = new ColorClass(oldR, oldG, oldB);
+      ColorClassInterface finalColor = new ColorClass(newR, newG, newB);
+      DurationInterface dur = new Duration(startTime, endTime);
 
       this.model.addAnimation(name, "Color Change", dur, initialColor, finalColor);
       return this;
@@ -613,7 +616,7 @@ public class AnimationModelText implements AnimationModelInterface {
             fromSy, float toSx, float toSy, int startTime, int endTime) {
       ShapeInterface targetShape = new Rectangle();
 
-      Duration dur = new Duration(startTime, endTime);
+      DurationInterface dur = new Duration(startTime, endTime);
 
       List<ShapeInterface> listOfShapes = this.model.getShapeList();
       for (ShapeInterface shape : listOfShapes) {

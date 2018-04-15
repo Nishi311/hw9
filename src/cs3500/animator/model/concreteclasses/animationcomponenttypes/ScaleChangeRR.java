@@ -7,6 +7,7 @@ import java.util.Objects;
 import cs3500.animator.model.abstracts.AnimationComponentAbstract;
 import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.model.interfaces.DurationInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -36,7 +37,7 @@ public class ScaleChangeRR extends AnimationComponentAbstract {
    * @param targetRadiusX   The end X radius.
    * @param targetRadiusY   The end Y radius.
    */
-  public ScaleChangeRR(ShapeInterface shape, Duration dur, float startingRadiusX,
+  public ScaleChangeRR(ShapeInterface shape, DurationInterface dur, float startingRadiusX,
                        float startingRadiusY, float targetRadiusX, float targetRadiusY) {
     this.shape = shape;
     this.dur = dur;

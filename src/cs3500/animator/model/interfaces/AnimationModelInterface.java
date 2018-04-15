@@ -3,10 +3,6 @@ package cs3500.animator.model.interfaces;
 import java.util.List;
 import java.util.Map;
 
-import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
-import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
-import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
-
 /**
  * This interface governs the implementation of the Animation model. Provides functions related to
  * manipulating internal animation components and shapes and executing animation components.
@@ -25,7 +21,7 @@ public interface AnimationModelInterface {
    *                                  the resulting animation will result in a conflict.
    */
   void addAnimation(String shapeName, String animationType,
-                    Duration animationDuration, Object... parameters)
+                    DurationInterface animationDuration, Object... parameters)
           throws IllegalArgumentException;
 
   /**
@@ -43,7 +39,7 @@ public interface AnimationModelInterface {
    *                                  the resulting animation will result in a conflict.
    */
   void editAnimation(int listIndex, String shapeName,
-                     String animationType, Duration animationDuration, Object... parameters)
+                     String animationType, DurationInterface animationDuration, Object... parameters)
           throws IllegalArgumentException;
 
   /**
@@ -60,7 +56,7 @@ public interface AnimationModelInterface {
    *                                  create an unknown shape type, if any of the parameters
    *                                  (including color and pos) are invalid.
    */
-  void addShape(String shapeName, String shapeType, ColorClass color, Position2D pos,
+  void addShape(String shapeName, String shapeType, ColorClassInterface color, Position2DInterface pos,
                 float orient, Object... parameters) throws IllegalArgumentException;
 
 

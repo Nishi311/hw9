@@ -4,6 +4,7 @@ import cs3500.animator.converters.ProviderLocation;
 import cs3500.animator.converters.shapes.ProviderAnimShape;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.PositionChange;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ITransformation;
 
@@ -13,8 +14,8 @@ import cs3500.animator.provider.ITransformation;
  */
 public class ProviderPositionChange extends ProviderTransformAbstract {
 
-  private Position2D startingPos;
-  private Position2D endingPos;
+  private Position2DInterface startingPos;
+  private Position2DInterface endingPos;
 
   private double xIncrement;
   private double yIncrement;
@@ -50,8 +51,8 @@ public class ProviderPositionChange extends ProviderTransformAbstract {
    * @param startingTick The tick when the shape should start moving.
    * @param endingTick   The tick when the shape should finish moving.
    */
-  public ProviderPositionChange(ProviderAnimShape shape, Position2D startingPos,
-                                Position2D endingPos, int startingTick, int endingTick) {
+  public ProviderPositionChange(ProviderAnimShape shape, Position2DInterface startingPos,
+                                Position2DInterface endingPos, int startingTick, int endingTick) {
     super(shape, startingTick, endingTick);
 
     this.startingPos = new Position2D(startingPos);

@@ -2,11 +2,13 @@ package cs3500.animator.model.concreteclasses.utilityclasses;
 
 import java.util.Objects;
 
+import cs3500.animator.model.interfaces.ColorClassInterface;
+
 /**
  * Basic class that contains RGB color values.
  * INVARIANT: color values cannot be negative.
  */
-public class ColorClass {
+public class ColorClass implements ColorClassInterface{
   private float red;
   private float green;
   private float blue;
@@ -42,10 +44,10 @@ public class ColorClass {
    *
    * @param copyColor The color to be copied.
    */
-  public ColorClass(ColorClass copyColor) {
-    this.red = copyColor.red;
-    this.green = copyColor.green;
-    this.blue = copyColor.blue;
+  public ColorClass(ColorClassInterface copyColor) {
+    this.red = copyColor.getRed();
+    this.green = copyColor.getGreen();
+    this.blue = copyColor.getBlue();
   }
 
   /**
@@ -116,10 +118,10 @@ public class ColorClass {
 
   @Override
   public boolean equals(Object obj) {
-    if (!(obj instanceof ColorClass)) {
+    if (!(obj instanceof ColorClassInterface)) {
       return false;
     }
-    ColorClass compareColor = (ColorClass) obj;
+    ColorClassInterface compareColor = (ColorClass) obj;
 
     if (red == compareColor.getRed()) {
       if (green == compareColor.getGreen()) {

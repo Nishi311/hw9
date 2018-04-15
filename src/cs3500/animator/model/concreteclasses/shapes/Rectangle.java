@@ -10,6 +10,8 @@ import cs3500.animator.model.abstracts.ShapeAbstract;
 import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
 import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
+import cs3500.animator.model.interfaces.ColorClassInterface;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -28,7 +30,7 @@ public class Rectangle extends ShapeAbstract {
    * @param height     The height of the rectangle.
    * @throws IllegalArgumentException If either the width or height is negative.
    */
-  public Rectangle(String name, ColorClass color, Position2D pos, float orient,
+  public Rectangle(String name, ColorClassInterface color, Position2DInterface pos, float orient,
                    boolean visibility, float width, float height)
           throws IllegalArgumentException {
     if (width < 0 || height < 0) {
@@ -94,8 +96,8 @@ public class Rectangle extends ShapeAbstract {
   public ShapeInterface copy() {
     ShapeInterface copyRectangle = new Rectangle(
             (String) workingParameterMap.get(UniversalShapeParameterTypes.NAME.name()),
-            (ColorClass) workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
-            (Position2D) workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
+            (ColorClassInterface) workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
+            (Position2DInterface) workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
             (float) workingParameterMap.get(UniversalShapeParameterTypes.ORIENTATION.name()),
             (boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name()),
             (float) workingParameterMap.get("width"),
@@ -131,9 +133,9 @@ public class Rectangle extends ShapeAbstract {
 
   @Override
   public String toString() {
-    ColorClass currentColor = (ColorClass) workingParameterMap.get(
+    ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
             UniversalShapeParameterTypes.COLOR.name());
-    Position2D currentPosition = (Position2D) workingParameterMap.get(
+    Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
             UniversalShapeParameterTypes.POSITION.name());
     float currentWidth = (float) workingParameterMap.get("width");
     float currentHeight = (float) workingParameterMap.get("height");
@@ -187,9 +189,9 @@ public class Rectangle extends ShapeAbstract {
 
   @Override
   public String toSvgString() {
-    ColorClass currentColor = (ColorClass) workingParameterMap.get(
+    ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
             UniversalShapeParameterTypes.COLOR.name());
-    Position2D currentPosition = (Position2D) workingParameterMap.get(
+    Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
             UniversalShapeParameterTypes.POSITION.name());
     float currentWidth = (float) workingParameterMap.get("width");
     float currentHeight = (float) workingParameterMap.get("height");
@@ -213,9 +215,9 @@ public class Rectangle extends ShapeAbstract {
   @Override
   public void draw(Graphics g) {
     if ((Boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name())) {
-      Position2D currentPosition = (Position2D) workingParameterMap.get(
+      Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
               UniversalShapeParameterTypes.POSITION.name());
-      ColorClass currentColor = (ColorClass) workingParameterMap.get(
+      ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
               UniversalShapeParameterTypes.COLOR.name());
       float currentRadiusX = (float) workingParameterMap.get("width");
       float currentRadiusY = (float) workingParameterMap.get("height");

@@ -2,6 +2,8 @@ package cs3500.animator.model.concreteclasses.utilityclasses;
 
 import java.util.Objects;
 
+import cs3500.animator.model.interfaces.DurationInterface;
+
 /**
  * Basic class that allows for the representation of a period of time. Start is the beginning of
  * the period and End is the end of the duration.
@@ -9,7 +11,7 @@ import java.util.Objects;
  * 1.) Cannot have negative times.
  * 2.) End time cannot be fore start time.
  */
-public class Duration {
+public class Duration implements DurationInterface{
   private int startTime;
   private int endTime;
 
@@ -51,9 +53,9 @@ public class Duration {
    *
    * @param copyDur Duration to be copied.
    */
-  public Duration(Duration copyDur) {
-    this.startTime = copyDur.startTime;
-    this.endTime = copyDur.endTime;
+  public Duration(DurationInterface copyDur) {
+    this.startTime = copyDur.getStartTime();
+    this.endTime = copyDur.getEndTime();
   }
 
   /**
@@ -95,10 +97,10 @@ public class Duration {
 
   @Override
   public boolean equals(Object obj) {
-    if (!(obj instanceof Duration)) {
+    if (!(obj instanceof DurationInterface)) {
       return false;
     }
-    Duration compareDur = (Duration) obj;
+    DurationInterface compareDur = (Duration) obj;
 
     if (startTime == compareDur.getStartTime()) {
       if (endTime == compareDur.getEndTime()) {

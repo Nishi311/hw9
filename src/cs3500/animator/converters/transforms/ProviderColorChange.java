@@ -4,6 +4,7 @@ import cs3500.animator.converters.ProviderColor;
 import cs3500.animator.converters.shapes.ProviderAnimShape;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ColorChange;
 import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
+import cs3500.animator.model.interfaces.ColorClassInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ITransformation;
 
@@ -13,8 +14,8 @@ import cs3500.animator.provider.ITransformation;
  */
 public class ProviderColorChange extends ProviderTransformAbstract {
 
-  private ColorClass startingColor;
-  private ColorClass endingColor;
+  private ColorClassInterface startingColor;
+  private ColorClassInterface endingColor;
 
   private double redIncrement;
   private double greenIncrement;
@@ -52,7 +53,7 @@ public class ProviderColorChange extends ProviderTransformAbstract {
    * @param startingTick  The tick when the shape should start changing color.
    * @param endingTick    The tick when the shape should finish changing color.
    */
-  public ProviderColorChange(ProviderAnimShape shape, ColorClass startingColor, ColorClass endingColor,
+  public ProviderColorChange(ProviderAnimShape shape, ColorClassInterface startingColor, ColorClassInterface endingColor,
                              int startingTick, int endingTick) {
     super(shape, startingTick, endingTick);
 

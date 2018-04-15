@@ -94,6 +94,11 @@ public class SVGView implements ViewInterface {
     }
   }
 
+  /**
+   * Sets the internal list of ShapeInterfaces with the provided list.
+   *
+   * @param newShapes Shapes to be used by the animation.
+   */
   public void setShapeList(List<ShapeInterface> newShapes) {
     shapes = newShapes;
   }

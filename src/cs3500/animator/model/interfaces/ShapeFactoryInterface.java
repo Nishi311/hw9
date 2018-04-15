@@ -1,8 +1,5 @@
 package cs3500.animator.model.interfaces;
 
-import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
-import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
-
 /**
  * This interface is used to guide any shape interface factories built. The sole method,
  * create(), is all that's needed for the factory.
@@ -21,6 +18,7 @@ public interface ShapeFactoryInterface {
    * @throws IllegalArgumentException if the shapeType is not known or if any of the parameters
    *                                  are invalid for that shapeType.
    */
-  ShapeInterface create(String shapeName, String shapeType, ColorClass color, Position2D pos,
-                        float orient, Object... parameters) throws IllegalArgumentException;
+  ShapeInterface create(String shapeName, String shapeType, ColorClassInterface color,
+                        Position2DInterface pos, float orient, Object... parameters)
+          throws IllegalArgumentException;
 }

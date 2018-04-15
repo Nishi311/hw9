@@ -9,6 +9,7 @@ import cs3500.animator.model.abstracts.AnimationComponentAbstract;
 import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
 import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.model.interfaces.DurationInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -29,7 +30,7 @@ public class VisibilityChange extends AnimationComponentAbstract {
    * @throws IllegalArgumentException If the duration given does not have the same start
    *                                  and end time.
    */
-  public VisibilityChange(ShapeInterface shape, Duration dur, boolean targetVisibility)
+  public VisibilityChange(ShapeInterface shape, DurationInterface dur, boolean targetVisibility)
           throws IllegalArgumentException {
 
     if (dur.getTotalDuration() != 1) {

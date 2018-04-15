@@ -10,10 +10,12 @@ import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChange
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeWH;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.VisibilityChange;
 import cs3500.animator.model.concreteclasses.utilityclasses.ColorClass;
-import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
 import cs3500.animator.model.interfaces.AnimationComponentFactoryInterface;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.model.interfaces.ColorClassInterface;
+import cs3500.animator.model.interfaces.DurationInterface;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -23,7 +25,7 @@ import cs3500.animator.model.interfaces.ShapeInterface;
 public class AnimationComponentFactoryBasic implements AnimationComponentFactoryInterface {
   @Override
   public AnimationComponentInterface create(ShapeInterface targetShape, String animationType,
-                                            Duration animationDuration, Object... parameters)
+                                            DurationInterface animationDuration, Object... parameters)
           throws IllegalArgumentException {
     AnimationComponentInterface newAnimation;
     List<Object> parameterList = new ArrayList<>();
@@ -35,8 +37,8 @@ public class AnimationComponentFactoryBasic implements AnimationComponentFactory
         if (parameterList.size() != 2) {
           throw new IllegalArgumentException("Wrong amount of parameters for a Color Change");
         }
-        if (!(parameterList.get(0) instanceof ColorClass)
-                || !(parameterList.get(1) instanceof ColorClass)) {
+        if (!(parameterList.get(0) instanceof ColorClassInterface)
+                || !(parameterList.get(1) instanceof ColorClassInterface)) {
           throw new IllegalArgumentException("Must pass two ColorClass parameters");
         }
         newAnimation = new ColorChange(targetShape, animationDuration,
@@ -47,8 +49,8 @@ public class AnimationComponentFactoryBasic implements AnimationComponentFactory
         if (parameterList.size() != 2) {
           throw new IllegalArgumentException("Wrong amount of parameters for a Position Change");
         }
-        if (!(parameterList.get(0) instanceof Position2D)
-                || !(parameterList.get(1) instanceof Position2D)) {
+        if (!(parameterList.get(0) instanceof Position2DInterface)
+                || !(parameterList.get(1) instanceof Position2DInterface)) {
           throw new IllegalArgumentException("Must pass two Position2D parameters");
         }
         newAnimation = new PositionChange(targetShape, animationDuration,

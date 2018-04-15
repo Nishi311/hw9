@@ -1,6 +1,7 @@
 package cs3500.animator.converters;
 
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.provider.ISLocation;
 
 /**
@@ -8,7 +9,7 @@ import cs3500.animator.provider.ISLocation;
  * necessary to display a shape's position. Basically just wraps around our own Position2D class.
  */
 public class ProviderLocation implements ISLocation {
-  public Position2D pos;
+  public Position2DInterface pos;
 
   /**
    * Conversion Constructor. Allows us to create a provider compatible ISLocation with our own
@@ -16,7 +17,7 @@ public class ProviderLocation implements ISLocation {
    *
    * @param pos The colorClass to wrap.
    */
-  public ProviderLocation(Position2D pos) {
+  public ProviderLocation(Position2DInterface pos) {
     this.pos = pos;
   }
 

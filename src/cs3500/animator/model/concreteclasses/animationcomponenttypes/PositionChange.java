@@ -8,6 +8,8 @@ import cs3500.animator.model.concreteclasses.utilityclasses.Duration;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
 import cs3500.animator.model.concreteclasses.utilityclasses.UniversalShapeParameterTypes;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
+import cs3500.animator.model.interfaces.DurationInterface;
+import cs3500.animator.model.interfaces.Position2DInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 
 /**
@@ -17,8 +19,8 @@ import cs3500.animator.model.interfaces.ShapeInterface;
 public class PositionChange extends AnimationComponentAbstract {
   private float xShiftPerTimeUnit;
   private float yShiftPerTimeUnit;
-  private Position2D targetPos;
-  private Position2D startingPos;
+  private Position2DInterface targetPos;
+  private Position2DInterface startingPos;
 
   /**
    * Basic PositionChange constructor.
@@ -28,8 +30,8 @@ public class PositionChange extends AnimationComponentAbstract {
    * @param startingPos The starting position of the shape.
    * @param targetPos   The ending positon of the shape.
    */
-  public PositionChange(ShapeInterface shape, Duration dur, Position2D startingPos,
-                        Position2D targetPos) {
+  public PositionChange(ShapeInterface shape, DurationInterface dur, Position2DInterface startingPos,
+                        Position2DInterface targetPos) {
     this.shape = shape;
     this.dur = new Duration(dur);
     this.startingPos = new Position2D(startingPos);
@@ -70,10 +72,10 @@ public class PositionChange extends AnimationComponentAbstract {
 
   @Override
   public void executeIncrement() {
-    Position2D currentPos = (Position2D) shape.getParameter(
+    Position2DInterface currentPos = (Position2D) shape.getParameter(
             UniversalShapeParameterTypes.POSITION.name());
 
-    Position2D incrementedPos = new Position2D(currentPos.getX() + xShiftPerTimeUnit,
+    Position2DInterface incrementedPos = new Position2D(currentPos.getX() + xShiftPerTimeUnit,
             currentPos.getY() + yShiftPerTimeUnit);
 
     shape.editParameter(UniversalShapeParameterTypes.POSITION.name(), incrementedPos);
@@ -131,7 +133,7 @@ public class PositionChange extends AnimationComponentAbstract {
         if (test.getEndTime() == (this.dur.getEndTime())) {
 
           List<Object> testStartList = test.getInitialParameters();
-          Position2D testStartPos = (Position2D) testStartList.get(0);
+          Position2DInterface testStartPos = (Position2D) testStartList.get(0);
           //check staring color
           if (testStartPos.equals(this.startingPos)) {
 

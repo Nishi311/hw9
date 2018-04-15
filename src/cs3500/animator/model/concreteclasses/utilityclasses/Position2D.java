@@ -2,10 +2,13 @@ package cs3500.animator.model.concreteclasses.utilityclasses;
 
 import java.util.Objects;
 
+
+import cs3500.animator.model.interfaces.Position2DInterface;
+
 /**
  * Basic class representing a position.
  */
-public class Position2D {
+public class Position2D implements Position2DInterface{
   private float xRef;
   private float yRef;
 
@@ -26,7 +29,7 @@ public class Position2D {
    *
    * @param copyPos The position to be copied.
    */
-  public Position2D(Position2D copyPos) {
+  public Position2D(Position2DInterface copyPos) {
     this.xRef = copyPos.getX();
     this.yRef = copyPos.getY();
   }
@@ -77,10 +80,10 @@ public class Position2D {
 
   @Override
   public boolean equals(Object obj) {
-    if (!(obj instanceof Position2D)) {
+    if (!(obj instanceof Position2DInterface)) {
       return false;
     }
-    Position2D comparePos = (Position2D) obj;
+    Position2DInterface comparePos = (Position2D) obj;
 
     if (xRef == comparePos.getX()) {
       if (yRef == comparePos.getY()) {
