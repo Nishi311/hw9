@@ -15,7 +15,8 @@ public class TextView extends APrintableView implements IPrintableView {
   /**
    * Build a Text View object, which describes the shapes and transformations as text,
    * allowing the viewer to see when shapes exist and how they change.
-   * @param output    The appendable object to put the results in
+   *
+   * @param output The appendable object to put the results in
    */
   public TextView(int speed, Appendable output) {
     super(speed, output);
@@ -28,13 +29,13 @@ public class TextView extends APrintableView implements IPrintableView {
    */
   @Override
   public void printView() throws IOException {
-    if(speed == 0) {
+    if (speed == 0) {
       throw new IllegalStateException("Speed cannot be 0.");
     }
-    if(shapes == null) {
+    if (shapes == null) {
       throw new IllegalStateException("The list of shapes cannot be null.");
     }
-    if(transformations == null) {
+    if (transformations == null) {
       throw new IllegalStateException("The list of transformations cannot be null.");
     }
 
@@ -45,8 +46,8 @@ public class TextView extends APrintableView implements IPrintableView {
                       + "Appears at t=%.1fs\n"
                       + "Disappears at t=%.1fs\n\n",
               shape.getName(), shape.getShapeType(), shape.getShape().getReference(),
-              shape.getLocation(), shape.getShape().toString() , shape.getColor(),
-              (double)shape.getAppears() / speed, (double)shape.getDisappears() / speed);
+              shape.getLocation(), shape.getShape().toString(), shape.getColor(),
+              (double) shape.getAppears() / speed, (double) shape.getDisappears() / speed);
 
       output.append(test);
     }
@@ -54,7 +55,7 @@ public class TextView extends APrintableView implements IPrintableView {
       output.append(String.format("Shape %s %s from %s to %s from t=%.1fs to t=%.1fs\n",
               transformation.getShapeName(), transformation.getInfo()[1],
               transformation.getInfo()[2], transformation.getInfo()[3],
-              (double)transformation.getStartTick() / speed, (double)transformation.getEndTick()));
+              (double) transformation.getStartTick() / speed, (double) transformation.getEndTick()));
     }
   }
 }

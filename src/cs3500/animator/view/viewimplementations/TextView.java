@@ -21,9 +21,10 @@ public class TextView implements ViewInterface {
 
   /**
    * TextView generates formatted textual view.
-   * @param model The model to be used when building.
-   * @param outFile The name for the target output file. If left empty, the default is
-   *                "out.svg".
+   *
+   * @param model          The model to be used when building.
+   * @param outFile        The name for the target output file. If left empty, the default is
+   *                       "out.svg".
    * @param ticksPerSecond The number of ticksPerSecond for the animation.
    * @throws IOException Throws IOException if outFile name is not legal.
    */

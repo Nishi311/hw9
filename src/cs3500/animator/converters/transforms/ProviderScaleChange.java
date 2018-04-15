@@ -8,6 +8,10 @@ import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ITransformation;
 
+/**
+ * Custom implementation of the Provider's ITransform interface. Manipulates the target shape's
+ * scale values over a given period of time.
+ */
 public class ProviderScaleChange extends ProviderTransformAbstract {
 
   private double startingX;
@@ -19,19 +23,17 @@ public class ProviderScaleChange extends ProviderTransformAbstract {
   private double xIncrement;
   private double yIncrement;
 
+  /**
+   * Converting constructor. Allows us to convert between our equivalent Scale Change animation
+   * components (we have two) and the provider version of a position change.
+   *
+   * @param amCom The animation component to convert from. MUST be either a ScaleChangeWW or
+   *              a ScaleChangeWH.
+   * @param shape The shape that the ProviderColorChange will be acting upon.
+   * @throws IllegalArgumentException if the amCom is not a ScaleChangeWH or ScaleChangeRR.
+   */
   public ProviderScaleChange(AnimationComponentInterface amCom, IAnimShape shape) {
     super(amCom, shape);
-
-    this.startingX = (double)((float) amCom.getInitialParameters().get(0));
-    this.startingY = (double)((float) amCom.getInitialParameters().get(1));
-
-    this.endingX = (double)((float) amCom.getFinalParameters().get(0));
-    this.endingY = (double)((float)amCom.getFinalParameters().get(1));
-
-    this.xIncrement = (endingX - startingX) / span;
-    this.yIncrement = (endingY - startingY) / span;
-
-
     String xParam = "";
     String yParam = "";
 
@@ -44,6 +46,8 @@ public class ProviderScaleChange extends ProviderTransformAbstract {
     } else if (amCom instanceof ScaleChangeRR) {
       xParam = "X Radius";
       yParam = "Y Radius";
+    } else {
+      throw new IllegalArgumentException("Must provide either a ScaleChangeWH or a ScaleChangeRR");
     }
 
     startingParams = String.format("%s: %.1f, %s, %.1f", xParam, startingX, yParam, startingY);
@@ -52,8 +56,28 @@ public class ProviderScaleChange extends ProviderTransformAbstract {
     this.transformInfo[1] = "scales";
     this.transformInfo[2] = startingParams;
     this.transformInfo[3] = endingParams;
+
+
+    this.startingX = (double) ((float) amCom.getInitialParameters().get(0));
+    this.startingY = (double) ((float) amCom.getInitialParameters().get(1));
+
+    this.endingX = (double) ((float) amCom.getFinalParameters().get(0));
+    this.endingY = (double) ((float) amCom.getFinalParameters().get(1));
+
+    this.xIncrement = (endingX - startingX) / span;
+    this.yIncrement = (endingY - startingY) / span;
   }
 
+  /**
+   * More basic constructor. Takes the shape and parameters necessary to create a
+   * ProviderScaleChange from scratch. Only really used in the makeCopy() method.
+   *
+   * @param shape        The shape that will be acted upon.
+   * @param startingX    The starting horizontal value of the shape.
+   * @param startingY    The ending vertical value of the shape.
+   * @param startingTick The tick when the shape should start moving.
+   * @param endingTick   The tick when the shape should finish moving.
+   */
   public ProviderScaleChange(ProviderAnimShape shape, double startingX, double startingY,
                              double endingX, double endingY, int startingTick, int endingTick) {
     super(shape, startingTick, endingTick);

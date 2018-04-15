@@ -127,7 +127,6 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
    * point to the new shape references in the shapeList (will have been modified
    * by the deep copy in the model get() methods). Then remaps the startTimeMap
    * and endTimeMap to do reference the new AnimationComponent references.
-   *
    */
   private void reorganizeMapsAndLists() {
     //sets all animationLists to reference proper shape copies.

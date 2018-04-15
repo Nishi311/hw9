@@ -1,4 +1,5 @@
 package cs3500.animator.provider;
+
 import java.util.List;
 
 
@@ -71,6 +72,7 @@ public interface IController {
 
   /**
    * Gets the end tick of the animation.
+   *
    * @return the final tick of the animation after every shape disappears
    */
   int getEndTick();

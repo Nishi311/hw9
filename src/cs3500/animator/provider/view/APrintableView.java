@@ -13,11 +13,12 @@ public abstract class APrintableView extends AView implements IPrintableView {
   /**
    * Build a Text View object, which describes the shapes and transformations as text,
    * allowing the viewer to see when shapes exist and how they change.
-   * @param output    The appendable object to put the results in
+   *
+   * @param output The appendable object to put the results in
    */
   public APrintableView(int speed, Appendable output) {
     super(speed);
-    if(output == null) {
+    if (output == null) {
       throw new IllegalStateException("The output file cannot be null.");
     }
     this.output = output;
@@ -28,7 +29,7 @@ public abstract class APrintableView extends AView implements IPrintableView {
    */
   @Override
   public void setTransformations(List<ITransformation> transformationList) {
-    if(transformationList == null) {
+    if (transformationList == null) {
       throw new IllegalStateException("The list of transformations cannot be null.");
     }
     this.transformations = transformationList;

@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.swing.*;
+
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ISColor;
 
@@ -56,7 +57,8 @@ public class AnimationPanel extends JPanel {
 
   /**
    * Override the paintComponent method of JPanel to add functionality for our animation.
-   * @param g   Graphics object
+   *
+   * @param g Graphics object
    */
   @Override
   protected void paintComponent(Graphics g) {
@@ -73,8 +75,9 @@ public class AnimationPanel extends JPanel {
   /**
    * Static method bridging SColor to java.awt.Color. This method is not in SColor so that one
    * wishing not to use this view does not have to import java.awt.Color.
-   * @param color   SColor to be turned into java.awt.Color
-   * @return        java.awt.Color representing the same color as the given SColor
+   *
+   * @param color SColor to be turned into java.awt.Color
+   * @return java.awt.Color representing the same color as the given SColor
    */
   private static Color getColorFromSColor(ISColor color) {
     return new Color((float) color.getRed(), (float) color.getGreen(), (float) color.getBlue());

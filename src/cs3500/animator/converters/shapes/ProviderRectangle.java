@@ -2,6 +2,11 @@ package cs3500.animator.converters.shapes;
 
 import cs3500.animator.provider.IShape;
 
+
+/**
+ * Custom implementation of the IShape Interface. Contains only information necessary to
+ * make a rectangle (no color, position, etc).
+ */
 public class ProviderRectangle implements IShape {
   protected String type;
   protected String reference;
@@ -9,7 +14,13 @@ public class ProviderRectangle implements IShape {
   protected String[] pNames = {"Width", "Height"};
   protected double[] pValues;
 
-  public ProviderRectangle(double width, double height){
+  /**
+   * Standard constructor. Creates an oval using the given width and height.
+   *
+   * @param width  The width of the rectangle.
+   * @param height The height of the rectangle.
+   */
+  public ProviderRectangle(double width, double height) {
     double[] pValues = {width, height};
     if (pNames.length != pValues.length || pNames.length == 0) {
       throw new IllegalArgumentException("Parameters number not legal!");

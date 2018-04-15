@@ -2,6 +2,10 @@ package cs3500.animator.converters.shapes;
 
 import cs3500.animator.provider.IShape;
 
+/**
+ * Custom implementation of the IShape Interface. Contains only information necessary to
+ * make an oval (no color, position, etc).
+ */
 public class ProviderOval implements IShape {
   protected String type;
   protected String reference;
@@ -9,7 +13,13 @@ public class ProviderOval implements IShape {
   protected String[] pNames = {"X radius", "Y radius"};
   protected double[] pValues;
 
-
+  /**
+   * Standard constructor. Creates an oval using the xRadius as it's horizontal length and yRadius
+   * as its vertical length.
+   *
+   * @param xRadius The horizontal length of the oval.
+   * @param yRadius The vertical length of the oval.
+   */
   public ProviderOval(double xRadius, double yRadius) {
     double[] pValues = {xRadius, yRadius};
     if (pNames.length != pValues.length || pNames.length == 0) {

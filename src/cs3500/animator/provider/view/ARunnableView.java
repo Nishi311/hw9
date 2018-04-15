@@ -54,7 +54,7 @@ public abstract class ARunnableView extends AView implements IRunnableView {
    */
   @Override
   public void setShapes(List<IAnimShape> currentList) {
-    if(currentList == null) {
+    if (currentList == null) {
       throw new IllegalStateException("The list of current shapes cannot be null.");
     }
     this.shapes = currentList;

@@ -43,6 +43,7 @@ public interface ModelInsulatorInterface {
 
   /**
    * See {@link AnimationModelInterface#getShapeNameToAnimationMap()}.
+   *
    * @return see {@link AnimationModelInterface#getShapeNameToAnimationMap()}.
    */
   Map<String, List<AnimationComponentInterface>> getShapeNameToAnimationMap();
@@ -55,7 +56,8 @@ public interface ModelInsulatorInterface {
   String getOverview();
 
   /**
-   *{@link AnimationModelInterface#getOverviewTick(int ticksPerSecond)} .
+   * {@link AnimationModelInterface#getOverviewTick(int ticksPerSecond)} .
+   *
    * @param ticksPerSecond The number of ticks represented by 1 second.
    * @return See {@link AnimationModelInterface#getOverviewTick(int ticksPerSecond)}.
    */

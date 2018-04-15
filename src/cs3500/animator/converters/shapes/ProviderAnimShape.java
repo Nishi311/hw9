@@ -1,10 +1,10 @@
 package cs3500.animator.converters.shapes;
 
 
-
 import cs3500.animator.converters.ProviderColor;
 import cs3500.animator.converters.ProviderLocation;
 
+import cs3500.animator.model.concreteclasses.animationcomponenttypes.VisibilityChange;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
 
 
@@ -14,42 +14,50 @@ import cs3500.animator.provider.ISColor;
 import cs3500.animator.provider.ISLocation;
 import cs3500.animator.provider.IShape;
 
+/**
+ * Custom implementation of the IAnimShape. Enables us to convert from our
+ * shapes into the provider's required classes. Contains the basic shape
+ * as well as all animation information necessary to manipulate and display
+ * that shape (Color, position, visibility, etc).
+ */
 public class ProviderAnimShape implements IAnimShape {
-
+  //Shape and Color and Position
+  IShape shape;
   ISColor color;
   ISLocation pos;
 
   String type;
   String name;
-  boolean isVisible = true;
 
+  //visibility infromation
+  boolean isVisible = true;
   int appears;
   int disappears;
 
-  IShape shape;
+  /**
+   * The constructor used to convert one of our ShapeInterfaces into an instance of the
+   * provider's IAnimShape. Requires the Visibility Change AnimationComponents detailing when
+   * the shape appears and disappears because this is not information usually contained within the
+   * ShapeInterface itself.
+   *
+   * @param s             The shape to be converted.
+   * @param appearance    The Visibility Change where "s" is made visible.
+   * @param disappearance The Visbility Change were "s" is made invisible.
+   */
+  public ProviderAnimShape(ShapeInterface s, VisibilityChange appearance,
+                           VisibilityChange disappearance) {
 
-  public ProviderAnimShape(IAnimShape s){
-    this.pos = new ProviderLocation(s.getLocation());
-    this.color = new ProviderColor(s.getColor());
-    this.type = s.getShapeType();
-    this.isVisible = s.getVisible();
-    this.name = s.getName();
-    this.appears = s.getAppears();
-    this.disappears = s.getDisappears();
-    this.shape = s.getShape().makeCopy();
-  }
+    this.appears = appearance.getStartTime();
+    this.disappears = disappearance.getStartTime();
 
-  public ProviderAnimShape(ShapeInterface s, AnimationComponentInterface appearance,
-                           AnimationComponentInterface disappearance){
     this.pos = new ProviderLocation(s.getPosition());
     this.color = new ProviderColor(s.getColor());
     this.type = s.getShapeType();
 
     this.name = s.getName();
-    this.appears = appearance.getStartTime();
-    this.disappears = disappearance.getStartTime();
 
-    if(this.type.equals("Oval")) {
+
+    if (this.type.equals("Oval")) {
       this.shape = new ProviderOval(s.allDimensions()[0], s.allDimensions()[1]);
       this.type = "oval";
     } else if (this.type.equals("Rectangle")) {
@@ -60,6 +68,22 @@ public class ProviderAnimShape implements IAnimShape {
     }
   }
 
+  /**
+   * Copy Constructor. Creates a deep copy of the provided IAnimShape.
+   *
+   * @param s The IAnimShape to be copied.
+   */
+  public ProviderAnimShape(IAnimShape s) {
+    this.pos = new ProviderLocation(s.getLocation());
+    this.color = new ProviderColor(s.getColor());
+    this.type = s.getShapeType();
+    this.isVisible = s.getVisible();
+    this.name = s.getName();
+    this.appears = s.getAppears();
+    this.disappears = s.getDisappears();
+    this.shape = s.getShape().makeCopy();
+  }
+
   @Override
   public boolean isActive(int tick) {
     return tick >= this.appears && tick <= this.disappears && this.isVisible;
@@ -67,7 +91,7 @@ public class ProviderAnimShape implements IAnimShape {
 
   @Override
   public void toggleVisible() {
-    this.isVisible = ! this.isVisible;
+    this.isVisible = !this.isVisible;
   }
 
   @Override
@@ -133,7 +157,7 @@ public class ProviderAnimShape implements IAnimShape {
   public boolean getVisible() {
     return this.isVisible;
   }
-  
+
   @Override
   public void setVisible(boolean isVisible) {
     this.isVisible = isVisible;

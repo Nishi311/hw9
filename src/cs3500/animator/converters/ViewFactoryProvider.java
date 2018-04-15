@@ -28,7 +28,10 @@ import cs3500.animator.provider.view.TextView;
 import cs3500.animator.view.ViewFactoryWithHybrid;
 import cs3500.animator.view.ViewTypes;
 
-
+/**
+ * An implementation of ViewFactoryProviderInterface that extends the original viewFactory. Allows
+ * for the create of both provider and our own view types.
+ */
 public class ViewFactoryProvider extends ViewFactoryWithHybrid
         implements ViewFactoryProviderInterface {
 
@@ -37,12 +40,12 @@ public class ViewFactoryProvider extends ViewFactoryWithHybrid
                                       List<IAnimShape> providerShapeListActive,
                                       List<ITransformation> providerTransformList,
                                       String output, int ticksPerSecond, IController controller)
-  throws IOException{
+          throws IOException {
 
     IViewable toReturn;
 
     PrintStream out = System.out;
-    if (!output.equals("out")){
+    if (!output.equals("out")) {
       out = new PrintStream(new FileOutputStream(output));
     }
 
@@ -70,7 +73,7 @@ public class ViewFactoryProvider extends ViewFactoryWithHybrid
           toReturn.setShapes(providerShapeListActive);
           ((IPrintableView) toReturn).setTransformations(providerTransformList);
           return toReturn;
-        } catch (Exception e){
+        } catch (Exception e) {
           throw new IllegalStateException(e.getMessage());
         }
       default:

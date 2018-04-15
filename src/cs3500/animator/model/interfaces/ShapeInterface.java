@@ -154,6 +154,7 @@ public interface ShapeInterface {
 
   /**
    * Allows the shape to be drawn as a graphics object.
+   *
    * @param g The graphics object the shape will be drawn too. I think. Not too sure on this one.
    */
   void draw(Graphics g);

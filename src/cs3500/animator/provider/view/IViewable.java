@@ -1,6 +1,7 @@
 package cs3500.animator.provider.view;
 
 import java.util.List;
+
 import cs3500.animator.provider.IAnimShape;
 
 /**
@@ -11,7 +12,8 @@ public interface IViewable {
 
   /**
    * Set the shapes for the view to print out.
-   * @param shapes  shapes to be given to the view
+   *
+   * @param shapes shapes to be given to the view
    */
   void setShapes(List<IAnimShape> shapes);
 }

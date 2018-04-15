@@ -30,9 +30,10 @@ public class SVGView implements ViewInterface {
 
   /**
    * SVGView generates formatted SVG text.
-   * @param model The model to be used when building.
-   * @param outFile The name for the target output file. If left empty, the default is
-   *                "out.svg".
+   *
+   * @param model          The model to be used when building.
+   * @param outFile        The name for the target output file. If left empty, the default is
+   *                       "out.svg".
    * @param ticksPerSecond The number of ticksPerSecond for the animation.
    * @throws IOException Throws IOException if outFile name is not legal.
    */
@@ -59,13 +60,14 @@ public class SVGView implements ViewInterface {
 
   /**
    * SVGView generates formatted SVG text.
-   * @param ticksPerSecond Ticks represented in one second.
-   * @param outFile The name for the target output file. If left empty, the default is
-   *                "out.svg".
-   * @param shapes List contains all the shapes.
-   * @param animationList List contains all the animations.
+   *
+   * @param ticksPerSecond          Ticks represented in one second.
+   * @param outFile                 The name for the target output file. If left empty, the default is
+   *                                "out.svg".
+   * @param shapes                  List contains all the shapes.
+   * @param animationList           List contains all the animations.
    * @param shapeNameToAnimationMap Maps that mapping name to animation.
-   * @param endToAnimationMap Map that maps ending time with animation.
+   * @param endToAnimationMap       Map that maps ending time with animation.
    * @throws IOException Throws IOException if outFile name is not legal.
    */
   public SVGView(int ticksPerSecond,

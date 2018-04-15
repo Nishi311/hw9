@@ -107,7 +107,7 @@ public class PositionChange extends AnimationComponentAbstract {
   @Override
   public String toStringTick(int ticksPerSecond) {
     return "Shape " + shape.getName() + " moves from " + startingPos + " to "
-            + targetPos + " from t=" + ( dur.getStartTime() / (double) ticksPerSecond)
+            + targetPos + " from t=" + (dur.getStartTime() / (double) ticksPerSecond)
             + " to t=" + (dur.getEndTime() / (double) ticksPerSecond) + "\n";
   }
 

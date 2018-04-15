@@ -16,7 +16,7 @@ public interface ControllerInterface {
    *             output file (defaults to system.out). "-speed" and an int to designate ticks per
    *             second.
    * @return String version of any error messages produced during the parsing. This can be used for
-   *         both testing and pop-up creation.
+   * both testing and pop-up creation.
    */
   String parseInput(String[] args);
 

@@ -5,6 +5,10 @@ import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.ITransformation;
 
+/**
+ * Abstract class that implements some basic, communal functions for all ITransform implementations.
+ * This includes active checks, tick retrievals, information retrievals and so on.
+ */
 public abstract class ProviderTransformAbstract implements ITransformation {
 
   protected IAnimShape shape;
@@ -16,7 +20,15 @@ public abstract class ProviderTransformAbstract implements ITransformation {
   protected int startingTick;
   protected int endingTick;
 
-  public ProviderTransformAbstract(AnimationComponentInterface amCom, IAnimShape shape){
+  /**
+   * Conversion constructor. Used to take universal information about an animation component (think
+   * shape name, starting ending ticks) and sets it up for an extending class to build upon with
+   * more specific information (color / position / scale change values).
+   *
+   * @param amCom The AnimationComponentInterface to be converted.
+   * @param shape The IAnimShape that the Transform will act on.
+   */
+  public ProviderTransformAbstract(AnimationComponentInterface amCom, IAnimShape shape) {
     this.shape = shape;
     this.shapeName = amCom.getTargetName();
     this.startingTick = amCom.getStartTime();
@@ -30,7 +42,15 @@ public abstract class ProviderTransformAbstract implements ITransformation {
     this.transformInfo[5] = Integer.toString(endingTick);
   }
 
-  public ProviderTransformAbstract(ProviderAnimShape shape, int startingTick, int endingTick){
+  /**
+   * A more basic constructor used to help build a Transform from scratch. Used in the copy method
+   * implementations.
+   *
+   * @param shape        The shape to be acted upon.
+   * @param startingTick The starting tick of the transform.
+   * @param endingTick   The ending tick of the transform.
+   */
+  public ProviderTransformAbstract(ProviderAnimShape shape, int startingTick, int endingTick) {
     this.shape = shape;
     this.shapeName = shape.getName();
     this.startingTick = startingTick;
@@ -45,9 +65,9 @@ public abstract class ProviderTransformAbstract implements ITransformation {
   }
 
   @Override
-  public boolean isActive(int tick){
-    if (tick >= startingTick){
-      if (tick < endingTick){
+  public boolean isActive(int tick) {
+    if (tick >= startingTick) {
+      if (tick < endingTick) {
         return true;
       }
     }
@@ -55,37 +75,37 @@ public abstract class ProviderTransformAbstract implements ITransformation {
   }
 
   @Override
-  public String getShapeName(){
+  public String getShapeName() {
     return shapeName;
   }
 
   @Override
-  public void setShape(IAnimShape shape){
+  public void setShape(IAnimShape shape) {
     this.shape = shape;
   }
 
   @Override
-  public int getStartTick(){
+  public int getStartTick() {
     return startingTick;
   }
 
   @Override
-  public int getEndTick(){
+  public int getEndTick() {
     return endingTick;
   }
 
   @Override
-  public boolean noConflict(ITransformation other){
+  public boolean noConflict(ITransformation other) {
     throw new UnsupportedOperationException("Not needed for HW 8");
   }
 
   @Override
-  public String[] buildStrings(){
+  public String[] buildStrings() {
     throw new UnsupportedOperationException("Not needed for HW 8");
   }
 
   @Override
-  public String[] getInfo(){
+  public String[] getInfo() {
     return transformInfo;
   }
 

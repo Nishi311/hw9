@@ -301,9 +301,9 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
       List<ShapeInterface> shapes = model.getShapeList();
 
       Map<String, List<AnimationComponentInterface>> shapeNameMap =
-               model.getShapeNameToAnimationMap();
+              model.getShapeNameToAnimationMap();
       Map<Integer, List<AnimationComponentInterface>> endMap =
-               model.getEndToAnimationMap();
+              model.getEndToAnimationMap();
       List<AnimationComponentInterface> anList = model.getAnimationList();
 
 

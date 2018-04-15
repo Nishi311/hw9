@@ -102,7 +102,7 @@ public interface AnimationModelInterface {
    * will be in chronological order.
    *
    * @return A list of AnimationComponentInterface objects that represent all animation components
-   *         in the model.
+   * in the model.
    */
   List<AnimationComponentInterface> getAnimationList();
 
@@ -117,7 +117,7 @@ public interface AnimationModelInterface {
    * Allows the user to retrieve the current list of animations as grouped by their starting times.
    *
    * @return A map that contains lists of AnimationComponentInterfaces grouped by their starting
-   *         times.
+   * times.
    */
   Map<Integer, List<AnimationComponentInterface>> getStartToAnimationMap();
 
@@ -125,7 +125,7 @@ public interface AnimationModelInterface {
    * Allows the user to retrieve the current list of animations as grouped by their ending times.
    *
    * @return A map that contains lists of AnimationComponentInterfaces grouped by their ending
-   *         times.
+   * times.
    */
   Map<Integer, List<AnimationComponentInterface>> getEndToAnimationMap();
 
@@ -133,7 +133,7 @@ public interface AnimationModelInterface {
    * Allows the user to retrieve the list of shapes and the animations they are attached to.
    *
    * @return A map that contains a list of AnimationComponentInterfaces grouped by their
-   *         shape.
+   * shape.
    */
   Map<String, List<AnimationComponentInterface>> getShapeNameToAnimationMap();
 

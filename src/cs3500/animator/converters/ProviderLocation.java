@@ -3,18 +3,39 @@ package cs3500.animator.converters;
 import cs3500.animator.model.concreteclasses.utilityclasses.Position2D;
 import cs3500.animator.provider.ISLocation;
 
+/**
+ * Custom implementation of the provider's ISLocation interface. Contains 2D position values
+ * necessary to display a shape's position. Basically just wraps around our own Position2D class.
+ */
 public class ProviderLocation implements ISLocation {
   public Position2D pos;
 
-  public ProviderLocation(Position2D pos){
+  /**
+   * Conversion Constructor. Allows us to create a provider compatible ISLocation with our own
+   * Position2D class.
+   *
+   * @param pos The colorClass to wrap.
+   */
+  public ProviderLocation(Position2D pos) {
     this.pos = pos;
   }
 
-  public ProviderLocation (ISLocation toCopy){
-    this.pos = new Position2D((float)toCopy.getX(), (float)toCopy.getY());
+  /**
+   * Copy Constructor. Necessary for makeCopy() methods.
+   *
+   * @param toCopy The ISLocation to copy.
+   */
+  public ProviderLocation(ISLocation toCopy) {
+    this.pos = new Position2D((float) toCopy.getX(), (float) toCopy.getY());
   }
 
-  public ProviderLocation (double x, double y){
+  /**
+   * The basic constructor needed to create a new ISLocation from scratch.
+   *
+   * @param x The x value of the position.
+   * @param y The y value of the position.
+   */
+  public ProviderLocation(double x, double y) {
     this.pos = new Position2D((float) x, (float) y);
   }
 
@@ -30,8 +51,8 @@ public class ProviderLocation implements ISLocation {
 
   @Override
   public void moveTo(ISLocation s) {
-    this.pos.setX((float)s.getX());
-    this.pos.setY((float)s.getY());
+    this.pos.setX((float) s.getX());
+    this.pos.setY((float) s.getY());
   }
 
   @Override
