@@ -14,7 +14,6 @@ import javax.swing.JCheckBox;
 
 import cs3500.animator.controller.ModelInsulator;
 import cs3500.animator.controller.interfaces.TweenModelBuilder;
-import cs3500.animator.provider.view.IViewable;
 import cs3500.animator.view.interfaces.ViewFactoryInterface;
 import cs3500.animator.model.AnimationModelText;
 import cs3500.animator.model.interfaces.AnimationModelInterface;

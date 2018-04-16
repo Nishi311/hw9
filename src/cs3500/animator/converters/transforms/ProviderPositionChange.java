@@ -87,14 +87,16 @@ public class ProviderPositionChange extends ProviderTransformAbstract {
 
   @Override
   public Double[] getStart() {
-    return new Double[]{(double) startingPos.getX(),
-            (double) startingPos.getY()};
+    double x = (double) startingPos.getX();
+    double y = (double) startingPos.getY();
+    return new Double[]{x, y};
   }
 
   @Override
   public Double[] getEnd() {
-    return new Double[]{(double) endingPos.getX(),
-            (double) endingPos.getY()};
+    double x = (double) endingPos.getX();
+    double y = (double) endingPos.getY();
+    return new Double[]{x, y};
   }
 
 }

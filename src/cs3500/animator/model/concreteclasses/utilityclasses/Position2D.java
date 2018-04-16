@@ -8,7 +8,7 @@ import cs3500.animator.model.interfaces.Position2DInterface;
 /**
  * Basic class representing a position.
  */
-public class Position2D implements Position2DInterface{
+public class Position2D implements Position2DInterface {
   private float xRef;
   private float yRef;
 

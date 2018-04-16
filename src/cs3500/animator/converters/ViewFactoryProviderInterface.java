@@ -26,8 +26,8 @@ public interface ViewFactoryProviderInterface extends ViewFactoryInterface {
    * @param providerTransformList   The list of all Transforms executed in the view.
    * @param output                  The desired output location.
    * @param ticksPerSecond          The initial speed of the view.
-   * @param controller              The controller necessary to run the view (really only used with the
-   *                                provider interactive view)
+   * @param controller              The controller necessary to run the view (really only
+   *                                used with the provider interactive view)
    * @return The completed view.
    * @throws IOException If anything goes wrong with output destination.
    */
