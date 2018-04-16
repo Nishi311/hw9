@@ -136,6 +136,7 @@ public class ProviderModel implements IAnimationModel {
 
   @Override
   public void endAnim() {
+    // Method used in the client view but will not be called with the provider controller
   }
 
   @Override

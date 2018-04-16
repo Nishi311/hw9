@@ -75,9 +75,10 @@ public class AnimationModelText implements AnimationModelInterface {
 
   @Override
   public void addAnimation(String shapeName,
-                           String animationType, DurationInterface animationDuration, Object... parameters)
+                           String animationType,
+                           DurationInterface animationDuration,
+                           Object... parameters)
           throws IllegalArgumentException {
-    //
     validateComponentShapeExists(shapeName);
     ShapeInterface targetShape = shapeNameToWorkingShapeObjectMap.get(shapeName);
 

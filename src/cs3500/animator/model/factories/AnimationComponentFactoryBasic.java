@@ -24,8 +24,10 @@ import cs3500.animator.model.interfaces.ShapeInterface;
  */
 public class AnimationComponentFactoryBasic implements AnimationComponentFactoryInterface {
   @Override
-  public AnimationComponentInterface create(ShapeInterface targetShape, String animationType,
-                                            DurationInterface animationDuration, Object... parameters)
+  public AnimationComponentInterface create(ShapeInterface targetShape,
+                                            String animationType,
+                                            DurationInterface animationDuration,
+                                            Object... parameters)
           throws IllegalArgumentException {
     AnimationComponentInterface newAnimation;
     List<Object> parameterList = new ArrayList<>();

@@ -53,8 +53,11 @@ public class ProviderColorChange extends ProviderTransformAbstract {
    * @param startingTick  The tick when the shape should start changing color.
    * @param endingTick    The tick when the shape should finish changing color.
    */
-  public ProviderColorChange(ProviderAnimShape shape, ColorClassInterface startingColor, ColorClassInterface endingColor,
-                             int startingTick, int endingTick) {
+  public ProviderColorChange(ProviderAnimShape shape,
+                             ColorClassInterface startingColor,
+                             ColorClassInterface endingColor,
+                             int startingTick,
+                             int endingTick) {
     super(shape, startingTick, endingTick);
 
     this.startingColor = new ColorClass(startingColor);
@@ -90,16 +93,18 @@ public class ProviderColorChange extends ProviderTransformAbstract {
 
   @Override
   public Double[] getStart() {
-    return new Double[]{(double) startingColor.getRed(),
-            (double) startingColor.getGreen(),
-            (double) startingColor.getBlue()};
+    double r = (double) startingColor.getRed();
+    double g = (double) startingColor.getGreen();
+    double b = (double) startingColor.getBlue();
+    return new Double[]{r, g, b};
   }
 
   @Override
   public Double[] getEnd() {
-    return new Double[]{(double) endingColor.getRed(),
-            (double) endingColor.getGreen(),
-            (double) endingColor.getBlue()};
+    double r = (double) endingColor.getRed();
+    double g = (double) endingColor.getGreen();
+    double b = (double) endingColor.getBlue();
+    return new Double[]{r, g, b};
   }
 
 }

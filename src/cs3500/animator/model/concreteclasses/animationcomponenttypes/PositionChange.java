@@ -30,7 +30,9 @@ public class PositionChange extends AnimationComponentAbstract {
    * @param startingPos The starting position of the shape.
    * @param targetPos   The ending positon of the shape.
    */
-  public PositionChange(ShapeInterface shape, DurationInterface dur, Position2DInterface startingPos,
+  public PositionChange(ShapeInterface shape,
+                        DurationInterface dur,
+                        Position2DInterface startingPos,
                         Position2DInterface targetPos) {
     this.shape = shape;
     this.dur = new Duration(dur);

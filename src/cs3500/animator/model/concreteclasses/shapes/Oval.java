@@ -30,8 +30,13 @@ public class Oval extends ShapeAbstract {
    * @param radiusY    The y radius of the oval.
    * @throws IllegalArgumentException If either the X or Y radii are negative.
    */
-  public Oval(String name, ColorClassInterface color, Position2DInterface pos, float orient, boolean visibility,
-              float radiusX, float radiusY) throws IllegalArgumentException {
+  public Oval(String name,
+              ColorClassInterface color,
+              Position2DInterface pos,
+              float orient,
+              boolean visibility,
+              float radiusX,
+              float radiusY) throws IllegalArgumentException {
     if (radiusX < 0.0 || radiusY < 0) {
       throw new IllegalArgumentException("Cannot have negative radius for Oval");
     }

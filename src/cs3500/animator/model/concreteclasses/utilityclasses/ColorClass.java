@@ -8,7 +8,7 @@ import cs3500.animator.model.interfaces.ColorClassInterface;
  * Basic class that contains RGB color values.
  * INVARIANT: color values cannot be negative.
  */
-public class ColorClass implements ColorClassInterface{
+public class ColorClass implements ColorClassInterface {
   private float red;
   private float green;
   private float blue;

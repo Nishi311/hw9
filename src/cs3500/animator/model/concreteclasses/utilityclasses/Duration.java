@@ -11,7 +11,7 @@ import cs3500.animator.model.interfaces.DurationInterface;
  * 1.) Cannot have negative times.
  * 2.) End time cannot be fore start time.
  */
-public class Duration implements DurationInterface{
+public class Duration implements DurationInterface {
   private int startTime;
   private int endTime;
 

@@ -36,8 +36,12 @@ public class ScaleChangeWH extends AnimationComponentAbstract {
    * @param widthTarget    The end width;
    * @param heightTarget   The end height;
    */
-  public ScaleChangeWH(ShapeInterface shape, DurationInterface dur, float staringWidth, float startingHeight,
-                       float widthTarget, float heightTarget) {
+  public ScaleChangeWH(ShapeInterface shape,
+                       DurationInterface dur,
+                       float staringWidth,
+                       float startingHeight,
+                       float widthTarget,
+                       float heightTarget) {
     this.dur = dur;
     this.shape = shape;
 

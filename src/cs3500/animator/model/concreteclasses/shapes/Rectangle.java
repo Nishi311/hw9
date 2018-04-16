@@ -30,8 +30,13 @@ public class Rectangle extends ShapeAbstract {
    * @param height     The height of the rectangle.
    * @throws IllegalArgumentException If either the width or height is negative.
    */
-  public Rectangle(String name, ColorClassInterface color, Position2DInterface pos, float orient,
-                   boolean visibility, float width, float height)
+  public Rectangle(String name,
+                   ColorClassInterface color,
+                   Position2DInterface pos,
+                   float orient,
+                   boolean visibility,
+                   float width,
+                   float height)
           throws IllegalArgumentException {
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("Cannot have negative width or height for rectangle");

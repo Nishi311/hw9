@@ -17,21 +17,22 @@ public class KeyListenerInteractions implements KeyListener {
    * @param controller The controller theoretically used to listen for stuff.
    */
   public KeyListenerInteractions(IController controller) {
+    // Method used in the client view but will not be called with the provider controller
   }
 
   @Override
   public void keyTyped(KeyEvent e) {
-
+    // Method used in the client view but will not be called with the provider controller
   }
 
   @Override
   public void keyPressed(KeyEvent e) {
-
+    // Method used in the client view but will not be called with the provider controller
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
-
+    // Method used in the client view but will not be called with the provider controller
   }
 
 }

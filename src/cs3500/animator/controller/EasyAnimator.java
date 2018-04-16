@@ -8,14 +8,11 @@ import cs3500.animator.controller.interfaces.ControllerInterface;
 import cs3500.animator.converters.ProviderController;
 import cs3500.animator.converters.ViewFactoryProvider;
 import cs3500.animator.converters.ViewFactoryProviderInterface;
-import cs3500.animator.view.interfaces.ViewFactoryInterface;
-import cs3500.animator.controller.controllerimplementations.ControllerWithHybrid;
 import cs3500.animator.model.AnimationModelText;
 
 import cs3500.animator.model.factories.AnimationComponentFactoryBasic;
 import cs3500.animator.model.factories.ShapeFactoryBasic;
 import cs3500.animator.model.interfaces.AnimationModelInterface;
-import cs3500.animator.view.ViewFactoryWithHybrid;
 
 /**
  * Contains the main method and helper functions that allow the user to input files to the
