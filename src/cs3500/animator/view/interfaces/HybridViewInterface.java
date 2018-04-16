@@ -3,7 +3,13 @@ package cs3500.animator.view.interfaces;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
+import java.security.Key;
+import java.util.Iterator;
 
+/**
+ * Extension of the ViewInterface that allows for the control of an animation's playback. Only
+ * to be used for Interactive views.
+ */
 public interface HybridViewInterface extends ViewInterface {
 
   /**

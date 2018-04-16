@@ -65,7 +65,7 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
     //retrieves ticks where animation components begin
     startTicks = new ArrayList<>(startTimeMap.keySet());
     //retrieves ticks where animation components end
-    endTicks = new ArrayList<>(startTimeMap.keySet());
+    endTicks = new ArrayList<>(endTimeMap.keySet());
 
     Collections.sort(startTicks);
     Collections.sort(endTicks);

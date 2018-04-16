@@ -10,6 +10,9 @@ import cs3500.animator.view.viewimplementations.SVGView;
 import cs3500.animator.view.viewimplementations.TextView;
 import cs3500.animator.view.viewimplementations.VisualView;
 
+/**
+ * View Factory capable of producing text, svg, visual as well as interactive (hybrid) views.
+ */
 public class ViewFactoryWithHybrid implements ViewFactoryInterface {
   @Override
   public ViewInterface create(ViewTypes type, ModelInsulatorInterface model, String output,

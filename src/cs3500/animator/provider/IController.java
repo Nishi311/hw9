@@ -21,8 +21,6 @@ public interface IController {
    */
   void buildView();
 
-  String getStatus();
-
   /**
    * Pause the animation. Continue displaying the current frame, do not move to the next one.
    */
@@ -64,6 +62,14 @@ public interface IController {
   List<IAnimShape> getCurrentShapes();
 
   /**
+   * Get the starting values for all of the shapes in the animation, maintaining the current
+   * visibility.
+   *
+   * @return A list of all the shapes in the animation as they first appeared
+   */
+  List<IAnimShape> getStartShapes();
+
+  /**
    * Checks whether the animation is going to loop at the end.
    *
    * @return the boolean flag that checks if the animation is looping
@@ -72,18 +78,9 @@ public interface IController {
 
   /**
    * Gets the end tick of the animation.
-   *
    * @return the final tick of the animation after every shape disappears
    */
   int getEndTick();
-
-//  /**
-//   * Gets the boolean that tells whether that shape is visible or not
-//   *
-//   * @return an array of booleans that tells whether the shape is visible
-//   */
-//  boolean[] visibleShape();
-
 
   /**
    * Let the animation loop back to the beginning when it's over, or turn this feature off.
@@ -104,17 +101,34 @@ public interface IController {
    * Reset the speed of the animation to the default speed.
    */
   public void resetSpeed();
-  //TODO
 
+  /**
+   * Restart the animation from the beginning.
+   */
   void restart();
-  //TODO
 
+  /**
+   * Change the selected shape's visibility, from visible to invisible or vice versa.
+   * @param shapeName   The shape to be turned visible or invisible
+   */
   void toggleVisible(String shapeName);
-  //TODO
 
+  /**
+   * See if the animation is currently paused.
+   * @return  True if the animation is paused, false if it is playing
+   */
   boolean getPaused();
-  //TODO
 
+  /**
+   * Change the status String to the given string.
+   * @param s  The string to make the status
+   */
   void changeStatus(String s);
+
+  /**
+   * Return the status String, describing the state of the animation.
+   * @return The string representing the current status
+   */
+  String getStatus();
 }
 

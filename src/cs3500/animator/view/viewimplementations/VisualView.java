@@ -17,9 +17,10 @@ import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.view.VisualViewTypeAbstract;
 
 /**
- * This class represents the visual of animation.
+ * This class represents the visual of animation. Similar to HybridView but does not have the
+ * same control functions. Will simply run the animation from start to finish. Does not loop
+ * animation.
  */
-
 public class VisualView extends VisualViewTypeAbstract {
   private VisualView.DrawingPanel dPan = new DrawingPanel();
   private int currentTick = 1;

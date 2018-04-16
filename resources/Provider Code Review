@@ -26,12 +26,12 @@ Other than that, the implementations worked as advertised and were pretty easy t
 
 Documentation critique:
 
-In terms of documentation there were some issues. Generally speaking we could figure out what pieces fit where but there were a few "to do" markers left in some of the interfaces.
-Fortunately, their method names were explicit enough where we could take a pretty good guess as to what they were intended for. Also, a more explicit relationship between the
-IAnimShape and IShape would have been nice. An IAnimShape turned out to be wrapper around an IShape that added on a lot of the animation specific information (like color, and
-position) but this wrapper relationship was only ever expressed in the getShape() method. Similarly, it wasn't entirely clear how we were expected to run the visual and interactive
-views on a tick by tick basis. We eventually figured it out by backtracking through the implements lists until we determined that we could use the ARunnableView's update method.
-But it took us a while to figure it out.
+In terms of documentation there were some issues. Generally speaking we could figure out what pieces fit where but there were a few "to do" markers left in some of the interfaces
+(these were cleaned up at our request). Fortunately, their method names were explicit enough where we could take a pretty good guess as to what they were intended for. Also, a more
+explicit relationship between the IAnimShape and IShape would have been nice. An IAnimShape turned out to be wrapper around an IShape that added on a lot of the animation specific
+information (like color, and position) but this wrapper relationship was only ever expressed in the getShape() method. Similarly, it wasn't entirely clear how we were expected to
+run the visual and interactive views on a tick by tick basis. We eventually figured it out by backtracking through the implements lists until we determined that we could use the
+ARunnableView's update method. But it took us a while to figure it out.
 
 
 Design / Code Limitations:

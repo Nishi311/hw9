@@ -81,8 +81,8 @@ public class InteractiveView extends ARunnableView implements IRunnableView, IPr
    * @throws InvocationTargetException If an underlying method throws an error
    * @throws InterruptedException      If the initial thread is interrupted before complete
    */
-  public InteractiveView(int speed, Appendable output, int endTick,
-                         IController controller) throws InvocationTargetException, InterruptedException {
+  public InteractiveView(int speed, Appendable output, int endTick, IController controller)
+          throws InvocationTargetException, InterruptedException {
     super(speed);
     this.output = output;
     this.endTick = endTick;
@@ -90,8 +90,6 @@ public class InteractiveView extends ARunnableView implements IRunnableView, IPr
     this.controller = controller;
 
     this.kl = new KeyListenerInteractions(controller);
-//    KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-//    manager.addKeyEventDispatcher(new KeyDispatcher());
 
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -178,8 +176,6 @@ public class InteractiveView extends ARunnableView implements IRunnableView, IPr
 
         statusPanel.add(speedSpinner);
         speedSpinner.setFocusable(false);
-//        speedSpinner.setEditor(new JSpinner.DefaultEditor(speedSpinner));
-//        ((JSpinner.DefaultEditor) speedSpinner.getEditor()).getTextField().setEditable(false);
         statusPanel.add(new JLabel("FPS"));
 
         export = new JButton("Export to SVG");
@@ -206,16 +202,17 @@ public class InteractiveView extends ARunnableView implements IRunnableView, IPr
   @Override
   public void printView() throws IOException {
 
-    final JFileChooser fileChooser = new JFileChooser(".");
-    fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("*.svg", "svg"));
-    int returnValue = fileChooser.showSaveDialog(statusPanel);
+    final JFileChooser FILE_CHOOSER = new JFileChooser(".");
+    FILE_CHOOSER.addChoosableFileFilter(new FileNameExtensionFilter("*.svg", "svg"));
+    int returnValue = FILE_CHOOSER.showSaveDialog(statusPanel);
     if (returnValue == JFileChooser.APPROVE_OPTION) {
-      this.output = new PrintStream(fileChooser.getSelectedFile());
+      this.output = new PrintStream(FILE_CHOOSER.getSelectedFile());
     }
 
     SVGView svg = new SVGView(speed, output, controller.isLooping(), endTick);
     svg.setSpeed(speed);
-    svg.setShapes(controller.getAllShapes());
+    svg.setShapes(controller.getStartShapes());
+
     svg.setTransformations(controller.getAllTransformations());
 
     svg.printView();
@@ -277,12 +274,19 @@ public class InteractiveView extends ARunnableView implements IRunnableView, IPr
           controller.changeStatus("Playing");
         }
       } else if (e.getSource().equals(export)) {
+        boolean alreadyPaused = controller.getPaused();
+        if (!alreadyPaused) {
+          controller.pauseAnimation();
+        }
         controller.changeStatus("Exporting Animation...");
         statusLabel.setText(controller.getStatus());
         try {
           printView();
         } catch (IOException ioe) {
           throw new IllegalStateException("Cannot write to file.");
+        }
+        if (!alreadyPaused) {
+          controller.pauseAnimation();
         }
         controller.changeStatus("Exported Animation");
       }

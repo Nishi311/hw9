@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 
 import cs3500.animator.provider.IAnimShape;
 
+/**
+ * This is the abstract class for a runnable View object, which displays the shapes in a visual
+ * form, allowing the viewer to see when shapes exist and how they change.
+ */
 public abstract class ARunnableView extends AView implements IRunnableView {
 
   protected static final int WIDTH = 600;
@@ -20,6 +24,11 @@ public abstract class ARunnableView extends AView implements IRunnableView {
   protected JFrame frame = new JFrame("Easy Animator");
   protected AnimationPanel mainPanel = new AnimationPanel(shapes, img, WIDTH, HEIGHT);
 
+  /**
+   * Build a runnable View object, which displays the shapes and transformations visually,
+   * allowing the viewer to see when shapes exist and how they change.
+   * @param speed    The speed at which the animation will run, in frames per second
+   */
   public ARunnableView(int speed) {
     super(speed);
     if (shapes == null) {

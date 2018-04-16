@@ -3,7 +3,6 @@ package cs3500.animator.converters;
 import java.io.IOException;
 import java.util.List;
 
-
 import cs3500.animator.provider.IAnimShape;
 import cs3500.animator.provider.IController;
 import cs3500.animator.provider.ITransformation;

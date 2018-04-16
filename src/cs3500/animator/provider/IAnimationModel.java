@@ -57,6 +57,14 @@ public interface IAnimationModel {
   List<ITransformation> getTransformations();
 
   /**
+   * Returns the list of animshapes at the start of the model, maintaining the current visibility
+   * of each shape.
+   *
+   * @return list of all visible AnimShapes as they started
+   */
+  List<IAnimShape> getStartShapes();
+
+  /**
    * Returns an int representing the current tick of the animation. Starts at 1.
    *
    * @return int representing the current TICK
@@ -106,11 +114,14 @@ public interface IAnimationModel {
    * (This note is for documentation only, it will not enforce classes implementing this
    * interface to override its inherent toString() method, but all such classes should.)
    *
-   * @return A verbose description for every shape, and action on those animshape,
-   * shown and performed.
+   * @return A verbose description for every shape, and action on those animshape, shown and
+   *         performed.
    */
   String toString();
 
-  //TODO
+  /**
+   * Change the selected shape's visibility, from visible to invisible or vice versa.
+   * @param shapeName   The shape to be turned visible or invisible
+   */
   void toggleVisible(String shapeName);
 }

@@ -143,6 +143,11 @@ public class ProviderController extends ControllerWithHybrid implements KeyListe
   }
 
   @Override
+  public List<IAnimShape> getStartShapes() {
+    return this.providerModel.getStartShapes();
+  }
+
+  @Override
   public boolean isLooping() {
     return this.doesLoop;
   }
