@@ -101,8 +101,10 @@ public class Rectangle extends ShapeAbstract {
   public ShapeInterface copy() {
     ShapeInterface copyRectangle = new Rectangle(
             (String) workingParameterMap.get(UniversalShapeParameterTypes.NAME.name()),
-            (ColorClassInterface) workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
-            (Position2DInterface) workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
+            (ColorClassInterface)
+                    workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
+            (Position2DInterface)
+                    workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
             (float) workingParameterMap.get(UniversalShapeParameterTypes.ORIENTATION.name()),
             (boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name()),
             (float) workingParameterMap.get("width"),

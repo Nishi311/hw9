@@ -100,8 +100,10 @@ public class Oval extends ShapeAbstract {
 
     ShapeInterface copyOval = new Oval(
             (String) workingParameterMap.get(UniversalShapeParameterTypes.NAME.name()),
-            (ColorClassInterface) workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
-            (Position2DInterface) workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
+            (ColorClassInterface)
+                    workingParameterMap.get(UniversalShapeParameterTypes.COLOR.name()),
+            (Position2DInterface)
+                    workingParameterMap.get(UniversalShapeParameterTypes.POSITION.name()),
             (float) workingParameterMap.get(UniversalShapeParameterTypes.ORIENTATION.name()),
             (boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name()),
             (float) workingParameterMap.get("xRadius"),

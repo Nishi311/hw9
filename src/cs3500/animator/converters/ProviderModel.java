@@ -116,9 +116,9 @@ public class ProviderModel implements IAnimationModel {
   }
 
   @Override
-  public List<IAnimShape> getStartShapes(){
+  public List<IAnimShape> getStartShapes() {
     List<IAnimShape> output = new ArrayList<>();
-    for (IAnimShape s: providerShapeBackup){
+    for (IAnimShape s: providerShapeBackup) {
       output.add(new ProviderAnimShape(s));
     }
     return output;

@@ -116,8 +116,9 @@ public class AnimationModelText implements AnimationModelInterface {
   }
 
   @Override
-  public void addShape(String shapeName, String shapeType, ColorClassInterface color, Position2DInterface pos,
-                       float orient, Object... parameters) throws IllegalArgumentException {
+  public void addShape(String shapeName, String shapeType, ColorClassInterface color,
+                       Position2DInterface pos, float orient, Object... parameters)
+          throws IllegalArgumentException {
 
     if (shapeNameToWorkingShapeObjectMap.containsKey(shapeName)) {
       throw new IllegalArgumentException("There is already a shape with this name");
