@@ -22,7 +22,7 @@ public abstract class ARunnableView extends AView implements IRunnableView {
   protected boolean running = false;
   protected BufferedImage img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
   protected JFrame frame = new JFrame("Easy Animator");
-  protected AnimationPanel mainPanel = new AnimationPanel(shapes, img, WIDTH, HEIGHT);
+  protected AnimationPanel mainPanel = new AnimationPanel(shapes, WIDTH, HEIGHT);
 
   /**
    * Build a runnable View object, which displays the shapes and transformations visually,

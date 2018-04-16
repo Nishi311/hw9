@@ -2,7 +2,6 @@ package cs3500.animator.provider.view;
 
 import java.awt.Graphics;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -21,9 +20,8 @@ public class AnimationPanel extends JPanel {
 
   static List<IAnimShape> shapes;
 
-  AnimationPanel(List<IAnimShape> s, BufferedImage buf, int width, int height) {
+  AnimationPanel(List<IAnimShape> s, int width, int height) {
     shapes = s;
-    //BufferedImage img = buf;
     xScale = width / 800d;
     yScale = height / 800d;
   }

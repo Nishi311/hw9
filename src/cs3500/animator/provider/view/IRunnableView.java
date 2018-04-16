@@ -9,7 +9,7 @@ import cs3500.animator.provider.IAnimShape;
  * This is the interface for a runnable View object, which displays the shapes in a visual form,
  * allowing the viewer to see when shapes exist and how they change.
  */
-public interface IRunnableView extends IViewable{
+public interface IRunnableView extends IViewable {
 
   /**
    * Update the view with new data for the current tick.

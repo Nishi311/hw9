@@ -28,13 +28,13 @@ public class TextView extends APrintableView implements IPrintableView {
    */
   @Override
   public void printView() throws IOException {
-    if(speed == 0) {
+    if (speed == 0) {
       throw new IllegalStateException("Speed cannot be 0.");
     }
-    if(shapes == null) {
+    if (shapes == null) {
       throw new IllegalStateException("The list of shapes cannot be null.");
     }
-    if(transformations == null) {
+    if (transformations == null) {
       throw new IllegalStateException("The list of transformations cannot be null.");
     }
 
@@ -56,5 +56,6 @@ public class TextView extends APrintableView implements IPrintableView {
     }
   }
 }
+
 
 

@@ -13,15 +13,15 @@ public interface IPrintableView extends IViewable {
 
   /**
    * Print or export the view to a file.
-   * @throws IOException    if the file cannot be printed to.
+   * @throws IOException if the file cannot be printed to.
    */
   void printView() throws IOException;
 
   /**
    * Set the transformations for the view to print out.
-   * @param transformations
+   * @param transformationList List of transformations to give to the view.
    */
-  void setTransformations(List<ITransformation> transformations);
+  void setTransformations(List<ITransformation> transformationList);
 
 
   /**

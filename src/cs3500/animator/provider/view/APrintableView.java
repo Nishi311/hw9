@@ -20,18 +20,19 @@ public abstract class APrintableView extends AView implements IPrintableView {
    */
   public APrintableView(int speed, Appendable output) {
     super(speed);
-    if(output == null) {
+    if (output == null) {
       throw new IllegalStateException("The output file cannot be null.");
     }
     this.output = output;
   }
 
   /**
-   * Get the list of shapes for the view to display.
+   * Set the transformations for the view to print out.
+   * @param transformationList  List of transformations to give to the view
    */
   @Override
   public void setTransformations(List<ITransformation> transformationList) {
-    if(transformationList == null) {
+    if (transformationList == null) {
       throw new IllegalStateException("The list of transformations cannot be null.");
     }
     this.transformations = transformationList;
