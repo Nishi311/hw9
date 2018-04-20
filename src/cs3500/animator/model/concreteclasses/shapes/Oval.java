@@ -1,7 +1,10 @@
 package cs3500.animator.model.concreteclasses.shapes;
 
-import java.awt.Graphics;
-import java.awt.Color;
+import com.sun.corba.se.impl.orbutil.graph.Graph;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -216,8 +219,7 @@ public class Oval extends ShapeAbstract {
   }
 
   @Override
-  public void draw(Graphics g) {
-
+  public void draw(Graphics2D g) {
     if ((Boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name())) {
       Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
               UniversalShapeParameterTypes.POSITION.name());
@@ -226,11 +228,18 @@ public class Oval extends ShapeAbstract {
       float currentRadiusX = (float) workingParameterMap.get("xRadius");
       float currentRadiusY = (float) workingParameterMap.get("yRadius");
 
-      g.drawOval((int) currentPosition.getX(), (int) currentPosition.getY(), (int) currentRadiusX,
-              (int) currentRadiusY);
-      g.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
-      g.fillOval((int) currentPosition.getX(), (int) currentPosition.getY(), (int) currentRadiusX,
-              (int) currentRadiusY);
+      Shape oval = new Ellipse2D.Double((double) currentPosition.getX(),
+              (double) currentPosition.getY(),
+              (double) currentRadiusX,
+              (double) currentRadiusY) {
+      };
+
+      AffineTransform afx = new AffineTransform();
+      afx.rotate(Math.toRadians(getOrientation()), currentPosition.getX(), currentPosition.getY());
+
+      Shape rotatedOval = afx.createTransformedShape(oval);
+      g.setPaint(new Color(currentColor.getRed(),currentColor.getGreen(),currentColor.getBlue()));
+      g.fill(rotatedOval);
     } else {
       g.dispose();
     }

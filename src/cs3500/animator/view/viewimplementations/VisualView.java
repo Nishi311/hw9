@@ -1,8 +1,6 @@
 package cs3500.animator.view.viewimplementations;
 
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -79,9 +77,12 @@ public class VisualView extends VisualViewTypeAbstract {
   protected class DrawingPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
-      super.paintComponent(g);
+      Graphics2D g2 = (Graphics2D) g;
+      super.paintComponent(g2);
       for (ShapeInterface shape : shapeList) {
-        shape.draw(g);
+//        g2.rotate(Math.toRadians(shape.getOrientation()), shape.getPosition().getX(),
+//                shape.getPosition().getY());
+        shape.draw(g2);
       }
     }
   }

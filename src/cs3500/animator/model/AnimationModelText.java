@@ -561,7 +561,7 @@ public class AnimationModelText implements AnimationModelInterface {
       DurationInterface durStart = new Duration(startOfLife);
       DurationInterface durEnd = new Duration(endOfLife);
 
-      this.model.addShape(name, "Oval", color, pos, 0, xRadius, yRadius);
+      this.model.addShape(name, "Oval", color, pos, 90, xRadius, yRadius);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
       this.model.addAnimation(name, "Visibility Change", durEnd, false);
 
@@ -579,7 +579,7 @@ public class AnimationModelText implements AnimationModelInterface {
       DurationInterface durStart = new Duration(startOfLife);
       DurationInterface durEnd = new Duration(endOfLife);
 
-      this.model.addShape(name, "Rectangle", color, pos, 0, width, height);
+      this.model.addShape(name, "Rectangle", color, pos, 20, width, height);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
       this.model.addAnimation(name, "Visibility Change", durEnd, false);
 

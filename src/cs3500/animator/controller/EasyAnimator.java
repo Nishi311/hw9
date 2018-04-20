@@ -3,6 +3,7 @@ package cs3500.animator.controller;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import cs3500.animator.controller.controllerimplementations.ControllerWithHybrid;
 import cs3500.animator.controller.interfaces.ControllerInterface;
 
 import cs3500.animator.converters.ProviderController;
@@ -34,7 +35,7 @@ public final class EasyAnimator {
 
     ViewFactoryProviderInterface vFac = new ViewFactoryProvider() {
     };
-    ControllerInterface controller = new ProviderController(model, vFac);
+    ControllerInterface controller = new ControllerWithHybrid(model, vFac);
 
     String errorMessage = controller.parseInput(args);
 

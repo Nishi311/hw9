@@ -1,7 +1,10 @@
 package cs3500.animator.model.concreteclasses.shapes;
 
-import java.awt.Graphics;
-import java.awt.Color;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -220,8 +223,9 @@ public class Rectangle extends ShapeAbstract {
 
 
   @Override
-  public void draw(Graphics g) {
+  public void draw(Graphics2D g) {
     if ((Boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name())) {
+
       Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
               UniversalShapeParameterTypes.POSITION.name());
       ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
@@ -230,11 +234,17 @@ public class Rectangle extends ShapeAbstract {
       float currentRadiusY = (float) workingParameterMap.get("height");
 
 
-      g.drawRect((int) currentPosition.getX(), (int) currentPosition.getY(), (int) currentRadiusX,
-              (int) currentRadiusY);
-      g.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
-      g.fillRect((int) currentPosition.getX(), (int) currentPosition.getY(), (int) currentRadiusX,
-              (int) currentRadiusY);
+      Shape rectangle = new Rectangle2D.Double((double) currentPosition.getX(),
+              (double) currentPosition.getY(),
+              (double) currentRadiusX,
+              (double) currentRadiusY) {
+      };
+      AffineTransform afx = new AffineTransform();
+      afx.rotate(Math.toRadians(getOrientation()), currentPosition.getX(), currentPosition.getY());
+
+      Shape rotatedRectangle = afx.createTransformedShape(rectangle);
+      g.setPaint(new Color(currentColor.getRed(),currentColor.getGreen(),currentColor.getBlue()));
+      g.fill(rotatedRectangle);
     } else {
       g.dispose();
     }

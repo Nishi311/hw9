@@ -1,7 +1,7 @@
 package cs3500.animator.model.interfaces;
 
+import java.awt.*;
 import java.util.List;
-import java.awt.Graphics;
 
 /**
  * This interface governs the implementation of shape interface. These objects are fundamental
@@ -152,9 +152,9 @@ public interface ShapeInterface {
   /**
    * Allows the shape to be drawn as a graphics object.
    *
-   * @param g The graphics object the shape will be drawn too. I think. Not too sure on this one.
+   * @param g The graphics2D object the shape will be drawn too. I think. Not too sure on this one.
    */
-  void draw(Graphics g);
+  void draw(Graphics2D g);
 
   /**
    * Covert Shape to Svg String.
