@@ -80,8 +80,6 @@ public class VisualView extends VisualViewTypeAbstract {
       Graphics2D g2 = (Graphics2D) g;
       super.paintComponent(g2);
       for (ShapeInterface shape : shapeList) {
-//        g2.rotate(Math.toRadians(shape.getOrientation()), shape.getPosition().getX(),
-//                shape.getPosition().getY());
         shape.draw(g2);
       }
     }

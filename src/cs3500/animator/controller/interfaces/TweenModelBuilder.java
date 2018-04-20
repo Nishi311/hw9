@@ -103,6 +103,15 @@ public interface TweenModelBuilder<T> {
           fromSy, float toSx, float toSy, int startTime, int endTime);
 
   /**
+   * Change the orientation of this shape from the specified orientation to the
+   * specified target orientation. These orientations should be representative of degrees
+   * where negative values are clockwise and positive values are counter-clockwise, consistent
+   * with standard mathematical practice.
+   */
+  TweenModelBuilder<T> addRotationChange(String name, float fromOrient, float
+          toOrient, int startTime, int endTime);
+
+  /**
    * Return the model built so far.
    *
    * @return the model that was constructed so far.

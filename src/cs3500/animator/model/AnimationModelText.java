@@ -561,7 +561,7 @@ public class AnimationModelText implements AnimationModelInterface {
       DurationInterface durStart = new Duration(startOfLife);
       DurationInterface durEnd = new Duration(endOfLife);
 
-      this.model.addShape(name, "Oval", color, pos, 90, xRadius, yRadius);
+      this.model.addShape(name, "Oval", color, pos, 0f, xRadius, yRadius);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
       this.model.addAnimation(name, "Visibility Change", durEnd, false);
 
@@ -579,7 +579,7 @@ public class AnimationModelText implements AnimationModelInterface {
       DurationInterface durStart = new Duration(startOfLife);
       DurationInterface durEnd = new Duration(endOfLife);
 
-      this.model.addShape(name, "Rectangle", color, pos, 20, width, height);
+      this.model.addShape(name, "Rectangle", color, pos, 0f, width, height);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
       this.model.addAnimation(name, "Visibility Change", durEnd, false);
 
@@ -635,6 +635,16 @@ public class AnimationModelText implements AnimationModelInterface {
         model.addAnimation(name, "Scale Change RR", dur, fromSx, fromSy, toSx, toSy);
       }
 
+      return this;
+    }
+
+    @Override
+    public TweenModelBuilder<AnimationModelText> addRotationChange(String name, float fromOrient,
+                                                                   float toOrient, int startTime,
+                                                                   int endTime){
+      DurationInterface dur = new Duration(startTime, endTime);
+
+      this.model.addAnimation(name, "Rotation Change", dur, fromOrient, toOrient);
       return this;
     }
 

@@ -220,7 +220,9 @@ public class Oval extends ShapeAbstract {
 
   @Override
   public void draw(Graphics2D g) {
+    //if shape is visible, draw it.
     if ((Boolean) workingParameterMap.get(UniversalShapeParameterTypes.VISIBILITY.name())) {
+      //gather all necessary information
       Position2DInterface currentPosition = (Position2D) workingParameterMap.get(
               UniversalShapeParameterTypes.POSITION.name());
       ColorClassInterface currentColor = (ColorClass) workingParameterMap.get(
@@ -228,20 +230,20 @@ public class Oval extends ShapeAbstract {
       float currentRadiusX = (float) workingParameterMap.get("xRadius");
       float currentRadiusY = (float) workingParameterMap.get("yRadius");
 
-      Shape oval = new Ellipse2D.Double((double) currentPosition.getX(),
-              (double) currentPosition.getY(),
-              (double) currentRadiusX,
-              (double) currentRadiusY) {
-      };
-
+      //create new AffineTransformation to rotate the shape about its current coordinates.
       AffineTransform afx = new AffineTransform();
       afx.rotate(Math.toRadians(getOrientation()), currentPosition.getX(), currentPosition.getY());
 
-      Shape rotatedOval = afx.createTransformedShape(oval);
-      g.setPaint(new Color(currentColor.getRed(),currentColor.getGreen(),currentColor.getBlue()));
+      //create an oval that's already been rotated by the affine transform.
+      Shape rotatedOval = afx.createTransformedShape(new Ellipse2D.Double(
+              (double) currentPosition.getX(),
+              (double) currentPosition.getY(),
+              (double) currentRadiusX,
+              (double) currentRadiusY));
+      //set the graphics2D color to the shapes current color.
+      g.setPaint(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
+      //draw and fill the shape.
       g.fill(rotatedOval);
-    } else {
-      g.dispose();
     }
   }
 }

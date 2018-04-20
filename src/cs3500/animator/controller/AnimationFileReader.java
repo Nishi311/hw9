@@ -91,6 +91,14 @@ public class AnimationFileReader {
                   scaleByInfo.getStart(),
                   scaleByInfo.getEnd());
           break;
+        case "rotate":
+          RotationInfo rotateByInfo = readRotateByInfo(sc);
+          builder.addRotationChange(rotateByInfo.name,
+                  rotateByInfo.getFromOrient(),
+                  rotateByInfo.getToOrient(),
+                  rotateByInfo.getStart(),
+                  rotateByInfo.getEnd());
+          break;
         default:
           throw new IllegalStateException("Unidentified token " + command + " "
                   + "read from file");
@@ -99,6 +107,7 @@ public class AnimationFileReader {
     }
     return builder.build();
   }
+
 
   private RectangleInfo readRectangleInfo(Scanner sc) throws
           IllegalStateException, InputMismatchException {
@@ -273,6 +282,35 @@ public class AnimationFileReader {
         default:
           throw new IllegalStateException("Invalid attribute " + command + " for "
                   + "scale-to");
+      }
+    }
+
+    return info;
+  }
+
+  private RotationInfo readRotateByInfo(Scanner sc) throws
+          IllegalStateException, InputMismatchException {
+    RotationInfo info = new RotationInfo();
+
+    while (!info.isAllInitialized()) {
+      String command = sc.next();
+      switch (command) {
+        case "rotateTo":
+          info.setFromOrient(sc.nextFloat());
+          info.setToOrient(sc.nextFloat());
+          break;
+        case "name":
+          info.setName(sc.next());
+          break;
+        case "from":
+          info.setStart(sc.nextInt());
+          break;
+        case "to":
+          info.setEnd(sc.nextInt());
+          break;
+        default:
+          throw new IllegalStateException("Invalid attribute " + command + " for "
+                  + "rotate-to");
       }
     }
 
@@ -765,4 +803,74 @@ public class AnimationFileReader {
       return end;
     }
   }
+
+  class RotationInfo extends Inputable {
+    private String name;
+    private float fromO;
+    private float toO;
+    private int start;
+    private int end;
+
+    RotationInfo() {
+      super();
+
+      valueFlags.put("name", false);
+      valueFlags.put("fromO", false);
+      valueFlags.put("toO", false);
+      valueFlags.put("start", false);
+      valueFlags.put("end", false);
+
+    }
+
+    void setName(String name) {
+      this.name = name;
+      valueFlags.replace("name", true);
+    }
+
+    void setFromOrient(float fromO) {
+      this.fromO = fromO;
+      valueFlags.replace("fromO", true);
+    }
+
+    void setToOrient(float toO) {
+      this.toO = toO;
+      valueFlags.replace("toO", true);
+    }
+
+
+    void setStart(int start) {
+      this.start = start;
+      valueFlags.replace("start", true);
+    }
+
+    void setEnd(int end) {
+      this.end = end;
+      valueFlags.replace("end", true);
+    }
+
+    String getName() {
+      return name;
+    }
+
+    float getFromOrient() {
+      return fromO;
+    }
+
+    float getToOrient() {
+      return toO;
+    }
+
+
+    int getStart() {
+      return start;
+    }
+
+    int getEnd() {
+      return end;
+    }
+  }
+
 }
+
+
+

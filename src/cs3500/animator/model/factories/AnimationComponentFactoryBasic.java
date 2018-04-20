@@ -6,6 +6,7 @@ import java.util.List;
 
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ColorChange;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.PositionChange;
+import cs3500.animator.model.concreteclasses.animationcomponenttypes.RotationChange;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeRR;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.ScaleChangeWH;
 import cs3500.animator.model.concreteclasses.animationcomponenttypes.VisibilityChange;
@@ -104,6 +105,17 @@ public class AnimationComponentFactoryBasic implements AnimationComponentFactory
         }
         newAnimation = new VisibilityChange(targetShape, animationDuration,
                 (Boolean) parameterList.get(0));
+        break;
+
+      case "Rotation Change":
+        if (parameterList.size() != 2) {
+          throw new IllegalArgumentException("Wrong amount of parameters for a Rotation Change");
+        }
+        if (!(parameterList.get(0) instanceof Float) || !(parameterList.get(1) instanceof Float)) {
+          throw new IllegalArgumentException("Must pass two Float parameters");
+        }
+        newAnimation = new RotationChange(targetShape, animationDuration,
+                (float) parameterList.get(0), (float) parameterList.get(1));
         break;
       default:
         throw new IllegalArgumentException("Not a recognized animation type");
