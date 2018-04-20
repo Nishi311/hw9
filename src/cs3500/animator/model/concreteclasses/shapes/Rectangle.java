@@ -234,19 +234,23 @@ public class Rectangle extends ShapeAbstract {
       float currentRadiusX = (float) workingParameterMap.get("width");
       float currentRadiusY = (float) workingParameterMap.get("height");
 
-      //create new AffineTransformation to rotate the shape about its current coordinates.
-      AffineTransform afx = new AffineTransform();
-      afx.rotate(Math.toRadians(getOrientation()), currentPosition.getX(), currentPosition.getY());
-
-      //create a rectangle that's already been rotated by the affine transform.
-      Shape rotatedRectangle = afx.createTransformedShape(new Rectangle2D.Double(
+      //create the rectangle as is (no rotation).
+      Rectangle2D oldRectangle = new Rectangle2D.Double(
               (double) currentPosition.getX(),
               (double) currentPosition.getY(),
               (double) currentRadiusX,
-              (double) currentRadiusY));
+              (double) currentRadiusY);
+
+      //create new AffineTransformation to rotate the shape about its current center coordinates.
+      AffineTransform afx = new AffineTransform();
+      afx.rotate(Math.toRadians(getOrientation()), oldRectangle.getCenterX(),
+              oldRectangle.getCenterY());
+
+      //create a new rectangle that's been rotated by the affine transform of the old one.
+      Shape rotatedRectangle = afx.createTransformedShape(oldRectangle);
       //set the graphics2D color to the shapes current color.
       g.setPaint(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
-      //draw and fill the shape.
+      //draw and fill the new shape.
       g.fill(rotatedRectangle);
     }
   }

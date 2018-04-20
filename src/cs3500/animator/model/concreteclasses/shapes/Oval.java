@@ -230,16 +230,19 @@ public class Oval extends ShapeAbstract {
       float currentRadiusX = (float) workingParameterMap.get("xRadius");
       float currentRadiusY = (float) workingParameterMap.get("yRadius");
 
-      //create new AffineTransformation to rotate the shape about its current coordinates.
-      AffineTransform afx = new AffineTransform();
-      afx.rotate(Math.toRadians(getOrientation()), currentPosition.getX(), currentPosition.getY());
-
-      //create an oval that's already been rotated by the affine transform.
-      Shape rotatedOval = afx.createTransformedShape(new Ellipse2D.Double(
+      //create the oval as is (no rotation).
+      Ellipse2D oldOval = new Ellipse2D.Double(
               (double) currentPosition.getX(),
               (double) currentPosition.getY(),
               (double) currentRadiusX,
-              (double) currentRadiusY));
+              (double) currentRadiusY);
+
+      //create new AffineTransformation to rotate the shape about its current center coordinates.
+      AffineTransform afx = new AffineTransform();
+      afx.rotate(Math.toRadians(getOrientation()), oldOval.getCenterX(), oldOval.getCenterY());
+
+      //create an oval that's been rotated by the affine transform.
+      Shape rotatedOval = afx.createTransformedShape(oldOval);
       //set the graphics2D color to the shapes current color.
       g.setPaint(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
       //draw and fill the shape.

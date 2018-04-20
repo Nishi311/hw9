@@ -295,7 +295,7 @@ public class AnimationFileReader {
     while (!info.isAllInitialized()) {
       String command = sc.next();
       switch (command) {
-        case "rotateTo":
+        case "rotateto":
           info.setFromOrient(sc.nextFloat());
           info.setToOrient(sc.nextFloat());
           break;
