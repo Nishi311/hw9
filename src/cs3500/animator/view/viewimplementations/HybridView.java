@@ -151,7 +151,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     for (Map.Entry<Integer, List<ShapeInterface>> entry : layerMap.entrySet()) {
       List<ShapeInterface> newList = entry.getValue();
       List<JCheckBox> checkBoxList = new ArrayList<>();
-      for (ShapeInterface shape: newList){
+      for (ShapeInterface shape : newList) {
         JCheckBox temp = new JCheckBox(shape.getName());
         temp.setSelected(true);
         temp.setActionCommand(shape.getName());
@@ -166,13 +166,13 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     Collections.reverse(reverseOrder);
 
     //Go through the reversed key order and add each sub-panel to the main checkbox panel.
-    for (Integer i: reverseOrder) {
+    for (Integer i : reverseOrder) {
       JPanel layerPanel = new JPanel();
       layerPanel.setPreferredSize(new Dimension(50, 50));
       layerPanel.setBorder(BorderFactory.createTitledBorder("Layer " + i));
 
       List<JCheckBox> temp = shapeCheckBoxMap.get(i);
-      for (JCheckBox check: temp){
+      for (JCheckBox check : temp) {
         layerPanel.add(check);
       }
       checkBoxPanel.add(layerPanel);
@@ -199,7 +199,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
 
     for (Map.Entry<Integer, List<JCheckBox>> entry : shapeCheckBoxMap.entrySet()) {
       List<JCheckBox> temp = entry.getValue();
-      for (JCheckBox check : temp){
+      for (JCheckBox check : temp) {
         check.addItemListener(items);
       }
     }
@@ -222,7 +222,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   }
 
   @Override
-  public void setSpeed(int newSpeed){
+  public void setSpeed(int newSpeed) {
     this.ticksPerSecond = newSpeed;
     this.milliPerTick = 1000 / ticksPerSecond;
     timer.setDelay((int) this.milliPerTick);

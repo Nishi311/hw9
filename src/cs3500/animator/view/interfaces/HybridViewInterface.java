@@ -29,6 +29,7 @@ public interface HybridViewInterface extends ViewInterface {
 
   /**
    * Updates speed spinner.
+   *
    * @param newSpeed the new speed.
    */
   void setSpeed(int newSpeed);

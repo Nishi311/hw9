@@ -107,8 +107,7 @@ public abstract class ShapeAbstract implements ShapeInterface {
     if (key.equals(UniversalShapeParameterTypes.ORIENTATION.name())) {
       if (!(value instanceof Float)) {
         throw new IllegalArgumentException("Orientation must be a float");
-      }
-      else if ((float) value < -360 || (float) value > 360) {
+      } else if ((float) value < -360 || (float) value > 360) {
         throw new IllegalArgumentException("Cannot have an orientation that is negative or greater"
                 + " than +/- 360 degrees");
       }

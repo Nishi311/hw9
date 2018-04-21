@@ -41,7 +41,7 @@ public class TestHybridView extends VisualViewTypeAbstract implements HybridView
   }
 
   @Override
-  public void setSpeed(int newSpeed){
+  public void setSpeed(int newSpeed) {
     //do nothing.
   }
 

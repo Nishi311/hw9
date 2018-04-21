@@ -191,7 +191,7 @@ public class ControllerWithHybrid extends ControllerAbstract implements ActionLi
   public void stateChanged(ChangeEvent changeEvent) {
     checkIfHybridExists();
     JSpinner temp = (JSpinner) changeEvent.getSource();
-    if (temp.getValue() instanceof Integer){
+    if (temp.getValue() instanceof Integer) {
       hybridView.setSpeed((int) temp.getValue());
     }
   }

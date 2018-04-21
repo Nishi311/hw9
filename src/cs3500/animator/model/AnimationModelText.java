@@ -136,11 +136,11 @@ public class AnimationModelText implements AnimationModelInterface {
     shapeNameToWorkingShapeObjectMap.put(shapeName, newShape);
     shapeList.add(newShape);
 
-    if (layerMap.containsKey(layer)){
+    if (layerMap.containsKey(layer)) {
       List<ShapeInterface> temp = layerMap.get(layer);
       temp.add(newShape);
       layerMap.put(layer, temp);
-    } else{
+    } else {
       List<ShapeInterface> temp = new ArrayList<>();
       temp.add(newShape);
       layerMap.put(layer, temp);
@@ -256,7 +256,7 @@ public class AnimationModelText implements AnimationModelInterface {
   }
 
   @Override
-  public Map<Integer, List<ShapeInterface>> getLayerMap(){
+  public Map<Integer, List<ShapeInterface>> getLayerMap() {
     //new linked hashmap to return
     Map<Integer, List<ShapeInterface>> newMap = new LinkedHashMap<>();
     //check each entry in the map
@@ -595,7 +595,7 @@ public class AnimationModelText implements AnimationModelInterface {
       DurationInterface durStart = new Duration(startOfLife);
       DurationInterface durEnd = new Duration(endOfLife);
 
-      this.model.addShape(name, "Oval", color, pos, 0f, layer,  xRadius, yRadius);
+      this.model.addShape(name, "Oval", color, pos, 0f, layer, xRadius, yRadius);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
       this.model.addAnimation(name, "Visibility Change", durEnd, false);
 
@@ -608,7 +608,7 @@ public class AnimationModelText implements AnimationModelInterface {
                                                               float width, float height,
                                                               float red, float green, float blue,
                                                               int startOfLife, int endOfLife, int
-                                                              layer) {
+                                                                      layer) {
       Position2DInterface pos = new Position2D(lx, ly);
       ColorClassInterface color = new ColorClass(red, green, blue);
       DurationInterface durStart = new Duration(startOfLife);
@@ -676,7 +676,7 @@ public class AnimationModelText implements AnimationModelInterface {
     @Override
     public TweenModelBuilder<AnimationModelText> addRotationChange(String name, float fromOrient,
                                                                    float toOrient, int startTime,
-                                                                   int endTime){
+                                                                   int endTime) {
       DurationInterface dur = new Duration(startTime, endTime);
 
       this.model.addAnimation(name, "Rotation Change", dur, fromOrient, toOrient);
