@@ -51,7 +51,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   private int currentTick = 1;
   private JButton exportButton;
   private JTextField textField;
-  private JCheckBox[] checkBox;
+  private Map<Integer, List<JCheckBox>> shapeCheckBoxMap = new HashMap<>();
 
   //Buttons and stuff!
   JPanel controlPanel;
@@ -138,8 +138,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     exportButton.setActionCommand("Export");
     controlPanel.add(exportButton);
 
-    //add shape selection widgets
-    checkBox = new JCheckBox[shapeList.size()];
+    //Create over-arching shape selection display panel.
     checkBoxPanel = new JPanel();
     checkBoxScrollPane = new JScrollPane(checkBoxPanel
             , ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED
@@ -152,15 +151,39 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     checkBoxDisplay = new JLabel("Please choose the shapes you want to see");
     checkBoxPanel.add(checkBoxDisplay);
 
-
-    for (int i = 0; i < checkBox.length; i++) {
-      checkBox[i] = new JCheckBox(shapeList.get(i).getName());
-      checkBox[i].setSelected(true);
-      checkBox[i].setActionCommand(shapeList.get(i).getName());
-      shapeNameToObj.put(shapeList.get(i).getName(), shapeList.get(i));
-      checkBoxPanel.add(checkBox[i]);
+    //Fill in the shapeCheckBoxMap. Each key is the number of the layer (key "1" is for layer
+    //one) and each JCheckBox in an key's corresponding list represents one shape in the layer.
+    for (Map.Entry<Integer, List<ShapeInterface>> entry : layerMap.entrySet()) {
+      List<ShapeInterface> newList = entry.getValue();
+      List<JCheckBox> checkBoxList = new ArrayList<>();
+      for (ShapeInterface shape: newList){
+        JCheckBox temp = new JCheckBox(shape.getName());
+        temp.setSelected(true);
+        temp.setActionCommand(shape.getName());
+        checkBoxList.add(temp);
+        shapeNameToObj.put(shape.getName(), shape);
+      }
+      shapeCheckBoxMap.put(entry.getKey(), checkBoxList);
     }
 
+    //reverse the order of the keys so top layer (highest number) is displayed first.
+    List<Integer> reverseOrder = new ArrayList<>(shapeCheckBoxMap.keySet());
+    Collections.reverse(reverseOrder);
+
+    //Go through the reversed key order and add each sub-panel to the main checkbox panel.
+    for (Integer i: reverseOrder) {
+      JPanel layerPanel = new JPanel();
+
+      layerPanel.setPreferredSize(new Dimension(50, 50));
+      layerPanel.setBorder(BorderFactory.createTitledBorder("Layer " + i));
+      List<JCheckBox> temp = shapeCheckBoxMap.get(i);
+      for (JCheckBox check: temp){
+        layerPanel.add(check);
+      }
+      checkBoxPanel.add(layerPanel);
+    }
+
+    //add the completed panel to the frame.
     this.add(checkBoxScrollPane, BorderLayout.EAST);
 
     //add the completed control panel and pack the frame for viewing
@@ -181,10 +204,12 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     this.textField.addActionListener(buttons);
     this.loopBox.addItemListener(items);
 
-    for (int i = 0; i < checkBox.length; i++) {
-      this.checkBox[i].addItemListener(items);
+    for (Map.Entry<Integer, List<JCheckBox>> entry : shapeCheckBoxMap.entrySet()) {
+      List<JCheckBox> temp = entry.getValue();
+      for (JCheckBox check : temp){
+        check.addItemListener(items);
+      }
     }
-
   }
 
   @Override
