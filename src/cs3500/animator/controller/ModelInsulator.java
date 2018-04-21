@@ -53,6 +53,11 @@ public class ModelInsulator implements ModelInsulatorInterface {
     return this.model.getShapeNameToAnimationMap();
   }
 
+  @Override
+  public Map<Integer, List<ShapeInterface>> getLayerMap() {
+    return this.model.getLayerMap();
+  }
+
   public String getOverview() {
     return this.model.getOverview();
   }

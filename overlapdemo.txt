@@ -1,0 +1,16 @@
+rectangle name R min-x 200 min-y 200 width 50 height 100 color 1 0 0 from 1 to 100 layer 1
+rectangle name R2 min-x 150 min-y 150 width 25 height 150 color 0 1 0 from 1 to 100 layer 2
+oval name O center-x 150 center-y 200 x-radius 60 y-radius 30 color  0 0.5 1 from 1 to 100 layer 2
+oval name O2 center-x 150 center-y 180 x-radius 60 y-radius 30 color 0 0 0 from 1 to 100 layer 2
+rectangle name R3 min-x 150 min-y 200 width 50 height 100 color 0 0 1 from 1 to 100 layer 3
+
+
+rotate name R rotateto 0 -360 from 5 to 100
+rotate name R2 rotateto 0 360 from 5 to 100
+rotate name R3 rotateto 0 -360 from 5 to 100
+
+move name O moveto 150 200 150 100 from 5 to 50
+move name O2 moveto 150 180 150 300 from 5 to 50
+
+move name O moveto 150 100 150 200 from 51 to 100
+move name O2 moveto 150 300 150 180 from 51 to 100

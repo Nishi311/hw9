@@ -51,13 +51,14 @@ public interface AnimationModelInterface {
    * @param color      The color of the shape to be created.
    * @param pos        The initial position of the shape. (Reference point depends on shapeType)
    * @param orient     The initial orientation of the shape. (0 is up, 180 is down).
+   * @param layer      The layer in which the shape will be represented
    * @param parameters Any parameters necessary to describe the animation.
    * @throws IllegalArgumentException If the shapeName conflicts with an existing shape, tries to
    *                                  create an unknown shape type, if any of the parameters
    *                                  (including color and pos) are invalid.
    */
   void addShape(String shapeName, String shapeType, ColorClassInterface color,
-                Position2DInterface pos, float orient, Object... parameters)
+                Position2DInterface pos, float orient, int layer, Object... parameters)
           throws IllegalArgumentException;
 
 
@@ -111,7 +112,7 @@ public interface AnimationModelInterface {
   List<ShapeInterface> getShapeList();
 
   /**
-   * Allows the user to retrieve the current list of animations as grouped by their starting times.
+   * Allows the user to retrieve the current map of animations as grouped by their starting times.
    *
    * @return A map that contains lists of AnimationComponentInterfaces grouped by their starting
    *         times.
@@ -119,7 +120,7 @@ public interface AnimationModelInterface {
   Map<Integer, List<AnimationComponentInterface>> getStartToAnimationMap();
 
   /**
-   * Allows the user to retrieve the current list of animations as grouped by their ending times.
+   * Allows the user to retrieve the current map of animations as grouped by their ending times.
    *
    * @return A map that contains lists of AnimationComponentInterfaces grouped by their ending
    *         times.
@@ -127,12 +128,20 @@ public interface AnimationModelInterface {
   Map<Integer, List<AnimationComponentInterface>> getEndToAnimationMap();
 
   /**
-   * Allows the user to retrieve the list of shapes and the animations they are attached to.
+   * Allows the user to retrieve the map of shapes and the animations they are attached to.
    *
    * @return A map that contains a list of AnimationComponentInterfaces grouped by their
    *         shape.
    */
   Map<String, List<AnimationComponentInterface>> getShapeNameToAnimationMap();
+
+  /**
+   * Allows the user to retrieve the map of layers and their corresponding shapes.
+   *
+   * @return A map that contains a key list of layer numbers and entries corresponding to the
+   *         shapes in each layer.
+   */
+  Map<Integer, List<ShapeInterface>> getLayerMap();
 
   /**
    * Allows the user to completely wipe the model of all animationComponents. Will keep any shapes.

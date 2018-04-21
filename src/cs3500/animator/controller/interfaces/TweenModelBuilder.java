@@ -21,6 +21,7 @@ public interface TweenModelBuilder<T> {
    * @param blue        the blue component of the color of the oval
    * @param startOfLife the time tick at which this oval appears
    * @param endOfLife   the time tick at which this oval disappears
+   * @param layer       the layer the oval shall appear on.
    * @return the builder object
    */
   TweenModelBuilder<T> addOval(
@@ -28,7 +29,8 @@ public interface TweenModelBuilder<T> {
           float cx, float cy,
           float xRadius, float yRadius,
           float red, float green, float blue,
-          int startOfLife, int endOfLife);
+          int startOfLife, int endOfLife,
+          int layer);
 
   /**
    * Add a new rectangle to the model with the given specifications.
@@ -45,6 +47,7 @@ public interface TweenModelBuilder<T> {
    * @param blue        the blue component of the color of the rectangle
    * @param startOfLife the time tick at which this rectangle appears
    * @param endOfLife   the time tick at which this rectangle disappears
+   * @param layer       the layer the oval shall appear on.
    * @return the builder object
    */
   TweenModelBuilder<T> addRectangle(
@@ -52,7 +55,8 @@ public interface TweenModelBuilder<T> {
           float lx, float ly,
           float width, float height,
           float red, float green, float blue,
-          int startOfLife, int endOfLife);
+          int startOfLife, int endOfLife,
+          int layer);
 
   /**
    * Move the specified shape to the given position during the given time.

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
   protected List<ShapeInterface> shapeList;
   protected List<AnimationComponentInterface> animationList;
 
+  protected Map<Integer, List<ShapeInterface>> layerMap;
   protected Map<Integer, List<AnimationComponentInterface>> startTimeMap;
   protected Map<Integer, List<AnimationComponentInterface>> endTimeMap;
 
@@ -60,6 +62,7 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
     this.animationList = model.getAnimationList();
     this.startTimeMap = model.getStartToAnimationMap();
     this.endTimeMap = model.getEndToAnimationMap();
+    this.layerMap = model.getLayerMap();
     reorganizeMapsAndLists();
 
     //retrieves ticks where animation components begin
@@ -137,6 +140,19 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
 
     reorganizeHelper(startTimeMap);
     reorganizeHelper(endTimeMap);
+
+    //Same code as reorganizeHelper but for re-organizing with ShapeInterfaces
+    for (Map.Entry<Integer, List<ShapeInterface>> entry : layerMap.entrySet()) {
+      //make new list of AmComs with updated references
+      List<ShapeInterface> newList = new ArrayList<>();
+      for (ShapeInterface a : entry.getValue()) {
+        int index = shapeList.indexOf(a);
+        a = shapeList.get(index);
+        newList.add(a);
+      }
+      //replace old list with new list of updated references.
+      layerMap.put(entry.getKey(), newList);
+    }
   }
 
   /**

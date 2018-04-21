@@ -73,9 +73,9 @@ public class SVGTest {
     ColorClass rectColor = new ColorClass(1f, 0f, 0f);
     ColorClass ovalColor = new ColorClass(0f, 0f, 1f);
 
-    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f,
+    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f, 1,
             50.0f, 100.0f);
-    model.addShape("C", "Oval", ovalColor, ovalPos, 0.0f,
+    model.addShape("C", "Oval", ovalColor, ovalPos, 0.0f,1,
             60.0f, 30.0f);
 
     //Create the view based on  the given parameters.
@@ -127,9 +127,9 @@ public class SVGTest {
     ColorClass rectColor = new ColorClass(1f, 0f, 0f);
     ColorClass ovalColor = new ColorClass(0f, 0f, 1f);
 
-    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f,
+    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f,1,
             50.0f, 90.0f);
-    model.addShape("C", "Oval", ovalColor, ovalPos, 0.0f,
+    model.addShape("C", "Oval", ovalColor, ovalPos, 0.0f,1,
             60.0f, 30.0f);
 
     Duration rectVis1 = new Duration(1);

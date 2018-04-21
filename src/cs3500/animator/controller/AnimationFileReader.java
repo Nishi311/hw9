@@ -47,7 +47,7 @@ public class AnimationFileReader {
                   rinfo.getX(), rinfo.getY(),
                   rinfo.getWidth(), rinfo.getHeight(),
                   rinfo.getR(), rinfo.getG(), rinfo.getB(),
-                  rinfo.getStart(), rinfo.getEnd());
+                  rinfo.getStart(), rinfo.getEnd(), rinfo.getLayer());
           break;
         case "oval":
           OvalInfo cinfo = readOvalInfo(sc);
@@ -56,7 +56,7 @@ public class AnimationFileReader {
                   cinfo.getX(), cinfo.getY(),
                   cinfo.getXRadius(), cinfo.getYRadius(),
                   cinfo.getR(), cinfo.getG(), cinfo.getB(),
-                  cinfo.getStart(), cinfo.getEnd());
+                  cinfo.getStart(), cinfo.getEnd(), cinfo.getLayer());
           break;
         case "move":
           MoveInfo minfo = readMoveInfo(sc);
@@ -142,10 +142,16 @@ public class AnimationFileReader {
         case "to":
           info.setEnd(sc.nextInt());
           break;
+        case "layer":
+          info.setLayer(sc.nextInt());
+          break;
         default:
           throw new IllegalStateException("Invalid attribute " + command + " for "
                   + "rectangle");
       }
+    } if (sc.hasNext("layer")){
+      String temp = sc.next();
+      info.setLayer(sc.nextInt());
     }
 
     return info;
@@ -184,10 +190,17 @@ public class AnimationFileReader {
         case "to":
           info.setEnd(sc.nextInt());
           break;
+        case "layer":
+          info.setLayer(sc.nextInt());
+          break;
         default:
           throw new IllegalStateException("Invalid attribute " + command + " for "
                   + "oval");
       }
+    }
+    if (sc.hasNext("layer")){
+      String temp = sc.next();
+      info.setLayer(sc.nextInt());
     }
 
     return info;
@@ -418,6 +431,7 @@ public class AnimationFileReader {
     private float y;
     private float width;
     private float height;
+    private int layer = 1;
 
     RectangleInfo() {
       super();
@@ -425,6 +439,7 @@ public class AnimationFileReader {
       valueFlags.put("y", false);
       valueFlags.put("width", false);
       valueFlags.put("height", false);
+      valueFlags.put("layer", true);
     }
 
     void setX(float x) {
@@ -447,6 +462,11 @@ public class AnimationFileReader {
       valueFlags.replace("height", true);
     }
 
+    void setLayer(int layer) {
+      this.layer = layer;
+      valueFlags.replace("layer", true);
+    }
+
     float getX() {
       return x;
     }
@@ -462,6 +482,8 @@ public class AnimationFileReader {
     float getHeight() {
       return height;
     }
+
+    int getLayer() { return layer; }
   }
 
   class OvalInfo extends ShapeInfo {
@@ -469,6 +491,7 @@ public class AnimationFileReader {
     private float cy;
     private float xradius;
     private float yradius;
+    private int layer = 1;
 
     OvalInfo() {
       super();
@@ -476,6 +499,7 @@ public class AnimationFileReader {
       valueFlags.put("cy", false);
       valueFlags.put("xradius", false);
       valueFlags.put("yradius", false);
+      valueFlags.put("layer", true);
     }
 
     void setX(float x) {
@@ -498,6 +522,11 @@ public class AnimationFileReader {
       valueFlags.replace("yradius", true);
     }
 
+    void setLayer(int layer){
+      this.layer = layer;
+      valueFlags.replace("layer", true);
+    }
+
     float getX() {
       return cx;
     }
@@ -513,6 +542,8 @@ public class AnimationFileReader {
     float getYRadius() {
       return yradius;
     }
+
+    int getLayer() { return layer; }
 
   }
 

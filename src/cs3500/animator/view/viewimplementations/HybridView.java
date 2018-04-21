@@ -3,6 +3,8 @@ package cs3500.animator.view.viewimplementations;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.HashMap;
 
@@ -12,6 +14,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
@@ -363,9 +366,18 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     protected void paintComponent(Graphics g) {
       Graphics2D g2 = (Graphics2D) g;
       super.paintComponent(g2);
-      for (ShapeInterface shape : shapeList) {
-        if (!shapeBlackList.contains(shape)) {
-          shape.draw(g2);
+
+      //reverses the key order to ensure that larger key numbers and draw last.
+      List<Integer> keyList = new ArrayList<>(layerMap.keySet());
+      Collections.reverse(keyList);
+
+      //draw all shapes.
+      for (Map.Entry<Integer, List<ShapeInterface>> entry : layerMap.entrySet()) {
+        List<ShapeInterface> newList = entry.getValue();
+        for (ShapeInterface shape : newList) {
+          if (!shapeBlackList.contains(shape)) {
+            shape.draw(g2);
+          }
         }
       }
     }

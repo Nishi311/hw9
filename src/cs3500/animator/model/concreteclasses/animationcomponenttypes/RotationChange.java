@@ -115,12 +115,12 @@ public class RotationChange extends AnimationComponentAbstract {
 
           List<Object> testStartList = test.getInitialParameters();
           double testOrient = (float) testStartList.get(0);
-          //check staring color
+          //check staring orientation
           if (testOrient == this.startingOrient) {
 
             List<Object> testEndList = test.getFinalParameters();
             testOrient = (float) testEndList.get(0);
-            //check ending color
+            //check ending orientation
             if (testOrient == this.targetOrient) {
               return true;
             }

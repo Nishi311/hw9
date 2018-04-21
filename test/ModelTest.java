@@ -42,16 +42,16 @@ public class ModelTest {
     model = new AnimationModelText(shapeFactoryInterface, animationFactory);
 
     model.addShape("TestRectangle1", "Rectangle", testColor, testPosition,
-            0.0f, 0.0f, 0.0f);
+            0.0f, 1,0.0f, 0.0f);
 
     model.addShape("TestRectangle2", "Rectangle", testColor, testPosition,
-            0.0f, 0.0f, 0.0f);
+            0.0f, 1, 0.0f, 0.0f);
 
     model.addShape("TestOval1", "Oval", testColor, testPosition,
-            0.0f, 0.0f, 0.0f);
+            0.0f,1, 0.0f, 0.0f);
 
     model.addShape("TestOval2", "Oval", testColor, testPosition,
-            0.0f, 0.0f, 0.0f);
+            0.0f, 1,0.0f, 0.0f);
 
 
   }
@@ -327,7 +327,7 @@ public class ModelTest {
 
     ShapeInterface newShape = new Rectangle(shapeName, color, pos, 0.0f, false,
             0.0f, 0.0f);
-    model.addShape(shapeName, shapeType, color, pos, 0.0f, 0.0f, 0.0f);
+    model.addShape(shapeName, shapeType, color, pos, 0.0f, 1,0.0f, 0.0f);
 
     List<ShapeInterface> shapeList = model.getShapeList();
     assertTrue(shapeList.contains(newShape));
@@ -342,7 +342,7 @@ public class ModelTest {
     Position2D pos = new Position2D();
 
     try {
-      model.addShape(shapeName, shapeType, color, pos, 0.0f, 0.0f, 0.0f);
+      model.addShape(shapeName, shapeType, color, pos, 0.0f,1, 0.0f, 0.0f);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("There is already a shape with this name", e.getMessage());
@@ -357,7 +357,7 @@ public class ModelTest {
     Position2D pos = new Position2D();
 
     try {
-      model.addShape(shapeName, shapeType, color, pos, 0.0f, 0.0f, 0.0f);
+      model.addShape(shapeName, shapeType, color, pos, 0.0f,1,0.0f, 0.0f);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Not a recognized shape type", e.getMessage());
@@ -373,7 +373,7 @@ public class ModelTest {
     Position2D pos = new Position2D();
 
     try {
-      model.addShape(shapeName, shapeType, color, pos, 0.0f, 0.0f, 0.0f, 0.0f);
+      model.addShape(shapeName, shapeType, color, pos, 0.0f, 1,0.0f, 0.0f, 0.0f);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Wrong amount of parameters for a rectangle", e.getMessage());
@@ -388,7 +388,7 @@ public class ModelTest {
     Position2D pos = new Position2D();
 
     try {
-      model.addShape(shapeName, shapeType, color, pos, 0.0f, 0.0f, 0.0f, 0.0f);
+      model.addShape(shapeName, shapeType, color, pos, 0.0f, 1,0.0f, 0.0f, 0.0f);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Wrong amount of parameters for an Oval", e.getMessage());
@@ -404,7 +404,7 @@ public class ModelTest {
     Position2D pos = new Position2D();
 
     try {
-      model.addShape(shapeName, shapeType, color, pos, 0.0f, color, color);
+      model.addShape(shapeName, shapeType, color, pos, 0.0f,1, color, color);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Wrong parameters for a rectangle", e.getMessage());
@@ -419,7 +419,7 @@ public class ModelTest {
     Position2D pos = new Position2D();
 
     try {
-      model.addShape(shapeName, shapeType, color, pos, 0.0f, color, color);
+      model.addShape(shapeName, shapeType, color, pos, 0.0f,1, color, color);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Wrong parameters for an Oval", e.getMessage());
@@ -527,9 +527,9 @@ public class ModelTest {
     ColorClass rectColor = new ColorClass(1f, 0f, 0f);
     ColorClass ovalColor = new ColorClass(0f, 0f, 1f);
 
-    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f,
+    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f,1,
             50.0f, 100.0f);
-    model.addShape("C", "Oval", ovalColor, ovalPos, 0.0f,
+    model.addShape("C", "Oval", ovalColor, ovalPos, 0.0f,1,
             60.0f, 30.0f);
 
     Duration rectVis1 = new Duration(1);
@@ -590,7 +590,7 @@ public class ModelTest {
             + "TestOval2\n";
     StringBuilder actualOutput = new StringBuilder();
 
-    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f,
+    model.addShape("R", "Rectangle", rectColor, rectPos, 0.0f,1,
             50.0f, 100.0f);
 
     model.addAnimation("TestRectangle1", "Scale Change WH", dur1,

@@ -3,6 +3,10 @@ package cs3500.animator.view.viewimplementations;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
@@ -79,8 +83,12 @@ public class VisualView extends VisualViewTypeAbstract {
     protected void paintComponent(Graphics g) {
       Graphics2D g2 = (Graphics2D) g;
       super.paintComponent(g2);
-      for (ShapeInterface shape : shapeList) {
-        shape.draw(g2);
+      //draw all shapes.
+      for (Map.Entry<Integer, List<ShapeInterface>> entry : layerMap.entrySet()) {
+        List<ShapeInterface> newList = entry.getValue();
+        for (ShapeInterface shape : newList) {
+          shape.draw(g2);
+        }
       }
     }
   }

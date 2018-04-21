@@ -1,11 +1,13 @@
 package cs3500.animator.model;
 
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +59,9 @@ public class AnimationModelText implements AnimationModelInterface {
   private Map<Integer, List<AnimationComponentInterface>> startToAnimationMap = new HashMap<>();
   //Map of times to animation components that end at that time.
   private Map<Integer, List<AnimationComponentInterface>> endToAnimationMap = new HashMap<>();
+  //Map whose keys represent the layer of the animation and whose entries
+  //represent shapes corresponding to those layers.
+  private Map<Integer, List<ShapeInterface>> layerMap = new LinkedHashMap<>();
 
   private ShapeFactoryInterface shapeFactory;
   private AnimationComponentFactoryInterface animationFactory;
@@ -117,7 +122,7 @@ public class AnimationModelText implements AnimationModelInterface {
 
   @Override
   public void addShape(String shapeName, String shapeType, ColorClassInterface color,
-                       Position2DInterface pos, float orient, Object... parameters)
+                       Position2DInterface pos, float orient, int layer, Object... parameters)
           throws IllegalArgumentException {
 
     if (shapeNameToWorkingShapeObjectMap.containsKey(shapeName)) {
@@ -130,6 +135,16 @@ public class AnimationModelText implements AnimationModelInterface {
     shapeNameToInitialShapeObjectMap.put(shapeName, newShape.copy());
     shapeNameToWorkingShapeObjectMap.put(shapeName, newShape);
     shapeList.add(newShape);
+
+    if (layerMap.containsKey(layer)){
+      List<ShapeInterface> temp = layerMap.get(layer);
+      temp.add(newShape);
+      layerMap.put(layer, temp);
+    } else{
+      List<ShapeInterface> temp = new ArrayList<>();
+      temp.add(newShape);
+      layerMap.put(layer, temp);
+    }
   }
 
   @Override
@@ -232,6 +247,24 @@ public class AnimationModelText implements AnimationModelInterface {
       //create a new array per end time with copies of all components
       List<AnimationComponentInterface> newList = new ArrayList<>();
       for (AnimationComponentInterface a : entry.getValue()) {
+        newList.add(a.copy());
+      }
+      //same key, new copied list.
+      newMap.put(entry.getKey(), newList);
+    }
+    return newMap;
+  }
+
+  @Override
+  public Map<Integer, List<ShapeInterface>> getLayerMap(){
+    //new linked hashmap to return
+    Map<Integer, List<ShapeInterface>> newMap = new LinkedHashMap<>();
+    //check each entry in the map
+    for (Map.Entry<Integer, List<ShapeInterface>> entry :
+            layerMap.entrySet()) {
+      //create a new array per end time with copies of all components
+      List<ShapeInterface> newList = new ArrayList<>();
+      for (ShapeInterface a : entry.getValue()) {
         newList.add(a.copy());
       }
       //same key, new copied list.
@@ -555,13 +588,14 @@ public class AnimationModelText implements AnimationModelInterface {
                                                          float cx, float cy,
                                                          float xRadius, float yRadius,
                                                          float red, float green, float blue,
-                                                         int startOfLife, int endOfLife) {
+                                                         int startOfLife, int endOfLife,
+                                                         int layer) {
       Position2DInterface pos = new Position2D(cx, cy);
       ColorClassInterface color = new ColorClass(red, green, blue);
       DurationInterface durStart = new Duration(startOfLife);
       DurationInterface durEnd = new Duration(endOfLife);
 
-      this.model.addShape(name, "Oval", color, pos, 0f, xRadius, yRadius);
+      this.model.addShape(name, "Oval", color, pos, 0f, layer,  xRadius, yRadius);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
       this.model.addAnimation(name, "Visibility Change", durEnd, false);
 
@@ -573,13 +607,14 @@ public class AnimationModelText implements AnimationModelInterface {
                                                               float lx, float ly,
                                                               float width, float height,
                                                               float red, float green, float blue,
-                                                              int startOfLife, int endOfLife) {
+                                                              int startOfLife, int endOfLife, int
+                                                              layer) {
       Position2DInterface pos = new Position2D(lx, ly);
       ColorClassInterface color = new ColorClass(red, green, blue);
       DurationInterface durStart = new Duration(startOfLife);
       DurationInterface durEnd = new Duration(endOfLife);
 
-      this.model.addShape(name, "Rectangle", color, pos, 0f, width, height);
+      this.model.addShape(name, "Rectangle", color, pos, 0f, layer, width, height);
       this.model.addAnimation(name, "Visibility Change", durStart, true);
       this.model.addAnimation(name, "Visibility Change", durEnd, false);
 

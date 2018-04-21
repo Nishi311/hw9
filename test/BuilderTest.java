@@ -30,7 +30,7 @@ public class BuilderTest {
   public void addOvalValid() {
 
     builder.addOval("Oval1", 0f, 0f, 1f, 1f, 2f, 3f, 4f,
-            10, 30);
+            10, 30, 1);
 
     ShapeInterface expectedOval = sFac.create("Oval1", "Oval",
             expectedColor, expectedPos, 0f, 1f, 1f);
@@ -57,7 +57,7 @@ public class BuilderTest {
   @Test
   public void addRectangleValid() {
     builder.addRectangle("Rectangle1", 0f, 0f, 1f, 1f, 2f, 3f, 4f,
-            10, 30);
+            10, 30, 1);
 
     ShapeInterface expectedRec = sFac.create("Rectangle1", "Rectangle",
             expectedColor, expectedPos, 0f, 1f, 1f);
@@ -83,7 +83,7 @@ public class BuilderTest {
   @Test
   public void addMoveValid() {
     builder.addOval("Oval1", 0f, 0f, 1f, 1f, 2f, 3f, 4f,
-            10, 30);
+            10, 30, 1);
 
     ShapeInterface expectedOval = sFac.create("Oval1", "Oval",
             expectedColor, expectedPos, 0f, 1f, 1f);
@@ -104,10 +104,10 @@ public class BuilderTest {
   public void addScaleValid() {
 
     builder.addOval("Oval1", 0f, 0f, 1f, 1f, 2f, 3f, 4f,
-            10, 30);
+            10, 30, 1);
 
     builder.addRectangle("Rectangle1", 0f, 0f, 1f, 1f, 2f, 3f, 4f,
-            10, 30);
+            10, 30, 1);
 
     ShapeInterface expectedOval = sFac.create("Oval1", "Oval",
             expectedColor, expectedPos, 0f, 1f, 1f);
@@ -138,7 +138,7 @@ public class BuilderTest {
   @Test
   public void addColor() {
     builder.addOval("Oval1", 0f, 0f, 1f, 1f, 2f, 3f, 4f,
-            10, 30);
+            10, 30, 1);
 
     ShapeInterface expectedOval = sFac.create("Oval1", "Oval",
             expectedColor, expectedPos, 0f, 1f, 1f);

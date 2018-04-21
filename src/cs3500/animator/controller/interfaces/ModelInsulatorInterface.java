@@ -49,6 +49,13 @@ public interface ModelInsulatorInterface {
   Map<String, List<AnimationComponentInterface>> getShapeNameToAnimationMap();
 
   /**
+   * See {@link AnimationModelInterface#getLayerMap()}.
+   *
+   * @return see {@link AnimationModelInterface#getLayerMap()}.
+   */
+  Map<Integer, List<ShapeInterface>> getLayerMap();
+
+  /**
    * see {@link AnimationModelInterface#getOverview()}.
    *
    * @return {@link AnimationModelInterface#getOverview()}.
