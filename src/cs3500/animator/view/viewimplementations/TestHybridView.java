@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.event.ChangeListener;
+
 import cs3500.animator.controller.interfaces.ModelInsulatorInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.view.interfaces.HybridViewInterface;
@@ -29,7 +31,7 @@ public class TestHybridView extends VisualViewTypeAbstract implements HybridView
   }
 
   @Override
-  public void setListeners(ActionListener buttons, KeyListener keys, ItemListener item) {
+  public void setListeners(ActionListener buttons, ChangeListener changes, ItemListener item) {
     //empty because not needed for testing
   }
 
@@ -39,13 +41,8 @@ public class TestHybridView extends VisualViewTypeAbstract implements HybridView
   }
 
   @Override
-  public void speedUp() {
-    speedUp = true;
-  }
-
-  @Override
-  public void speedDown() {
-    speedDown = true;
+  public void setSpeed(int newSpeed){
+    //do nothing.
   }
 
   @Override

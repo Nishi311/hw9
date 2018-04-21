@@ -16,21 +16,16 @@ import java.awt.event.KeyListener;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JScrollPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
-import javax.swing.BorderFactory;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.Timer;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import cs3500.animator.controller.interfaces.ModelInsulatorInterface;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.view.interfaces.HybridViewInterface;
 import cs3500.animator.view.VisualViewTypeAbstract;
+import javafx.scene.control.TextFormatter;
 
 
 /**
@@ -42,7 +37,6 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   //Visual implementation parameters
   private List<ShapeInterface> shapeBlackList = new ArrayList<>();
   private HashMap<String, ShapeInterface> shapeNameToObj = new HashMap<String, ShapeInterface>();
-  private List<AnimationComponentInterface> animationComponentBlackList = new ArrayList<>();
   private HybridView.DrawingPanel dPan = new DrawingPanel();
   private String outFile;
 
@@ -59,8 +53,8 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   private JButton resumeButton;
   private JButton pauseButton;
   private JButton restartButton;
-  private JButton speedUpButton;
-  private JButton speedDownButton;
+
+  private JSpinner speedSpinner;
   private JCheckBox loopBox;
   private JLabel tickLabel;
 
@@ -109,26 +103,21 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     controlPanel.add(loopBox);
 
     //add the tick rate and current tick label
-    tickLabel = new JLabel("<html>Ticks Per Second: " + this.ticksPerSecond +
-            "<br>Current Tick: N/A</html>");
+    tickLabel = new JLabel("<html>Speed Controller (Ticks / Second):" +
+            " <br>Current Tick: N/A</html>");
 
     controlPanel.add(tickLabel);
 
     //add speed controls
-    speedUpButton = new JButton("Speed Up");
-    speedUpButton.setActionCommand("Speed Up");
-    controlPanel.add(speedUpButton);
+    SpinnerModel sm = new SpinnerNumberModel(ticksPerSecond, 1, 1000, 1);
+    speedSpinner = new JSpinner(sm);
+    speedSpinner.setValue(ticksPerSecond);
 
-    speedDownButton = new JButton("Speed Down");
-    speedDownButton.setActionCommand("Speed Down");
-    controlPanel.add(speedDownButton);
+    controlPanel.add(speedSpinner);
 
-    JPanel checkBoxPanel;
-    JLabel checkBoxDisplay;
-    JLabel svgInputLabel;
-    JScrollPane checkBoxScrollPane;
 
     //add svg stuff
+    JLabel svgInputLabel;
     svgInputLabel = new JLabel("Enter the name for SVG file here:");
     textField = new JTextField("Output.svg");
     controlPanel.add(svgInputLabel);
@@ -137,6 +126,12 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     exportButton = new JButton("Export SVG");
     exportButton.setActionCommand("Export");
     controlPanel.add(exportButton);
+
+
+    //add shape selection stuff.
+    JPanel checkBoxPanel;
+    JLabel checkBoxDisplay;
+    JScrollPane checkBoxScrollPane;
 
     //Create over-arching shape selection display panel.
     checkBoxPanel = new JPanel();
@@ -173,9 +168,9 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     //Go through the reversed key order and add each sub-panel to the main checkbox panel.
     for (Integer i: reverseOrder) {
       JPanel layerPanel = new JPanel();
-
       layerPanel.setPreferredSize(new Dimension(50, 50));
       layerPanel.setBorder(BorderFactory.createTitledBorder("Layer " + i));
+
       List<JCheckBox> temp = shapeCheckBoxMap.get(i);
       for (JCheckBox check: temp){
         layerPanel.add(check);
@@ -193,13 +188,11 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   }
 
   @Override
-  public void setListeners(ActionListener buttons, KeyListener keys, ItemListener items) {
-    this.addKeyListener(keys);
+  public void setListeners(ActionListener buttons, ChangeListener changes, ItemListener items) {
     this.resumeButton.addActionListener(buttons);
     this.pauseButton.addActionListener(buttons);
     this.restartButton.addActionListener(buttons);
-    this.speedUpButton.addActionListener(buttons);
-    this.speedDownButton.addActionListener(buttons);
+    this.speedSpinner.addChangeListener(changes);
     this.exportButton.addActionListener(buttons);
     this.textField.addActionListener(buttons);
     this.loopBox.addItemListener(items);
@@ -229,47 +222,19 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   }
 
   @Override
-  public void speedUp() {
-    if (this.ticksPerSecond + tickIncrement < maxSpeed) {
-      this.ticksPerSecond += tickIncrement;
-      this.milliPerTick = 1000 / ticksPerSecond;
-      timer.setDelay((int) this.milliPerTick);
-
-    } else {
-      this.ticksPerSecond = 100;
-      this.milliPerTick = 1000 / ticksPerSecond;
-      timer.setDelay((int) this.milliPerTick);
-    }
+  public void setSpeed(int newSpeed){
+    this.ticksPerSecond = newSpeed;
+    this.milliPerTick = 1000 / ticksPerSecond;
+    timer.setDelay((int) this.milliPerTick);
 
     if (currentTick == 1) {
-      tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
-              "<br>Current Tick: N/A</html>");
+      tickLabel.setText("<html>Speed Controller (Ticks / Second): <br>Current Tick: N/A</html>");
     } else {
-      tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
+      tickLabel.setText("<html>Speed Controller (Ticks / Second):" +
               "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
     }
 
-  }
-
-  @Override
-  public void speedDown() {
-    if (this.ticksPerSecond - tickIncrement > minSpeed) {
-      this.ticksPerSecond -= tickIncrement;
-      this.milliPerTick = 1000 / ticksPerSecond;
-      timer.setDelay((int) this.milliPerTick);
-    } else {
-      this.ticksPerSecond = 1;
-      this.milliPerTick = 1000 / 1;
-      timer.setDelay((int) this.milliPerTick);
-    }
-
-    if (currentTick == 1) {
-      tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
-              "<br>Current Tick: N/A</html>");
-    } else {
-      tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
-              "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
-    }
+    speedSpinner.setValue(newSpeed);
   }
 
   @Override
@@ -283,7 +248,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     if (!timer.isRunning()) {
       this.timer = new Timer((int) this.milliPerTick, new DrawListener());
       timer.start();
-      tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
+      tickLabel.setText("<html>Speed Controller (Ticks / Second):" +
               "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
     }
   }
@@ -308,7 +273,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     }
 
     //reset the tick label
-    tickLabel.setText("<html>Ticks Per Second: " + this.ticksPerSecond +
+    tickLabel.setText("<html>Speed Controller (Ticks / Second):" +
             "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
 
     //reset the current tick.
@@ -421,7 +386,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
           restart();
           timer.restart();
         } else {
-          tickLabel.setText("<html>Ticks Per Second: " + ticksPerSecond +
+          tickLabel.setText("<html>Speed Controller (Ticks / Second):" +
                   "<br>Current Tick: N/A</html>");
           timer.stop();
         }
@@ -430,7 +395,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
         try {
           runForOneTick(currentTick, dPan);
           currentTick++;
-          tickLabel.setText("<html>Ticks Per Second: " + ticksPerSecond +
+          tickLabel.setText("<html>Speed Controller (Ticks / Second):" +
                   "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
         } catch (Exception ex) {
           throw new IllegalStateException("Run");

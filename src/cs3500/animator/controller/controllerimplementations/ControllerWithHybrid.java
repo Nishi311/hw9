@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.swing.JCheckBox;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import cs3500.animator.controller.ModelInsulator;
 import cs3500.animator.controller.interfaces.TweenModelBuilder;
@@ -27,8 +29,8 @@ import cs3500.animator.view.ViewTypes;
  * method on the appropriate view. The class itself contains methods for dealing with
  * ActionListeners, ItemListeners and KeyListeners
  */
-public class ControllerWithHybrid extends ControllerAbstract implements KeyListener, ActionListener,
-        ItemListener {
+public class ControllerWithHybrid extends ControllerAbstract implements ActionListener,
+        ItemListener, ChangeListener {
 
   protected HybridViewInterface hybridView;
 
@@ -61,27 +63,6 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
     }
   }
 
-  @Override
-  public void keyTyped(KeyEvent k) {
-    checkIfHybridExists();
-
-    System.out.println("Key pressed: " + k.getKeyCode());
-
-  }
-
-  @Override
-  public void keyPressed(KeyEvent k) {
-    checkIfHybridExists();
-
-
-    System.out.println("Key pressed: " + k.getKeyCode());
-  }
-
-  @Override
-  public void keyReleased(KeyEvent k) {
-    checkIfHybridExists();
-    System.out.println("Key pressed: " + k.getKeyCode());
-  }
 
   @Override
   public String parseInput(String[] args) {
@@ -181,14 +162,6 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
         hybridView.restart();
         hybridView.resetFocus();
         break;
-      case "Speed Up":
-        hybridView.speedUp();
-        hybridView.resetFocus();
-        break;
-      case "Speed Down":
-        hybridView.speedDown();
-        hybridView.resetFocus();
-        break;
       case "Export":
         hybridView.exportSVG();
         hybridView.resetFocus();
@@ -211,6 +184,15 @@ public class ControllerWithHybrid extends ControllerAbstract implements KeyListe
       }
     } else {
       hybridView.selectOrUnseletShapes(which);
+    }
+  }
+
+  @Override
+  public void stateChanged(ChangeEvent changeEvent) {
+    checkIfHybridExists();
+    JSpinner temp = (JSpinner) changeEvent.getSource();
+    if (temp.getValue() instanceof Integer){
+      hybridView.setSpeed((int) temp.getValue());
     }
   }
 
