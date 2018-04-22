@@ -7,6 +7,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -193,7 +194,19 @@ public class ControllerWithHybrid extends ControllerAbstract implements ActionLi
     JSpinner temp = (JSpinner) changeEvent.getSource();
     if (temp.getValue() instanceof Integer) {
       hybridView.setSpeed((int) temp.getValue());
+      hybridView.resetFocus();
     }
+    try{
+      temp.commitEdit();
+      hybridView.setSpeed((int) temp.getValue());
+    } catch (ParseException e){
+      JFrame frame = new JFrame();
+      JOptionPane.showMessageDialog(frame,
+              "Must input an integer for speed!",
+              "Invalid speed",
+              JOptionPane.WARNING_MESSAGE);
+    }
+
   }
 
   @Override

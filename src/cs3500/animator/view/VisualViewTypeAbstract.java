@@ -74,7 +74,7 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
     Collections.sort(endTicks);
 
     this.setTitle("Animation!");
-    this.setSize(500, 600);
+    this.setSize(1200, 600);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     //use a border layout with drawing panel in center and status output in south
