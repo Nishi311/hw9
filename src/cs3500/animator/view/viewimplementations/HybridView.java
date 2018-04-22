@@ -195,7 +195,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     this.resumeButton.addActionListener(buttons);
     this.pauseButton.addActionListener(buttons);
     this.restartButton.addActionListener(buttons);
-//    this.speedSpinner.addChangeListener(changes);
+    this.speedSpinner.addChangeListener(changes);
     this.exportButton.addActionListener(buttons);
     this.textField.addActionListener(buttons);
     this.loopBox.addItemListener(items);
