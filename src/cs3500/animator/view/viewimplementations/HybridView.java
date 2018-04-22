@@ -2,6 +2,7 @@ package cs3500.animator.view.viewimplementations;
 
 import java.awt.*;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -78,7 +79,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     this.outFile = outFile;
 
     JScrollPane scrollPane = new JScrollPane(dPan);
-    scrollPane.setPreferredSize(new Dimension(700, 500));
+    scrollPane.setPreferredSize(new Dimension(800, 800));
 
     this.add(scrollPane, BorderLayout.CENTER);
     controlPanel = new JPanel();
@@ -112,7 +113,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     SpinnerModel sm = new SpinnerNumberModel(ticksPerSecond, 1, 1000, 1);
     speedSpinner = new JSpinner(sm);
     speedSpinner.setValue(ticksPerSecond);
-
+    speedSpinner.setFocusable(false);
     controlPanel.add(speedSpinner);
 
 
@@ -139,12 +140,11 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
             , ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED
             , ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-    checkBoxPanel.setLayout(new GridLayout(100, 1));
-    checkBoxScrollPane.setPreferredSize(new Dimension(300, 300));
+    checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.PAGE_AXIS));
+    checkBoxScrollPane.setPreferredSize(new Dimension(500, 300));
 
-    checkBoxPanel.setBorder(BorderFactory.createTitledBorder("Shape Selection"));
-    checkBoxDisplay = new JLabel("Please choose the shapes you want to see");
-    checkBoxPanel.add(checkBoxDisplay);
+    checkBoxPanel.setBorder(BorderFactory.createTitledBorder("Shape Selection: Please choose the " +
+            "shapes you want to see "));
 
     //Fill in the shapeCheckBoxMap. Each key is the number of the layer (key "1" is for layer
     //one) and each JCheckBox in an key's corresponding list represents one shape in the layer.
@@ -168,14 +168,17 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     //Go through the reversed key order and add each sub-panel to the main checkbox panel.
     for (Integer i : reverseOrder) {
       JPanel layerPanel = new JPanel();
-      layerPanel.setPreferredSize(new Dimension(50, 50));
       layerPanel.setBorder(BorderFactory.createTitledBorder("Layer " + i));
-
+      layerPanel.setLayout(new GridLayout(20, 5));
       List<JCheckBox> temp = shapeCheckBoxMap.get(i);
+      Collections.reverse(temp);
       for (JCheckBox check : temp) {
         layerPanel.add(check);
       }
-      checkBoxPanel.add(layerPanel);
+
+      JScrollPane layerPanelScroll = new JScrollPane(layerPanel);
+
+      checkBoxPanel.add(layerPanelScroll);
     }
 
     //add the completed panel to the frame.
@@ -192,7 +195,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     this.resumeButton.addActionListener(buttons);
     this.pauseButton.addActionListener(buttons);
     this.restartButton.addActionListener(buttons);
-    this.speedSpinner.addChangeListener(changes);
+//    this.speedSpinner.addChangeListener(changes);
     this.exportButton.addActionListener(buttons);
     this.textField.addActionListener(buttons);
     this.loopBox.addItemListener(items);
@@ -226,15 +229,13 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     this.ticksPerSecond = newSpeed;
     this.milliPerTick = 1000 / ticksPerSecond;
     timer.setDelay((int) this.milliPerTick);
-
+    timer.setInitialDelay((int) this.milliPerTick);
     if (currentTick == 1) {
       tickLabel.setText("<html>Speed Controller (Ticks / Second): <br>Current Tick: N/A</html>");
     } else {
       tickLabel.setText("<html>Speed Controller (Ticks / Second):" +
               "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");
     }
-
-    speedSpinner.setValue(newSpeed);
   }
 
   @Override
