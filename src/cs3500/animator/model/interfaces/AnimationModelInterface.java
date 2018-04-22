@@ -114,7 +114,7 @@ public interface AnimationModelInterface {
   /**
    * Allows the user to retrieve the current map of animations as grouped by their starting times.
    *
-   * @return A map that contains lists of AnimationComponentInterfaces grouped by their starting
+   * @return map that contains lists of AnimationComponentInterfaces grouped by their starting
    *         times.
    */
   Map<Integer, List<AnimationComponentInterface>> getStartToAnimationMap();
@@ -122,16 +122,14 @@ public interface AnimationModelInterface {
   /**
    * Allows the user to retrieve the current map of animations as grouped by their ending times.
    *
-   * @return A map that contains lists of AnimationComponentInterfaces grouped by their ending
-   *         times.
+   * @return map that contains lists of AnimationComponentInterfaces grouped by their ending times.
    */
   Map<Integer, List<AnimationComponentInterface>> getEndToAnimationMap();
 
   /**
    * Allows the user to retrieve the map of shapes and the animations they are attached to.
    *
-   * @return A map that contains a list of AnimationComponentInterfaces grouped by their
-   *         shape.
+   * @return A map that contains a list of AnimationComponentInterfaces grouped by their shape.
    */
   Map<String, List<AnimationComponentInterface>> getShapeNameToAnimationMap();
 

@@ -60,14 +60,6 @@ public class TestControllerHybrid extends ControllerAbstract implements ActionLi
         hybridView.restart();
         hybridView.resetFocus();
         break;
-      case "Speed Up":
-        hybridView.speedUp();
-        hybridView.resetFocus();
-        break;
-      case "Speed Down":
-        hybridView.speedDown();
-        hybridView.resetFocus();
-        break;
       default:
         throw new IllegalArgumentException("Button option not valid");
     }

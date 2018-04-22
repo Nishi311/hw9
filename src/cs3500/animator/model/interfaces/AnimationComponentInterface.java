@@ -94,7 +94,7 @@ public interface AnimationComponentInterface extends Comparable<AnimationCompone
    *
    * @param test the animation component to be compared to
    * @return 1 if parameter component has earlier start time, 0 if parameter component has
-   *         the same start time, -1 if parameter component has later start time.
+   * the same start time, -1 if parameter component has later start time.
    */
   int compareTo(AnimationComponentInterface test);
 

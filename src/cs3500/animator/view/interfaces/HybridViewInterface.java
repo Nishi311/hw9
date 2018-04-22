@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 
+import javax.swing.event.ChangeListener;
+
 /**
  * Extension of the ViewInterface that allows for the control of an animation's playback. Only
  * to be used for Interactive views.
@@ -14,10 +16,10 @@ public interface HybridViewInterface extends ViewInterface {
    * Allows for the setting listeners for use by controller.
    *
    * @param buttons action listener for buttons.
-   * @param keys    key listener for key shortcuts.
+   * @param changes key listener for the speed spinner.
    * @param items   item listener for any checkboxes and such.
    */
-  void setListeners(ActionListener buttons, KeyListener keys, ItemListener items);
+  void setListeners(ActionListener buttons, ChangeListener changes, ItemListener items);
 
   /**
    * Reset the focus on the appropriate part of the view that has the keyboard listener attached to
@@ -26,14 +28,11 @@ public interface HybridViewInterface extends ViewInterface {
   void resetFocus();
 
   /**
-   * Increases speed by one tick per second.
+   * Updates speed spinner.
+   *
+   * @param newSpeed the new speed.
    */
-  void speedUp();
-
-  /**
-   * Decreases speed by one tick per second.
-   */
-  void speedDown();
+  void setSpeed(int newSpeed);
 
   /**
    * Allows the user to determine the looping behavior (animation restarts upon completion).

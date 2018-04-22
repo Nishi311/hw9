@@ -149,7 +149,8 @@ public class AnimationFileReader {
           throw new IllegalStateException("Invalid attribute " + command + " for "
                   + "rectangle");
       }
-    } if (sc.hasNext("layer")){
+    }
+    if (sc.hasNext("layer")) {
       String temp = sc.next();
       info.setLayer(sc.nextInt());
     }
@@ -198,7 +199,7 @@ public class AnimationFileReader {
                   + "oval");
       }
     }
-    if (sc.hasNext("layer")){
+    if (sc.hasNext("layer")) {
       String temp = sc.next();
       info.setLayer(sc.nextInt());
     }
@@ -483,7 +484,9 @@ public class AnimationFileReader {
       return height;
     }
 
-    int getLayer() { return layer; }
+    int getLayer() {
+      return layer;
+    }
   }
 
   class OvalInfo extends ShapeInfo {
@@ -522,7 +525,7 @@ public class AnimationFileReader {
       valueFlags.replace("yradius", true);
     }
 
-    void setLayer(int layer){
+    void setLayer(int layer) {
       this.layer = layer;
       valueFlags.replace("layer", true);
     }
@@ -543,7 +546,9 @@ public class AnimationFileReader {
       return yradius;
     }
 
-    int getLayer() { return layer; }
+    int getLayer() {
+      return layer;
+    }
 
   }
 
