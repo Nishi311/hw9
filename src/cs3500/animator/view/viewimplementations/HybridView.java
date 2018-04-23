@@ -20,6 +20,7 @@ import java.util.Set;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.JSlider;
 
 import cs3500.animator.controller.interfaces.ModelInsulatorInterface;
 import cs3500.animator.model.interfaces.AnimationComponentInterface;
@@ -58,6 +59,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   private JSpinner speedSpinner;
   private JCheckBox loopBox;
   private JLabel tickLabel;
+  private JSlider slider;
 
   //speed related stuff;
   Timer timer;
@@ -128,6 +130,21 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     exportButton.setActionCommand("Export");
     controlPanel.add(exportButton);
 
+    //add scrubbing slider
+
+    final int FPS_MIN = 0;
+    final int FPS_MAX = endTicks.get(endTicks.size() - 1);
+    final int FPS_INIT = 0;
+
+    JPanel sliderPanel = new JPanel();
+    slider = new JSlider(JSlider.HORIZONTAL, FPS_MIN, FPS_MAX, FPS_INIT);
+    slider.setPreferredSize(new Dimension(900, 30));
+    slider.setMajorTickSpacing(10);
+    slider.setMinorTickSpacing(1);
+    slider.setPaintTicks(true);
+    slider.setPaintLabels(true);
+    sliderPanel.add(slider, BorderLayout.CENTER);
+
 
     //add shape selection stuff.
     JPanel checkBoxPanel;
@@ -184,8 +201,14 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     //add the completed panel to the frame.
     this.add(checkBoxScrollPane, BorderLayout.EAST);
 
+    //creates and adds the hyper control panel that contains both the slider and the controls
+    JPanel hyperControlPanel = new JPanel();
+    hyperControlPanel.setLayout(new BorderLayout());
+    hyperControlPanel.add(controlPanel, BorderLayout.SOUTH);
+    hyperControlPanel.add(sliderPanel, BorderLayout.NORTH);
+
     //add the completed control panel and pack the frame for viewing
-    this.add(controlPanel, BorderLayout.SOUTH);
+    this.add(hyperControlPanel, BorderLayout.SOUTH);
     this.pack();
     this.setVisible(true);
   }
@@ -199,6 +222,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     this.exportButton.addActionListener(buttons);
     this.textField.addActionListener(buttons);
     this.loopBox.addItemListener(items);
+    this.slider.addChangeListener(changes);
 
     for (Map.Entry<Integer, List<JCheckBox>> entry : shapeCheckBoxMap.entrySet()) {
       List<JCheckBox> temp = entry.getValue();

@@ -191,22 +191,30 @@ public class ControllerWithHybrid extends ControllerAbstract implements ActionLi
   @Override
   public void stateChanged(ChangeEvent changeEvent) {
     checkIfHybridExists();
-    JSpinner temp = (JSpinner) changeEvent.getSource();
-    if (temp.getValue() instanceof Integer) {
-      hybridView.setSpeed((int) temp.getValue());
-      hybridView.resetFocus();
-    }
-    try{
-      temp.commitEdit();
-      hybridView.setSpeed((int) temp.getValue());
-    } catch (ParseException e){
-      JFrame frame = new JFrame();
-      JOptionPane.showMessageDialog(frame,
-              "Must input an integer for speed!",
-              "Invalid speed",
-              JOptionPane.WARNING_MESSAGE);
-    }
+    Object soruce = changeEvent.getSource();
 
+    if (soruce instanceof JSpinner) {
+      JSpinner spinner = (JSpinner) soruce;
+      if (spinner.getValue() instanceof Integer) {
+        hybridView.setSpeed((int) spinner.getValue());
+        hybridView.resetFocus();
+      }
+      try{
+        spinner.commitEdit();
+        hybridView.setSpeed((int) spinner.getValue());
+      } catch (ParseException e){
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame,
+                "Must input an integer for speed!",
+                "Invalid speed",
+                JOptionPane.WARNING_MESSAGE);
+      }
+    } else if (soruce instanceof JSlider) {
+      JSlider slider = (JSlider) soruce;
+
+    } else {
+      throw new IllegalArgumentException("changeEvent option not valid");
+    }
   }
 
   @Override
