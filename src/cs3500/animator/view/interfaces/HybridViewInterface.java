@@ -66,5 +66,8 @@ public interface HybridViewInterface extends ViewInterface {
    */
   void selectOrUnseletShapes(String shapeName);
 
-
+  /**
+   * Allows the user set current tick.
+   */
+  void setToTick(int prevTick, int currTick);
 }

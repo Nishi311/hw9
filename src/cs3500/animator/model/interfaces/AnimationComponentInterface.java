@@ -25,6 +25,17 @@ public interface AnimationComponentInterface extends Comparable<AnimationCompone
   void executeIncrement();
 
   /**
+   * Performs one tick of the animation component. Works with the current status of the shape (i.e,
+   * may not be in the initial state).
+   */
+  void executeDecrement();
+
+  /**
+   * Allows user to set animation by tick.
+   */
+  void setToTick(int startTick, int endTick);
+
+  /**
    * Allows the animationComponent to be copied.
    *
    * @return The copy animationComponent

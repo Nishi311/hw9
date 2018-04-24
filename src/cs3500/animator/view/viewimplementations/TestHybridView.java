@@ -100,6 +100,12 @@ public class TestHybridView extends VisualViewTypeAbstract implements HybridView
   public void selectOrUnseletShapes(String shapeName) {
     //empty because not needed for testing
   }
+
+  @Override
+  public void setToTick(int prevTick, int currTick) {
+    //empty because not needed for testing
+  }
+
 }
 
 

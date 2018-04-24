@@ -84,6 +84,17 @@ public class PositionChange extends AnimationComponentAbstract {
   } //end executeIncrement()
 
   @Override
+  public void executeDecrement() {
+    Position2DInterface currentPos = (Position2D) shape.getParameter(
+            UniversalShapeParameterTypes.POSITION.name());
+
+    Position2DInterface incrementedPos = new Position2D(currentPos.getX() - xShiftPerTimeUnit,
+            currentPos.getY() - yShiftPerTimeUnit);
+
+    shape.editParameter(UniversalShapeParameterTypes.POSITION.name(), incrementedPos);
+  } //end executeDecrement()
+
+  @Override
   public String getAnimationType() {
     return "Position Change";
   }

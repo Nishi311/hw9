@@ -87,6 +87,16 @@ public class ScaleChangeWH extends AnimationComponentAbstract {
   }
 
   @Override
+  public void executeDecrement() {
+
+    float currentWidth = (float) shape.getParameter("width");
+    float currentHeight = (float) shape.getParameter("height");
+
+    shape.editParameter("width", currentWidth - widthShiftPerTimeUnit);
+    shape.editParameter("height", currentHeight - heightShiftPerTimeUnit);
+  }
+
+  @Override
   public String getAnimationType() {
     return "Scale Change WH";
   }

@@ -82,6 +82,16 @@ public class ScaleChangeRR extends AnimationComponentAbstract {
   }
 
   @Override
+  public void executeDecrement() {
+
+    float currentRadiusL = (float) shape.getParameter("xRadius");
+    float currentRadiusS = (float) shape.getParameter("yRadius");
+
+    shape.editParameter("xRadius", currentRadiusL - radiusLShiftPerTimeUnit);
+    shape.editParameter("yRadius", currentRadiusS - radiusSShiftPerTimeUnit);
+  }
+
+  @Override
   public String getAnimationType() {
     return "Scale Change RR";
   }

@@ -70,6 +70,20 @@ public class RotationChange extends AnimationComponentAbstract {
   }
 
   @Override
+  public void executeDecrement() {
+    float currentOrient = shape.getOrientation();
+    float newOrient = currentOrient - rotationPerTimeUnit;
+
+    if (newOrient < -360) {
+      newOrient = -360;
+    } else if (newOrient > 360) {
+      newOrient = 360;
+    }
+
+    shape.editParameter(UniversalShapeParameterTypes.ORIENTATION.name(), newOrient);
+  }
+
+  @Override
   public String getAnimationType() {
     return "Rotation Change";
   }

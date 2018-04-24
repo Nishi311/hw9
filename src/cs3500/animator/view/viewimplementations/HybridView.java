@@ -41,6 +41,8 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   private HashMap<String, ShapeInterface> shapeNameToObj = new HashMap<String, ShapeInterface>();
   private HybridView.DrawingPanel dPan = new DrawingPanel();
   private String outFile;
+  Map<Integer, List<AnimationComponentInterface>> endMapCp =
+          model.getEndToAnimationMap();
 
   //Visual Control parameters
   private boolean doesAnimationLoop = true;
@@ -133,6 +135,8 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     //add scrubbing slider
 
     final int FPS_MIN = 0;
+    System.out.println("endTicks.toString():" + endTicks.toString());
+
     final int FPS_MAX = endTicks.get(endTicks.size() - 1);
     final int FPS_INIT = 0;
 
@@ -269,6 +273,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
 
   @Override
   public void resume() {
+    System.out.println(runningAnimationList);
     //create a new time and begin.
     if (!timer.isRunning()) {
       this.timer = new Timer((int) this.milliPerTick, new DrawListener());
@@ -321,7 +326,6 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
               model.getEndToAnimationMap();
       List<AnimationComponentInterface> anList = model.getAnimationList();
 
-
       for (ShapeInterface shape : shapes) {
         if (!shapeBlackList.contains(shape)) {
           tempShapes.add(shape);
@@ -330,8 +334,15 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
 
       this.outFile = textField.getText();
 
+
       SVGView svgV = new SVGView(ticksPerSecond, outFile, tempShapes, anList,
               shapeNameMap, endMap);
+
+      System.out.println("tempShapes: " + tempShapes);
+      System.out.println("anList: " + anList);
+      System.out.println("shapeNameMap: " + shapeNameMap);
+      System.out.println(endMapCp);
+
 
       if (this.doesAnimationLoop) {
         svgV.setIsLoopback(this.doesAnimationLoop);
@@ -363,6 +374,35 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
   @Override
   public int getSpeed() {
     return ticksPerSecond;
+  }
+
+  @Override
+  public void setToTick(int prevTick, int currTick) {
+    timer.stop();
+    this.currentTick = currTick;
+    int prevEndTime = 0;
+
+    for (Map.Entry<Integer, List<AnimationComponentInterface>> entry : endMapCp.entrySet()) {
+      Integer endTime = entry.getKey();
+      List<AnimationComponentInterface> animations = entry.getValue();
+
+      if (currTick > prevEndTime && currTick <= endTime) {
+        for (AnimationComponentInterface a:animations) {
+          System.out.println("prevEndTime: " + prevEndTime);
+          System.out.println("endTime: " + endTime);
+          a.setToTick(prevTick, currTick);
+          if (runningAnimationList.contains(a)) {
+            runningAnimationList.remove(a);
+          }
+        }
+        break;
+      }
+
+    }
+
+    dPan.repaint();
+
+    timer.start();
   }
 
   @Override
@@ -419,6 +459,8 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
       } else {
         try {
           runForOneTick(currentTick, dPan);
+          System.out.println("currentTick: " + currentTick);
+
           currentTick++;
           tickLabel.setText("<html>Speed Controller (Ticks / Second):" +
                   "<br>Current Tick: " + Integer.toString(currentTick) + "</html>");

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +96,9 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
     //represents how long all the animations components  required to be done during the tick
     //actually took to compute and render.
     //execute a tick on any animations currently running.
+//    System.out.println("endTimeMap: " + endTimeMap.toString());
+//    System.out.println("startTimeMap: " + startTimeMap.toString());
+
     if (!runningAnimationList.isEmpty()) {
       for (AnimationComponentInterface runningAnimation : runningAnimationList) {
         runningAnimation.executeIncrement();

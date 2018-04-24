@@ -64,6 +64,11 @@ public class VisibilityChange extends AnimationComponentAbstract {
   }
 
   @Override
+  public void executeDecrement() {
+    executeFull();
+  }
+
+  @Override
   public String getAnimationType() {
     return "Visibility Change";
   }

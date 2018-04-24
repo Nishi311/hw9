@@ -101,6 +101,42 @@ public class ColorChange extends AnimationComponentAbstract {
   }
 
   @Override
+  public void executeDecrement() {
+
+    ColorClassInterface currentColor = (ColorClass) shape.getParameter(
+            UniversalShapeParameterTypes.COLOR.name());
+
+    float newRed = currentColor.getRed() - redShiftPerTimeUnit;
+    float newGreen = currentColor.getGreen() - greenShiftPerTimeUnit;
+    float newBlue = currentColor.getBlue() - blueShiftPerTimeUnit;
+
+    //clamps any overflow
+    if (newRed < 0) {
+      newRed = 0;
+    } else if (newRed > 1) {
+      newRed = 1;
+    }
+
+    //clamps any overflow
+    if (newGreen < 0) {
+      newGreen = 0;
+    } else if (newGreen > 1) {
+      newGreen = 1;
+    }
+
+    //clamps any overflow
+    if (newBlue < 0) {
+      newBlue = 0;
+    } else if (newBlue > 1) {
+      newBlue = 1;
+    }
+
+    ColorClassInterface decrementedColor = new ColorClass(newRed, newGreen, newBlue);
+
+    shape.editParameter(UniversalShapeParameterTypes.COLOR.name(), decrementedColor);
+  }
+
+  @Override
   public String getAnimationType() {
     return "Color Change";
   }
