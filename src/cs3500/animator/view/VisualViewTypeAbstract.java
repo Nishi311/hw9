@@ -162,7 +162,7 @@ public abstract class VisualViewTypeAbstract extends JFrame implements ViewInter
    *
    * @param map map of integer and animation components to iterate through
    */
-  private void reorganizeHelper(Map<Integer, List<AnimationComponentInterface>> map) {
+  protected void reorganizeHelper(Map<Integer, List<AnimationComponentInterface>> map) {
     for (Map.Entry<Integer, List<AnimationComponentInterface>> entry : map.entrySet()) {
       //make new list of AmComs with updated references
       List<AnimationComponentInterface> newList = new ArrayList<>();

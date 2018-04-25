@@ -26,7 +26,6 @@ import cs3500.animator.model.interfaces.AnimationComponentInterface;
 import cs3500.animator.model.interfaces.ShapeInterface;
 import cs3500.animator.view.interfaces.HybridViewInterface;
 import cs3500.animator.view.VisualViewTypeAbstract;
-import javafx.scene.control.TextFormatter;
 
 
 /**
@@ -75,7 +74,6 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
    */
   public HybridView(ModelInsulatorInterface model, String outFile, int ticksPerSecond) {
     super(model, ticksPerSecond);
-
     this.outFile = outFile;
 
     JScrollPane scrollPane = new JScrollPane(dPan);
@@ -195,7 +193,7 @@ public class HybridView extends VisualViewTypeAbstract implements HybridViewInte
     this.resumeButton.addActionListener(buttons);
     this.pauseButton.addActionListener(buttons);
     this.restartButton.addActionListener(buttons);
-//    this.speedSpinner.addChangeListener(changes);
+    this.speedSpinner.addChangeListener(changes);
     this.exportButton.addActionListener(buttons);
     this.textField.addActionListener(buttons);
     this.loopBox.addItemListener(items);
