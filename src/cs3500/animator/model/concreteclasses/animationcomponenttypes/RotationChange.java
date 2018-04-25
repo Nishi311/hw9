@@ -158,26 +158,117 @@ public class RotationChange extends AnimationComponentAbstract {
 
   @Override
   public int countattributions() {
-    return 0;
+    return 1;
   }
 
   @Override
   public String getattributename(int index) {
-    return "TO DO";
+    List<String> attributenames = new ArrayList<>();
+    attributenames.add("transform");
+
+    return "\"" + attributenames.get(index) + "\"";
   }
 
   @Override
   public String attributeValueFrom(int index) {
-    return "TO DO";
+    List<String> attributevaluesfrom = new ArrayList<>();
+    float center_x = shape.getPosition().getX();
+    float center_y = shape.getPosition().getY();
+    float width = 0;
+    float height = 0;
+    if (shape.getShapeType().equals("Rectangle")) {
+      width = (float) shape.getParameter("width");
+      height = (float) shape.getParameter("height");
+    } else {
+      width = (float) shape.getParameter("xRadius")/2;
+      height = (float) shape.getParameter("yRadius")/2;
+    }
+    float temp_x = center_x + width/2;
+    float temp_y = center_y + height/2;
+    attributevaluesfrom.add(Float.toString(startingOrient) + " " + temp_x + " " + temp_y);
+    return "\"" + attributevaluesfrom.get(index) + "\"";
   }
 
   @Override
   public String attributeValueTo(int index) {
-    return "TO DO";
+    List<String> attributevaluesto = new ArrayList<>();
+    float center_x = shape.getPosition().getX();
+    float center_y = shape.getPosition().getY();
+    float width = 0;
+    float height = 0;
+    if (shape.getShapeType().equals("Rectangle")) {
+      width = (float) shape.getParameter("width");
+      height = (float) shape.getParameter("height");
+    } else {
+      width = (float) shape.getParameter("xRadius")/2;
+      height = (float) shape.getParameter("yRadius")/2;
+    }
+    float temp_x = center_x + width/2;
+    float temp_y = center_y + height/2;
+    attributevaluesto.add(Float.toString(targetOrient) + " " + temp_x + " " + temp_y);
+
+    return "\"" + attributevaluesto.get(index) + "\"";
   }
 
   @Override
   public String getSvg(boolean isLoopback, int ticksPerSecond) {
-    return "TO DO";
+
+    String unit = "ms";
+    String svgtext = "";
+    for (int i = 0; i < this.countattributions(); i++) {
+      double duration = (((double) dur.getEndTime()
+              / (double) ticksPerSecond) - ((double) dur.getStartTime()
+              / (double) ticksPerSecond)) * 1000;
+
+      if (isLoopback) {
+        svgtext = svgtext + "<animateTransform ";
+        svgtext = svgtext + "attributeType= \"xml\" ";
+        svgtext = svgtext + "begin=\"base.begin+"
+                + ((double) dur.getStartTime() / (double) ticksPerSecond) * 1000
+                + unit + "\" dur=\""
+                + (((double) dur.getEndTime() / (double) ticksPerSecond)
+                - ((double) dur.getStartTime() / (double) ticksPerSecond)) * 1000
+                + unit
+                + "\" "
+                + "type="
+                + "\""
+                + "rotate"
+                + "\""
+                + " attributeName="
+                + getattributename(i)
+                + " from="
+                + attributeValueFrom(i)
+                + " to="
+                + attributeValueTo(i)
+                + " fill=" + "\"freeze\" />\n";
+        svgtext = svgtext + "<animate ";
+        svgtext = svgtext + "attributeType= \"xml\" ";
+        svgtext = svgtext + "begin=\"base.end\" dur=\"1" + unit + "\" attributeName="
+                + this.getattributename(i) + " to=" + this.attributeValueFrom(i)
+                + " fill=\"freeze\" />\n";
+      } else {
+        svgtext += "<animateTransform ";
+        svgtext += "attributeType= \"xml\" ";
+        svgtext += "begin=" + "\"" + ((double) dur.getStartTime() / (double) ticksPerSecond) * 1000
+                + unit + "\" "
+                + "type="
+                + "\""
+                + "rotate"
+                + "\""
+                + " dur=" + "\""
+                + duration
+                + unit + "\" " + "attributeName="
+                + getattributename(i)
+                + " from="
+                + attributeValueFrom(i)
+                + " to="
+                + attributeValueTo(i)
+                + " fill=" + "\"freeze\" />\n";
+      }
+    }
+
+    System.out.println("svgtext" + svgtext);
+
+    return svgtext;
   }
 }

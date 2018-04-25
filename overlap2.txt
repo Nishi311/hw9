@@ -1,7 +1,7 @@
 rectangle name Red min-x 200 min-y 200 width 50 height 100 color 1 0 0 from 1 to 100 layer 1
 rectangle name Green min-x 150 min-y 150 width 25 height 150 color 0 1 0 from 1 to 100 layer 2
-oval name Purple center-x 150 center-y 200 x-radius 60 y-radius 30 color  0.5 0 1 from 1 to 100 layer 2
-oval name Black center-x 150 center-y 180 x-radius 60 y-radius 30 color 0 0 0 from 1 to 100 layer 2
+oval name Purple center-x 150 center-y 200 x-radius 60 y-radius 70 color  0.5 0 1 from 1 to 100 layer 2
+oval name Black center-x 150 center-y 180 x-radius 60 y-radius 70 color 0 0 0 from 1 to 100 layer 2
 
 rotate name Red rotateto 0 -360 from 5 to 100
 rotate name Green rotateto 0 360 from 5 to 100
