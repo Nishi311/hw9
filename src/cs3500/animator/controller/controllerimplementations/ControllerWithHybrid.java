@@ -38,6 +38,7 @@ public class ControllerWithHybrid extends ControllerAbstract implements ActionLi
   protected ViewTypes type = null;
   protected String outFile = "out";
   protected int ticksPerSecond = 1;
+  protected int prevTick = 0;
 
   /**
    * Basic constructor for the controller. Just calls the ControllerAbstract constructor.
@@ -211,6 +212,14 @@ public class ControllerWithHybrid extends ControllerAbstract implements ActionLi
       }
     } else if (soruce instanceof JSlider) {
       JSlider slider = (JSlider) soruce;
+
+      if (!slider.getValueIsAdjusting()) {
+        hybridView.pause();
+      } else {
+        int currTick = (int)slider.getValue();
+        hybridView.setToTick(prevTick, currTick);
+        prevTick = currTick;
+      }
 
     } else {
       throw new IllegalArgumentException("changeEvent option not valid");

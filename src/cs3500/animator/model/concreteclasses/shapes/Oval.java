@@ -211,10 +211,10 @@ public class Oval extends ShapeAbstract {
             + "\"" + " "
 
             + getSvgShapeLenX() + "=" + "\""
-            + allDimensions()[0] + "\"" +
+            + allDimensions()[0]/2 + "\"" +
             " " + getSvgShapeLenY()
             + "=" + "\"" +
-            allDimensions()[1] + "\"" + " fill=" + "\"" + "rgb" +
+            allDimensions()[1]/2 + "\"" + " fill=" + "\"" + "rgb" +
             getColor().tranferrbg() + "\"" + " visibility=\"visible\"" + ">";
   }
 

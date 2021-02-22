@@ -1,0 +1,16 @@
+<svg width="1000" height="1000" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<rect id="R" x="200.0" y="200.0" width="50.0" height="100.0" fill="rgb(255,0,0)" visibility="visible">
+
+<animate attributeType= "xml" begin="0ms" dur="50.0ms" attributeName="visibility" from="hidden" to="hidden"/>
+<animate attributeType= "xml" begin="5000.0ms" dur="1ms" attributeName="visibility" from="visible" to="hidden"/>
+<animate
+  attributeType= "xml"
+  begin="250.0ms"
+  dur="4750.0ms"
+  attributeName="transform"
+  from="rotate(0)"
+  to="rotate(360)"
+fill="freeze" />
+
+</rect>
+</svg>

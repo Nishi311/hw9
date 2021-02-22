@@ -24,6 +24,17 @@ public abstract class AnimationComponentAbstract implements AnimationComponentIn
   }
 
   @Override
+  public void setToTick(int startTick, int endTick) {
+    if (startTick < endTick) {
+      System.out.println("Increment called!");
+      executeIncrement();
+    } else {
+      System.out.println("Decrement called!");
+      executeDecrement();
+    }
+  }
+
+  @Override
   public String getTargetName() {
     return shape.getName();
   }
